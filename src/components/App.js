@@ -11,7 +11,7 @@ const App = () => {
       <BrowserRouter>
         <Header />
         <Route path="/" exact component={ContentList} />
-        <Route path="/content/edit" exact component={ContentEdit} />
+        <Route path="/content/edit/:id" exact component={ContentEdit} />
         <Route path="/content/new" exact component={ContentCreate} />
       </BrowserRouter>
     </div>

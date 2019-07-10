@@ -1,31 +1,38 @@
 import React from 'react';
-import contentIndex from '../api/contentIndex';
+import { Link } from 'react-router-dom';
+import { contentIndex } from '../api/contentApi';
 
 class ContentList extends React.Component {
-  state = { items: [] };
+  state = {
+    items: []
+  };
 
-  getContent = async () => {
-    const response = await contentIndex.get();
+  getContentIndex = async () => {
+    const response = await contentIndex();
     this.setState({ items: response.data });
   }
 
   renderList() {
     return this.state.items.map(item => {
+      const linkPath = `/content/edit/${item.id}`;
+
       return(
         <tr key={item.id}>
           <td>
-            {item.title}
+            <Link to={linkPath} className="item">
+              {item.title}
+            </Link>
           </td>
           <td>
-            {item.type}
+            {item.contentType}
           </td>
           <td className="collapsing">
             {item.id}
           </td>
           <td className="collapsing">
-            <div class="ui icon buttons">
-              <button class="ui basic button"><i class="edit outline icon"></i></button>
-              <button class="ui basic button"><i class="trash alternate outline icon"></i></button>
+            <div className="ui icon buttons">
+              <button className="ui basic button"><i className="edit outline icon"></i></button>
+              <button className="ui basic button"><i className="trash alternate outline icon"></i></button>
             </div>
           </td>
         </tr>
@@ -34,7 +41,7 @@ class ContentList extends React.Component {
   }
 
   componentDidMount() {
-    this.getContent();
+    this.getContentIndex();
   }
 
   render() {
@@ -45,7 +52,7 @@ class ContentList extends React.Component {
           <thead>
             <tr>
               <th>Title</th>
-              <th>Type</th>
+              <th>Content Type</th>
               <th>ID</th>
               <th></th>
             </tr>

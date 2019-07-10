@@ -7,9 +7,6 @@ const Header = () => {
       <Link to="/" className="item">
         Content List
       </Link>
-      <Link to="/content/edit" className="item">
-        Edit
-      </Link>
       <Link to="/content/new" className="item">
         New
       </Link>
