@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { contentIndex } from '../api/contentApi';
+import { contentDelete } from '../api/contentApi';
 
 class ContentList extends React.Component {
   state = {
@@ -10,6 +11,10 @@ class ContentList extends React.Component {
   getContentIndex = async () => {
     const response = await contentIndex();
     this.setState({ items: response.data });
+  }
+
+  deleteContent = async (id) => {
+    await contentDelete(id);
   }
 
   renderList() {
@@ -31,8 +36,14 @@ class ContentList extends React.Component {
           </td>
           <td className="collapsing">
             <div className="ui icon buttons">
-              <button className="ui basic button"><i className="edit outline icon"></i></button>
-              <button className="ui basic button"><i className="trash alternate outline icon"></i></button>
+              <Link to={linkPath}
+                    className="ui basic button">
+                <i className="edit outline icon"></i>
+              </Link>
+              <button className="ui basic button"
+                      onClick={() => this.deleteContent(item.id)}>
+                <i className="trash alternate outline icon"></i>
+              </button>
             </div>
           </td>
         </tr>

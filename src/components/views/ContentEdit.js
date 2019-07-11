@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { contentRead } from '../api/contentApi';
 import { contentUpdate } from '../api/contentApi';
-// import { contentDelete } from '../api/contentApi';
+import ContentItem from '../ContentItem';
 
 class ContentEdit extends React.Component {
   state = {
@@ -28,24 +28,10 @@ class ContentEdit extends React.Component {
     this.setState({ redirect: true });
   }
 
-  onInputChange = (event) => {
-    const { item } = { ...this.state };
-    const currentState = item;
-    const { name, value } = event.target;
-    currentState[name] = value;
-
-    this.setState({ item: currentState})
-  }
-
-  onFormSubmit = (event) => {
-    event.preventDefault();
-    this.putContent();
-  }
-
-  onFormCancel = (event) => {
-    event.preventDefault();
+  onFormCancel = () => {
     this.setState({ redirect: true });
   }
+
 
   componentDidMount () {
     this.getContent(this.props.match.params.id);
@@ -56,47 +42,12 @@ class ContentEdit extends React.Component {
       return <Redirect to="/" />;
     }
 
-    const item = this.state.item;
-
     return (
       <div>
         <h1>Edit Content</h1>
-        <div className="ui form">
-          <div className="field">
-            <label htmlFor="id">ID</label>
-            <input name="id"
-                   type="text"
-                   value={item.id}
-                   readOnly />
-          </div>
-          <div className="field">
-            <label htmlFor="title">Title</label>
-            <input name="title"
-                   type="text"
-                   placeholder="title"
-                   value={item.title}
-                   onChange={this.onInputChange} />
-          </div>
-          <div className="field">
-            <label htmlFor="contentType">Type</label>
-            <input name="contentType"
-                   type="text"
-                   placeholder="type"
-                   value={item.contentType}
-                   onChange={this.onInputChange} />
-          </div>
-
-          <div className="ui right floated">
-            <button className="ui right floated primary button"
-                    onClick={this.onFormSubmit}>
-              Save
-            </button>
-            <button className="ui right floated secondary basic button"
-                    onClick={this.onFormCancel}>
-              Cancel
-            </button>
-          </div>
-        </div>
+        <ContentItem item={this.state.item}
+                     onFormSubmit={this.putContent}
+                     onFormCancel={this.onFormCancel}/>
       </div>
     );
   }
