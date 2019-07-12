@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const API_BASE_URL = 'https://kpuw6vo7wg.execute-api.us-east-1.amazonaws.com/default';
 const API_CREATE = '/dxm-lambda-content-create';
 const API_INDEX = '/dxm-lambda-content-index';
@@ -8,8 +6,18 @@ const API_UPDATE = '/dxm-lambda-content-update';
 const API_DELETE = '/dxm-lambda-content-delete';
 
 export const contentCreate = (item) => {
-  console.log(`contentCreate: ${JSON.stringify(item)}`);
-  return axios.post(`${API_BASE_URL}${API_CREATE}`, item);
+  return fetch(`${API_BASE_URL}${API_CREATE}`, {
+      method: 'POST',
+      body: JSON.stringify(item)
+  })
+    .then(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 }
 
 export const contentIndex = () => {
@@ -39,13 +47,8 @@ export const contentRead = (id) => {
 }
 
 export const contentUpdate = (item) => {
-  console.log(`contentUpdate: ${JSON.stringify(item)}`);
-
   return fetch(`${API_BASE_URL}${API_UPDATE}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify(item)
   })
     .then(
@@ -59,8 +62,6 @@ export const contentUpdate = (item) => {
 }
 
 export const contentDelete = (id) => {
-  console.log(`contentDelete: ${JSON.stringify(id)}`);
-
   return fetch(`${API_BASE_URL}${API_DELETE}?id=${encodeURIComponent(id)}`, {
       method: 'DELETE'
   })
