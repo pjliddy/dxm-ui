@@ -44,17 +44,12 @@ class ContentCreate extends React.Component {
     return (
       <div>
         <h1>New Content</h1>
-        <div className="ui segment">
-            <div className="ui segment">
-              <div className={loaderStyles}>
-                <div className="ui text loader">Working...</div>
-              </div>
-              <ContentForm item={this.state.item}
-                           onFormSubmit={this.postContent}
-                           onFormCancel={this.onFormCancel}/>
-            </div>
-
+        <div className={loaderStyles}>
+          <div className="ui text loader">Working...</div>
         </div>
+        <ContentForm item={this.state.item}
+                     onFormSubmit={this.postContent}
+                     onFormCancel={this.onFormCancel}/>
        </div>
     );
   }

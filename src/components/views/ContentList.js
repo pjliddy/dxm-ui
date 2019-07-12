@@ -67,30 +67,27 @@ class ContentList extends React.Component {
 
     return (
       <div>
+        <Link to="/content/new" className="ui right floated primary button">
+          New Content
+        </Link>
         <h1>Content List</h1>
-        <div className="ui segment">
-            <div className="ui segment">
-              <div className={loaderStyles}>
-                <div className="ui text loader">Working...</div>
-              </div>
-              <table className="ui celled striped compact table">
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Content Type</th>
-                    <th>ID</th>
-                    <th>Date Modified</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.renderList()}
-                </tbody>
-              </table>
-            </div>
+        <div className={loaderStyles}>
+          <div className="ui text loader">Working...</div>
         </div>
-
-
+        <table className="ui celled striped compact table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Content Type</th>
+              <th>ID</th>
+              <th>Date Modified</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderList()}
+          </tbody>
+        </table>
       </div>
     );
   }
