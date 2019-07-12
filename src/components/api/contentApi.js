@@ -43,9 +43,11 @@ export const contentUpdate = (item) => {
 
   return fetch(`${API_BASE_URL}${API_UPDATE}`, {
       method: 'PUT',
-      body: item
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(item)
   })
-    .then(response => response.json())
     .then(
       (response) => {
         return response;
@@ -54,8 +56,6 @@ export const contentUpdate = (item) => {
         console.log(error);
       }
     );
-
-  // return axios.put(`${API_BASE_URL}${API_UPDATE}`, item);
 }
 
 export const contentDelete = (id) => {
@@ -64,7 +64,6 @@ export const contentDelete = (id) => {
   return fetch(`${API_BASE_URL}${API_DELETE}?id=${encodeURIComponent(id)}`, {
       method: 'DELETE'
   })
-    .then(response => response.json())
     .then(
       (response) => {
         return response;

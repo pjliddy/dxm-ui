@@ -17,7 +17,7 @@ class ContentForm extends React.Component {
     const { name, value } = event.target;
     currentState[name] = value;
 
-    console.log(currentState);
+    console.log(JSON.stringify(currentState));
 
 
     this.setState({ item: currentState})

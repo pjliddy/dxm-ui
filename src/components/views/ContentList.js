@@ -15,6 +15,7 @@ class ContentList extends React.Component {
 
   deleteContent = async (id) => {
     await contentDelete(id);
+    this.getContentIndex();
   }
 
   renderList() {
