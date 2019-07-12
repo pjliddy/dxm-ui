@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { contentRead } from '../api/contentApi';
 import { contentUpdate } from '../api/contentApi';
-import ContentItem from '../ContentItem';
+import ContentForm from '../ContentForm';
 
 class ContentEdit extends React.Component {
   state = {
@@ -16,22 +16,17 @@ class ContentEdit extends React.Component {
 
   getContent = async (id) => {
     const response = await contentRead(id);
-    this.setState({ item: response.data });
+    this.setState({ item: response });
   }
 
   putContent = async () => {
-    console.log(this.state.item);
-
-    const response = await contentUpdate(this.state.item);
-
-    console.log(response);
+    await contentUpdate(this.state.item);
     this.setState({ redirect: true });
   }
 
   onFormCancel = () => {
     this.setState({ redirect: true });
   }
-
 
   componentDidMount () {
     this.getContent(this.props.match.params.id);
@@ -45,7 +40,7 @@ class ContentEdit extends React.Component {
     return (
       <div>
         <h1>Edit Content</h1>
-        <ContentItem item={this.state.item}
+        <ContentForm item={this.state.item}
                      onFormSubmit={this.putContent}
                      onFormCancel={this.onFormCancel}/>
       </div>

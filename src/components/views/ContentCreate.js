@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import ContentItem from '../ContentItem';
+import ContentForm from '../ContentForm';
 import { contentCreate } from '../api/contentApi';
 
 class ContentCreate extends React.Component {
@@ -34,7 +34,7 @@ class ContentCreate extends React.Component {
     return (
       <div>
         <h1>New Content</h1>
-        <ContentItem item={this.state.item}
+        <ContentForm item={this.state.item}
                      onFormSubmit={this.postContent}
                      onFormCancel={this.onFormCancel}/>
        </div>

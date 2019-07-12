@@ -10,7 +10,7 @@ class ContentList extends React.Component {
 
   getContentIndex = async () => {
     const response = await contentIndex();
-    this.setState({ items: response.data });
+    this.setState({ items: response });
   }
 
   deleteContent = async (id) => {

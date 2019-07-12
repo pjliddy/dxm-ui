@@ -13,28 +13,64 @@ export const contentCreate = (item) => {
 }
 
 export const contentIndex = () => {
-  return axios.get(`${API_BASE_URL}${API_INDEX}`);
+  return fetch(`${API_BASE_URL}${API_INDEX}`)
+    .then(response => response.json())
+    .then(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 }
 
 export const contentRead = (id) => {
-  return axios.get(`${API_BASE_URL}${API_READ}`, {
-    params: {
-      id: id
-    }
-  });
+  return fetch(`${API_BASE_URL}${API_READ}?id=${encodeURIComponent(id)}`)
+    .then(response => response.json())
+    .then(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 }
 
 export const contentUpdate = (item) => {
   console.log(`contentUpdate: ${JSON.stringify(item)}`);
-  return axios.put(`${API_BASE_URL}${API_UPDATE}`, item);
+
+  return fetch(`${API_BASE_URL}${API_UPDATE}`, {
+      method: 'PUT',
+      body: item
+  })
+    .then(response => response.json())
+    .then(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+  // return axios.put(`${API_BASE_URL}${API_UPDATE}`, item);
 }
 
 export const contentDelete = (id) => {
   console.log(`contentDelete: ${JSON.stringify(id)}`);
 
-  return axios.delete(`${API_BASE_URL}${API_DELETE}`, {
-    params: {
-      id: id
-    }
-  });
+  return fetch(`${API_BASE_URL}${API_DELETE}?id=${encodeURIComponent(id)}`, {
+      method: 'DELETE'
+  })
+    .then(response => response.json())
+    .then(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 }

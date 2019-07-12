@@ -1,11 +1,24 @@
 import React from 'react';
 
-class ContentItem extends React.Component {
-  onInputChange = (event) => {
+class ContentForm extends React.Component {
+  state = {
+    item: {
+      id: '',
+      title: '',
+      contentType: '',
+    }
+  };
+
+  handleChange = (event) => {
+    console.log('inputChange');
+
     const { item } = { ...this.state };
     const currentState = item;
     const { name, value } = event.target;
     currentState[name] = value;
+
+    console.log(currentState);
+
 
     this.setState({ item: currentState})
   }
@@ -18,6 +31,16 @@ class ContentItem extends React.Component {
   onFormCancel = (event) => {
     event.preventDefault();
     this.props.onFormCancel();
+  }
+
+  componentDidMount() {
+    this.setState({ item: this.props.item });
+  }
+
+  componentDidUpdate() {
+    if (this.props.item.id !== this.state.item.id ) {
+      this.setState({ item: this.props.item });
+    }
   }
 
   render() {
@@ -38,15 +61,15 @@ class ContentItem extends React.Component {
                  type="text"
                  placeholder="title"
                  value={item.title}
-                 onChange={this.onInputChange} />
+                 onChange={this.handleChange} />
         </div>
         <div className="field">
-          <label htmlFor="contentType">Type</label>
+          <label htmlFor="contentType">Content Type</label>
           <input name="contentType"
                  type="text"
-                 placeholder="type"
+                 placeholder="content type"
                  value={item.contentType}
-                 onChange={this.onInputChange} />
+                 onChange={this.handleChange} />
         </div>
 
         <div>
@@ -60,8 +83,8 @@ class ContentItem extends React.Component {
           </button>
         </div>
       </div>
-  );
-}
+    );
+  }
 }
 
-export default ContentItem;
+export default ContentForm;
