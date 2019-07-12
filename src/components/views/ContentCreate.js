@@ -7,18 +7,18 @@ class ContentCreate extends React.Component {
   state = {
     item: {
       id: '',
-      title: '',
       contentType: '',
+      title: '',
+      subTitle: '',
+      copyText: '',
+      dateCreated: '',
+      dateModified: ''
     },
     redirect: false
   };
 
   postContent = async () => {
-    console.log(this.state.item);
-
     const response = await contentCreate(this.state.item);
-
-    console.log(response);
     this.setState({ redirect: true });
   }
 

@@ -4,21 +4,20 @@ class ContentForm extends React.Component {
   state = {
     item: {
       id: '',
-      title: '',
       contentType: '',
+      title: '',
+      subTitle: '',
+      copyText: '',
+      dateCreated: '',
+      dateModified: ''
     }
   };
 
   handleChange = (event) => {
-    console.log('inputChange');
-
     const { item } = { ...this.state };
     const currentState = item;
     const { name, value } = event.target;
     currentState[name] = value;
-
-    console.log(JSON.stringify(currentState));
-
 
     this.setState({ item: currentState})
   }
@@ -44,16 +43,28 @@ class ContentForm extends React.Component {
   }
 
   render() {
-    const item = this.props.item;
+    const item = this.state.item;
 
     return(
       <div className="ui form">
-        <div className="field">
+        <div className="disabled field">
           <label htmlFor="id">ID</label>
           <input name="id"
                  type="text"
+                 placeholder="id"
                  value={item.id}
                  readOnly />
+        </div>
+        <div className="field">
+          <label htmlFor="contentType">Content Type</label>
+          <select name="contentType"
+                 type="text"
+                 placeholder="content type"
+                 value={item.contentType}
+                 onChange={this.handleChange}>
+                 <option value="">Content Type...</option>
+                  <option value="content">Content</option>
+          </select>
         </div>
         <div className="field">
           <label htmlFor="title">Title</label>
@@ -64,12 +75,35 @@ class ContentForm extends React.Component {
                  onChange={this.handleChange} />
         </div>
         <div className="field">
-          <label htmlFor="contentType">Content Type</label>
-          <input name="contentType"
+          <label htmlFor="subTitle">Subtitle</label>
+          <input name="subTitle"
                  type="text"
-                 placeholder="content type"
-                 value={item.contentType}
+                 placeholder="subtitle"
+                 value={item.subTitle}
                  onChange={this.handleChange} />
+        </div>
+        <div className="field">
+          <label htmlFor="copyText">Copy Text</label>
+          <textarea name="copyText"
+                 placeholder="copy text"
+                 value={item.copyText}
+                 onChange={this.handleChange}></textarea>
+        </div>
+        <div className="disabled field">
+          <label htmlFor="dateCreated">Date Created</label>
+          <input name="dateCreated"
+                 type="text"
+                 placeholder="date created"
+                 value={item.dateCreated}
+                 readOnly />
+        </div>
+        <div className="disabled field">
+          <label htmlFor="dateModified">Date Modified</label>
+          <input name="dateModified"
+                 type="text"
+                 placeholder="date modifed"
+                 value={item.dateModified}
+                 readOnly />
         </div>
 
         <div>

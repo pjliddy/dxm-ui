@@ -8,8 +8,12 @@ class ContentEdit extends React.Component {
   state = {
     item: {
       id: '',
-      title: '',
       contentType: '',
+      title: '',
+      subTitle: '',
+      copyText: '',
+      dateCreated: '',
+      dateModified: ''
     },
     redirect: false
   };

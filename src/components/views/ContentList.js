@@ -36,11 +36,10 @@ class ContentList extends React.Component {
             {item.id}
           </td>
           <td className="collapsing">
+            {item.dateModified}
+          </td>
+          <td className="collapsing">
             <div className="ui icon buttons">
-              <Link to={linkPath}
-                    className="ui basic button">
-                <i className="edit outline icon"></i>
-              </Link>
               <button className="ui basic button"
                       onClick={() => this.deleteContent(item.id)}>
                 <i className="trash alternate outline icon"></i>
@@ -66,6 +65,7 @@ class ContentList extends React.Component {
               <th>Title</th>
               <th>Content Type</th>
               <th>ID</th>
+              <th>Date Modified</th>
               <th></th>
             </tr>
           </thead>
