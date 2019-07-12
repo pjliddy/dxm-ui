@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/pjliddy/dxm-ui/static/js/main.b53a05f2.chunk.js",
+    "main.js.map": "/pjliddy/dxm-ui/static/js/main.b53a05f2.chunk.js.map",
+    "runtime~main.js": "/pjliddy/dxm-ui/static/js/runtime~main.303e4f33.js",
+    "runtime~main.js.map": "/pjliddy/dxm-ui/static/js/runtime~main.303e4f33.js.map",
+    "static/js/2.2a5336e7.chunk.js": "/pjliddy/dxm-ui/static/js/2.2a5336e7.chunk.js",
+    "static/js/2.2a5336e7.chunk.js.map": "/pjliddy/dxm-ui/static/js/2.2a5336e7.chunk.js.map",
+    "index.html": "/pjliddy/dxm-ui/index.html",
+    "precache-manifest.8da837bb2383b17891ba24804c73bd53.js": "/pjliddy/dxm-ui/precache-manifest.8da837bb2383b17891ba24804c73bd53.js",
+    "service-worker.js": "/pjliddy/dxm-ui/service-worker.js"
+  }
+}
