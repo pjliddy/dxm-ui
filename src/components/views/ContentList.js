@@ -5,17 +5,24 @@ import { contentDelete } from '../api/contentApi';
 
 class ContentList extends React.Component {
   state = {
-    items: []
+    items: [],
+    isLoading: false
   };
 
   getContentIndex = async () => {
+    this.setState({ isLoading: true });
     const response = await contentIndex();
-    this.setState({ items: response });
+    this.setState({
+      isLoading: false,
+      items: response
+    });
   }
 
   deleteContent = async (id) => {
+    this.setState({ isLoading: true });
     await contentDelete(id);
     this.getContentIndex();
+    this.setState({ isLoading: false });
   }
 
   renderList() {
@@ -56,23 +63,34 @@ class ContentList extends React.Component {
   }
 
   render() {
+    const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
+
     return (
       <div>
         <h1>Content List</h1>
-        <table className="ui celled striped compact table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Content Type</th>
-              <th>ID</th>
-              <th>Date Modified</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderList()}
-          </tbody>
-        </table>
+        <div className="ui segment">
+            <div className="ui segment">
+              <div className={loaderStyles}>
+                <div className="ui text loader">Working...</div>
+              </div>
+              <table className="ui celled striped compact table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Content Type</th>
+                    <th>ID</th>
+                    <th>Date Modified</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.renderList()}
+                </tbody>
+              </table>
+            </div>
+        </div>
+
+
       </div>
     );
   }

@@ -14,15 +14,20 @@ class ContentCreate extends React.Component {
       dateCreated: '',
       dateModified: ''
     },
-    redirect: false
+    redirect: false,
+    isLoading: false
   };
 
   postContent = async () => {
+    this.setState({ isLoading: true });
     const response = await contentCreate(this.state.item);
 
     console.log(`postContent: ${JSON.stringify(response)}`);
 
-    this.setState({ redirect: true });
+    this.setState({
+      isLoading: false,
+      redirect: true
+    });
   }
 
   onFormCancel = () => {
@@ -34,12 +39,22 @@ class ContentCreate extends React.Component {
       return <Redirect to="/" />;
     }
 
+      const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
+
     return (
       <div>
         <h1>New Content</h1>
-        <ContentForm item={this.state.item}
-                     onFormSubmit={this.postContent}
-                     onFormCancel={this.onFormCancel}/>
+        <div className="ui segment">
+            <div className="ui segment">
+              <div className={loaderStyles}>
+                <div className="ui text loader">Working...</div>
+              </div>
+              <ContentForm item={this.state.item}
+                           onFormSubmit={this.postContent}
+                           onFormCancel={this.onFormCancel}/>
+            </div>
+
+        </div>
        </div>
     );
   }

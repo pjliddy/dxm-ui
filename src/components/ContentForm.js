@@ -47,6 +47,7 @@ class ContentForm extends React.Component {
 
     return(
       <div className="ui form">
+        <p>All fields must have values. Validation to be added.</p>
         <div className="disabled field">
           <label htmlFor="id">ID</label>
           <input name="id"
@@ -55,7 +56,7 @@ class ContentForm extends React.Component {
                  value={item.id}
                  readOnly />
         </div>
-        <div className="field">
+        <div className="required field">
           <label htmlFor="contentType">Content Type</label>
           <select name="contentType"
                  type="text"
@@ -65,7 +66,7 @@ class ContentForm extends React.Component {
                     <option value="content">Content</option>
           </select>
         </div>
-        <div className="field">
+        <div className="required field">
           <label htmlFor="title">Title</label>
           <input name="title"
                  type="text"
@@ -73,7 +74,7 @@ class ContentForm extends React.Component {
                  value={item.title}
                  onChange={this.handleChange} />
         </div>
-        <div className="field">
+        <div className="required field">
           <label htmlFor="subTitle">Subtitle</label>
           <input name="subTitle"
                  type="text"
@@ -81,7 +82,7 @@ class ContentForm extends React.Component {
                  value={item.subTitle}
                  onChange={this.handleChange} />
         </div>
-        <div className="field">
+        <div className="required field">
           <label htmlFor="copyText">Copy Text</label>
           <textarea name="copyText"
                  placeholder="copy text"
