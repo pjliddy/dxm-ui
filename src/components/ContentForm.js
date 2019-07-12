@@ -4,7 +4,7 @@ class ContentForm extends React.Component {
   state = {
     item: {
       id: '',
-      contentType: '',
+      contentType: 'content',
       title: '',
       subTitle: '',
       copyText: '',
@@ -62,8 +62,7 @@ class ContentForm extends React.Component {
                  placeholder="content type"
                  value={item.contentType}
                  onChange={this.handleChange}>
-                 <option value="">Content Type...</option>
-                  <option value="content">Content</option>
+                    <option value="content">Content</option>
           </select>
         </div>
         <div className="field">

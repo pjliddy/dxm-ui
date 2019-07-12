@@ -19,6 +19,9 @@ class ContentCreate extends React.Component {
 
   postContent = async () => {
     const response = await contentCreate(this.state.item);
+
+    console.log(`postContent: ${JSON.stringify(response)}`);
+
     this.setState({ redirect: true });
   }
 
