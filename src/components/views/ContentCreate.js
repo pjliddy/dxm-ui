@@ -18,9 +18,9 @@ class ContentCreate extends React.Component {
     isLoading: false
   };
 
-  postContent = async () => {
+  postContent = async (item) => {
     this.setState({ isLoading: true });
-    const response = await contentCreate(this.state.item);
+    const response = await contentCreate(item);
 
     console.log(`postContent: ${JSON.stringify(response)}`);
 

@@ -24,7 +24,7 @@ class ContentForm extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit();
+    this.props.onFormSubmit(this.state.item);
   }
 
   onFormCancel = (event) => {
@@ -33,11 +33,13 @@ class ContentForm extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ item: this.props.item });
+    if (this.props.item.id && this.props.item.id !== this.state.item.id ) {
+      this.setState({ item: this.props.item });
+    }
   }
 
   componentDidUpdate() {
-    if (this.props.item.id !== this.state.item.id ) {
+    if (this.props.item.id && this.props.item.id !== this.state.item.id ) {
       this.setState({ item: this.props.item });
     }
   }
@@ -63,6 +65,7 @@ class ContentForm extends React.Component {
                  placeholder="content type"
                  value={item.contentType}
                  onChange={this.handleChange}>
+                    <option value="">Content Type</option>
                     <option value="content">Content</option>
           </select>
         </div>

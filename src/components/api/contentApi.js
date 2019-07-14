@@ -1,17 +1,13 @@
-const API_BASE_URL = 'https://kpuw6vo7wg.execute-api.us-east-1.amazonaws.com/default';
-const API_CREATE = '/dxm-lambda-content-create';
-const API_INDEX = '/dxm-lambda-content-index';
-const API_READ = '/dxm-lambda-content-read';
-const API_UPDATE = '/dxm-lambda-content-update';
-const API_DELETE = '/dxm-lambda-content-delete';
+const API_BASE_URL = 'https://icvdl0i8ol.execute-api.us-east-1.amazonaws.com/nodes/';
 
 export const contentCreate = (item) => {
-  return fetch(`${API_BASE_URL}${API_CREATE}`, {
+  return fetch(`${API_BASE_URL}`, {
       method: 'POST',
       body: JSON.stringify(item)
   })
     .then(
       (response) => {
+        console.log(`contentCreate: ${JSON.stringify(response)}`);
         return response;
       },
       (error) => {
@@ -21,7 +17,7 @@ export const contentCreate = (item) => {
 }
 
 export const contentIndex = () => {
-  return fetch(`${API_BASE_URL}${API_INDEX}`)
+  return fetch(`${API_BASE_URL}`)
     .then(response => response.json())
     .then(
       (response) => {
@@ -34,7 +30,7 @@ export const contentIndex = () => {
 }
 
 export const contentRead = (id) => {
-  return fetch(`${API_BASE_URL}${API_READ}?id=${encodeURIComponent(id)}`)
+  return fetch(`${API_BASE_URL}/${id}`)
     .then(response => response.json())
     .then(
       (response) => {
@@ -47,7 +43,7 @@ export const contentRead = (id) => {
 }
 
 export const contentUpdate = (item) => {
-  return fetch(`${API_BASE_URL}${API_UPDATE}`, {
+  return fetch(`${API_BASE_URL}/${item.id}`, {
       method: 'PUT',
       body: JSON.stringify(item)
   })
@@ -62,7 +58,7 @@ export const contentUpdate = (item) => {
 }
 
 export const contentDelete = (id) => {
-  return fetch(`${API_BASE_URL}${API_DELETE}?id=${encodeURIComponent(id)}`, {
+  return fetch(`${API_BASE_URL}/${id}`, {
       method: 'DELETE'
   })
     .then(
