@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://icvdl0i8ol.execute-api.us-east-1.amazonaws.com/nodes/';
+const API_BASE_URL = 'https://kiuhmwwxi4.execute-api.us-east-1.amazonaws.com/dxm-api/nodes';
 
 export const contentCreate = (item) => {
   return fetch(`${API_BASE_URL}`, {
