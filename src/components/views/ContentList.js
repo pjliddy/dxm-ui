@@ -1,17 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { contentIndex } from '../api/contentApi';
-import { contentDelete } from '../api/contentApi';
+import Api from '../api/Api';
 
 class ContentList extends React.Component {
-  state = {
-    items: [],
-    isLoading: false
-  };
+  constructor() {
+    super();
+    this.apiResource = 'nodes';
+    this.state = {
+      items: [],
+      isLoading: false
+    };
+  }
 
   getContentIndex = async () => {
     this.setState({ isLoading: true });
-    const response = await contentIndex();
+    const response = await Api.list(this.apiResource);
     this.setState({
       isLoading: false,
       items: response
@@ -20,7 +23,7 @@ class ContentList extends React.Component {
 
   deleteContent = async (id) => {
     this.setState({ isLoading: true });
-    await contentDelete(id);
+    await Api.destroy(this.apiResource, id);
     this.getContentIndex();
     this.setState({ isLoading: false });
   }

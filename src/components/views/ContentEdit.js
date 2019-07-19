@@ -1,27 +1,30 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { contentRead } from '../api/contentApi';
-import { contentUpdate } from '../api/contentApi';
+import Api from '../api/Api';
 import ContentForm from '../ContentForm';
 
 class ContentEdit extends React.Component {
-  state = {
-    item: {
-      id: '',
-      contentType: '',
-      title: '',
-      subTitle: '',
-      copyText: '',
-      dateCreated: '',
-      dateModified: ''
-    },
-    redirect: false,
-    isLoading: false
-  };
+  constructor() {
+    super();
+    this.apiResource = 'nodes';
+    this.state = {
+      item: {
+        id: '',
+        contentType: '',
+        title: '',
+        subTitle: '',
+        copyText: '',
+        dateCreated: '',
+        dateModified: ''
+      },
+      redirect: false,
+      isLoading: false
+    };
+  }
 
   getContent = async (id) => {
     this.setState({ isLoading: true });
-    const response = await contentRead(id);
+    const response = await Api.read(this.apiResource, id);
     this.setState({
       item: response,
       isLoading: false
@@ -30,7 +33,7 @@ class ContentEdit extends React.Component {
 
   putContent = async () => {
     this.setState({ isLoading: true });
-    await contentUpdate(this.state.item);
+    await Api.update(this.apiResource, this.state.item);
     this.setState({
       isLoading: false,
       redirect: true

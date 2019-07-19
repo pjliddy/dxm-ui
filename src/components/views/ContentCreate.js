@@ -1,26 +1,30 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import ContentForm from '../ContentForm';
-import { contentCreate } from '../api/contentApi';
+import Api from '../api/Api';
 
 class ContentCreate extends React.Component {
-  state = {
-    item: {
-      id: '',
-      contentType: '',
-      title: '',
-      subTitle: '',
-      copyText: '',
-      dateCreated: '',
-      dateModified: ''
-    },
-    redirect: false,
-    isLoading: false
-  };
+  constructor() {
+    super();
+    this.apiResource = 'nodes';
+    this.state = {
+      item: {
+        id: '',
+        contentType: '',
+        title: '',
+        subTitle: '',
+        copyText: '',
+        dateCreated: '',
+        dateModified: ''
+      },
+      redirect: false,
+      isLoading: false
+    };
+  }
 
   postContent = async (item) => {
     this.setState({ isLoading: true });
-    const response = await contentCreate(item);
+    const response = await Api.create(this.apiResource, item);
 
     console.log(`postContent: ${JSON.stringify(response)}`);
 

@@ -1,17 +1,22 @@
 import React from 'react';
+import Api from './api/Api';
 
 class ContentForm extends React.Component {
-  state = {
-    item: {
-      id: '',
-      contentType: 'content',
-      title: '',
-      subTitle: '',
-      copyText: '',
-      dateCreated: '',
-      dateModified: ''
-    }
-  };
+  constructor() {
+    super();
+    this.apiResource = 'compose';
+    this.state = {
+      item: {
+        id: '',
+        contentType: 'content',
+        title: '',
+        subTitle: '',
+        copyText: '',
+        dateCreated: '',
+        dateModified: ''
+      }
+    };
+  }
 
   handleChange = (event) => {
     const { item } = { ...this.state };
@@ -19,7 +24,7 @@ class ContentForm extends React.Component {
     const { name, value } = event.target;
     currentState[name] = value;
 
-    this.setState({ item: currentState})
+    this.setState({ item: currentState });
   }
 
   onFormSubmit = (event) => {
@@ -30,6 +35,33 @@ class ContentForm extends React.Component {
   onFormCancel = (event) => {
     event.preventDefault();
     this.props.onFormCancel();
+  }
+
+  onPreview = () => {
+    const body = {
+      data: this.state.item,
+      templateId: this.state.item.contentType
+    };
+
+    Api.create(this.apiResource, body)
+      .then(response => {
+        return response.text();
+      })
+      .then(response => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(response, "text/html");
+        const html = doc.documentElement.outerHTML;
+
+        console.log(html);
+
+        const newWindow = window.open();
+        newWindow.document.body.outerHTML = html;
+      })
+  }
+
+  onSaveAndPreview = (event) => {
+    this.onFormSubmit(event);
+    this.onPreview(event);
   }
 
   itemToState() {
@@ -54,6 +86,7 @@ class ContentForm extends React.Component {
     let idField = null;
     let dateCreatedField = null;
     let dateModifiedField = null;
+    let previewButton = null;
 
     if (!isNew) {
       idField = <div className="disabled field">
@@ -81,6 +114,10 @@ class ContentForm extends React.Component {
                                    value={item.dateModified}
                                    readOnly />
                           </div>;
+      previewButton = <button className="ui secondary basic button"
+                              onClick={this.onPreview}>
+                        Preview
+                      </button>;
     }
 
     return(
@@ -128,6 +165,7 @@ class ContentForm extends React.Component {
                   onClick={this.onFormCancel}>
             Cancel
           </button>
+          {previewButton}
           <button className="ui primary button"
                   onClick={this.onFormSubmit}>
             Save
