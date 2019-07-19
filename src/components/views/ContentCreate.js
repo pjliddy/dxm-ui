@@ -48,6 +48,7 @@ class ContentCreate extends React.Component {
           <div className="ui text loader">Working...</div>
         </div>
         <ContentForm item={this.state.item}
+                     isNew={true}
                      onFormSubmit={this.postContent}
                      onFormCancel={this.onFormCancel}/>
        </div>

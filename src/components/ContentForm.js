@@ -32,32 +32,61 @@ class ContentForm extends React.Component {
     this.props.onFormCancel();
   }
 
-  componentDidMount() {
+  itemToState() {
     if (this.props.item.id && this.props.item.id !== this.state.item.id ) {
       this.setState({ item: this.props.item });
     }
   }
 
+  componentDidMount() {
+    this.setState({ isNew: this.props.isNew });
+    this.itemToState();
+  }
+
   componentDidUpdate() {
-    if (this.props.item.id && this.props.item.id !== this.state.item.id ) {
-      this.setState({ item: this.props.item });
-    }
+    this.itemToState();
   }
 
   render() {
     const item = this.state.item;
+    const isNew = this.state.isNew
+
+    let idField = null;
+    let dateCreatedField = null;
+    let dateModifiedField = null;
+
+    if (!isNew) {
+      idField = <div className="disabled field">
+                  <label htmlFor="id">ID</label>
+                  <input name="id"
+                         type="text"
+                         placeholder="id"
+                         value={item.id}
+                         readOnly />
+                </div>;
+      dateCreatedField = <div className="disabled field">
+                          <label htmlFor="dateCreated">Date Created</label>
+                          <input name="dateCreated"
+                                 type="text"
+                                 placeholder="date created"
+                                 value={item.dateCreated}
+                                 readOnly />
+                        </div>;
+
+      dateModifiedField = <div className="disabled field">
+                            <label htmlFor="dateModified">Date Modified</label>
+                            <input name="dateModified"
+                                   type="text"
+                                   placeholder="date modifed"
+                                   value={item.dateModified}
+                                   readOnly />
+                          </div>;
+    }
 
     return(
       <div className="ui form">
         <p>All fields must have values. Validation to be added.</p>
-        <div className="disabled field">
-          <label htmlFor="id">ID</label>
-          <input name="id"
-                 type="text"
-                 placeholder="id"
-                 value={item.id}
-                 readOnly />
-        </div>
+        {idField}
         <div className="required field">
           <label htmlFor="contentType">Content Type</label>
           <select name="contentType"
@@ -92,23 +121,8 @@ class ContentForm extends React.Component {
                  value={item.copyText}
                  onChange={this.handleChange}></textarea>
         </div>
-        <div className="disabled field">
-          <label htmlFor="dateCreated">Date Created</label>
-          <input name="dateCreated"
-                 type="text"
-                 placeholder="date created"
-                 value={item.dateCreated}
-                 readOnly />
-        </div>
-        <div className="disabled field">
-          <label htmlFor="dateModified">Date Modified</label>
-          <input name="dateModified"
-                 type="text"
-                 placeholder="date modifed"
-                 value={item.dateModified}
-                 readOnly />
-        </div>
-
+        {dateCreatedField}
+        {dateModifiedField}
         <div>
           <button className="ui secondary basic button"
                   onClick={this.onFormCancel}>
