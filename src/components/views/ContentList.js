@@ -5,9 +5,10 @@ import Api from '../api/Api';
 class ContentList extends React.Component {
   constructor() {
     super();
+    
     this.apiResource = 'nodes';
     this.state = {
-      items: [],
+      nodes: [],
       isLoading: false
     };
   }
@@ -17,7 +18,7 @@ class ContentList extends React.Component {
     const response = await Api.list(this.apiResource);
     this.setState({
       isLoading: false,
-      items: response
+      nodes: response
     });
   }
 
@@ -29,29 +30,29 @@ class ContentList extends React.Component {
   }
 
   renderList() {
-    return this.state.items.map(item => {
-      const linkPath = `/content/edit/${item.id}`;
+    return this.state.nodes.map(node => {
+      const linkPath = `/content/edit/${node.id}`;
 
       return(
-        <tr key={item.id}>
+        <tr key={node.id}>
           <td>
-            <Link to={linkPath} className="item">
-              {item.title}
+            <Link to={linkPath} className="node">
+              {node.title}
             </Link>
           </td>
           <td>
-            {item.contentType}
+            {node.contentType}
           </td>
           <td className="collapsing">
-            {item.id}
+            {node.id}
           </td>
           <td className="collapsing">
-            {item.dateModified}
+            {node.dateModified}
           </td>
           <td className="collapsing">
             <div className="ui icon buttons">
               <button className="ui basic button"
-                      onClick={() => this.deleteContent(item.id)}>
+                      onClick={() => this.deleteContent(node.id)}>
                 <i className="trash alternate outline icon"></i>
               </button>
             </div>

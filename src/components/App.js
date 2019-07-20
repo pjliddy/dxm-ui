@@ -1,9 +1,9 @@
 import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
+import Header from './Header';
 import ContentList from './views/ContentList';
 import ContentCreate from './views/ContentCreate';
 import ContentEdit from './views/ContentEdit';
-import Header from './Header';
 
 const App = () => {
   return (

@@ -6,9 +6,10 @@ import ContentForm from '../ContentForm';
 class ContentEdit extends React.Component {
   constructor() {
     super();
+    
     this.apiResource = 'nodes';
     this.state = {
-      item: {
+      node: {
         id: '',
         contentType: '',
         title: '',
@@ -26,14 +27,14 @@ class ContentEdit extends React.Component {
     this.setState({ isLoading: true });
     const response = await Api.read(this.apiResource, id);
     this.setState({
-      item: response,
+      node: response,
       isLoading: false
     });
   }
 
   putContent = async () => {
     this.setState({ isLoading: true });
-    await Api.update(this.apiResource, this.state.item);
+    await Api.update(this.apiResource, this.state.node);
     this.setState({
       isLoading: false,
       redirect: true
@@ -60,7 +61,7 @@ class ContentEdit extends React.Component {
       );
     } else {
       return(
-        <ContentForm item={this.state.item}
+        <ContentForm node={this.state.node}
                      onFormSubmit={this.putContent}
                      onFormCancel={this.onFormCancel}/>
       );
@@ -68,9 +69,7 @@ class ContentEdit extends React.Component {
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/" />;
-    }
+    if (this.state.redirect) { return <Redirect to="/" />; }
 
     const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
 
@@ -80,7 +79,7 @@ class ContentEdit extends React.Component {
           <div className={loaderStyles}>
             <div className="ui text loader">Working...</div>
           </div>
-          <ContentForm item={this.state.item}
+          <ContentForm node={this.state.node}
                        onFormSubmit={this.putContent}
                        onFormCancel={this.onFormCancel}/>
         </div>

@@ -4,9 +4,10 @@ import Api from './api/Api';
 class ContentForm extends React.Component {
   constructor() {
     super();
+    
     this.apiResource = 'compose';
     this.state = {
-      item: {
+      node: {
         id: '',
         contentType: 'content',
         title: '',
@@ -14,22 +15,23 @@ class ContentForm extends React.Component {
         copyText: '',
         dateCreated: '',
         dateModified: ''
-      }
+      },
+      isNew: false
     };
   }
 
   handleChange = (event) => {
-    const { item } = { ...this.state };
-    const currentState = item;
+    const { node } = { ...this.state };
+    const currentState = node;
     const { name, value } = event.target;
     currentState[name] = value;
 
-    this.setState({ item: currentState });
+    this.setState({ node: currentState });
   }
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit(this.state.item);
+    this.props.onFormSubmit(this.state.node);
   }
 
   onFormCancel = (event) => {
@@ -39,8 +41,8 @@ class ContentForm extends React.Component {
 
   onPreview = () => {
     const body = {
-      data: this.state.item,
-      templateId: this.state.item.contentType
+      data: this.state.node,
+      templateId: this.state.node.contentType
     };
 
     Api.create(this.apiResource, body)
@@ -51,9 +53,6 @@ class ContentForm extends React.Component {
         const parser = new DOMParser();
         const doc = parser.parseFromString(response, "text/html");
         const html = doc.documentElement.outerHTML;
-
-        console.log(html);
-
         const newWindow = window.open();
         newWindow.document.body.outerHTML = html;
       })
@@ -64,23 +63,23 @@ class ContentForm extends React.Component {
     this.onPreview(event);
   }
 
-  itemToState() {
-    if (this.props.item.id && this.props.item.id !== this.state.item.id ) {
-      this.setState({ item: this.props.item });
+  nodeToState() {
+    if (this.props.node.id && this.props.node.id !== this.state.node.id ) {
+      this.setState({ node: this.props.node });
     }
   }
 
   componentDidMount() {
     this.setState({ isNew: this.props.isNew });
-    this.itemToState();
+    this.nodeToState();
   }
 
   componentDidUpdate() {
-    this.itemToState();
+    this.nodeToState();
   }
 
   render() {
-    const item = this.state.item;
+    const node = this.state.node;
     const isNew = this.state.isNew
 
     let idField = null;
@@ -94,24 +93,24 @@ class ContentForm extends React.Component {
                   <input name="id"
                          type="text"
                          placeholder="id"
-                         value={item.id}
+                         value={node.id}
                          readOnly />
                 </div>;
-      dateCreatedField = <div className="disabled field">
-                          <label htmlFor="dateCreated">Date Created</label>
-                          <input name="dateCreated"
-                                 type="text"
-                                 placeholder="date created"
-                                 value={item.dateCreated}
-                                 readOnly />
-                        </div>;
+      dateCreatedField =  <div className="disabled field">
+                            <label htmlFor="dateCreated">Date Created</label>
+                            <input name="dateCreated"
+                                   type="text"
+                                   placeholder="date created"
+                                   value={node.dateCreated}
+                                   readOnly />
+                          </div>;
 
       dateModifiedField = <div className="disabled field">
                             <label htmlFor="dateModified">Date Modified</label>
                             <input name="dateModified"
                                    type="text"
                                    placeholder="date modifed"
-                                   value={item.dateModified}
+                                   value={node.dateModified}
                                    readOnly />
                           </div>;
       previewButton = <button className="ui secondary basic button"
@@ -129,7 +128,7 @@ class ContentForm extends React.Component {
           <select name="contentType"
                  type="text"
                  placeholder="content type"
-                 value={item.contentType}
+                 value={node.contentType}
                  onChange={this.handleChange}>
                     <option value="">Content Type</option>
                     <option value="content">Content</option>
@@ -140,7 +139,7 @@ class ContentForm extends React.Component {
           <input name="title"
                  type="text"
                  placeholder="title"
-                 value={item.title}
+                 value={node.title}
                  onChange={this.handleChange} />
         </div>
         <div className="required field">
@@ -148,14 +147,14 @@ class ContentForm extends React.Component {
           <input name="subTitle"
                  type="text"
                  placeholder="subtitle"
-                 value={item.subTitle}
+                 value={node.subTitle}
                  onChange={this.handleChange} />
         </div>
         <div className="required field">
           <label htmlFor="copyText">Copy Text</label>
           <textarea name="copyText"
                  placeholder="copy text"
-                 value={item.copyText}
+                 value={node.copyText}
                  onChange={this.handleChange}></textarea>
         </div>
         {dateCreatedField}

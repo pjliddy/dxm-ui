@@ -7,7 +7,7 @@ const create = (resource, body) => {
   })
     .then(
       (response) => {
-        console.log(`contentCreate: ${JSON.stringify(response)}`);
+        console.log(`api.create(): ${JSON.stringify(response)}`);
         return response;
       },
       (error) => {
@@ -34,6 +34,7 @@ const read = (resource, id) => {
     .then(response => response.json())
     .then(
       (response) => {
+        console.log(`api.read(): ${JSON.stringify(response)}`);
         return response;
       },
       (error) => {
@@ -49,6 +50,7 @@ const update = (resource, body) => {
   })
     .then(
       (response) => {
+        console.log(`api.update(): ${JSON.stringify(response)}`);
         return response;
       },
       (error) => {
@@ -63,6 +65,7 @@ const destroy = (resource, id) => {
   })
     .then(
       (response) => {
+        console.log(`api.destroy(): ${JSON.stringify(response)}`);
         return response;
       },
       (error) => {
@@ -78,75 +81,4 @@ module.exports = {
   read,
   update,
   destroy
-}
-
-// export const create = (resource, item) => {
-//   return fetch(`${API_BASE_URL}/${resource}`, {
-//       method: 'POST',
-//       body: JSON.stringify(item)
-//   })
-//     .then(
-//       (response) => {
-//         console.log(`contentCreate: ${JSON.stringify(response)}`);
-//         return response;
-//       },
-//       (error) => {
-//         console.log(error);
-//       }
-//     );
-// }
-
-// export const list = (resource) => {
-//   return fetch(`${API_BASE_URL}/${resource}`)
-//     .then(response => response.json())
-//     .then(
-//       (response) => {
-//         return response;
-//       },
-//       (error) => {
-//         console.log(error);
-//       }
-//     );
-// }
-
-// export const read = (resource, id) => {
-//   return fetch(`${API_BASE_URL}/${resource}/${id}`)
-//     .then(response => response.json())
-//     .then(
-//       (response) => {
-//         return response;
-//       },
-//       (error) => {
-//         console.log(error);
-//       }
-//     );
-// }
-
-// export const update = (resource, item) => {
-//   return fetch(`${API_BASE_URL}/${resource}/${item.id}`, {
-//       method: 'PUT',
-//       body: JSON.stringify(item)
-//   })
-//     .then(
-//       (response) => {
-//         return response;
-//       },
-//       (error) => {
-//         console.log(error);
-//       }
-//     );
-// }
-
-// export const destroy = (resource, id) => {
-//   return fetch(`${API_BASE_URL}/${resource}/${id}`, {
-//       method: 'DELETE'
-//   })
-//     .then(
-//       (response) => {
-//         return response;
-//       },
-//       (error) => {
-//         console.log(error);
-//       }
-//     );
-// }
+};

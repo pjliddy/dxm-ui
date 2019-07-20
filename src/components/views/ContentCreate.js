@@ -1,14 +1,15 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import ContentForm from '../ContentForm';
 import Api from '../api/Api';
+import ContentForm from '../ContentForm';
 
 class ContentCreate extends React.Component {
   constructor() {
     super();
+
     this.apiResource = 'nodes';
     this.state = {
-      item: {
+      node: {
         id: '',
         contentType: '',
         title: '',
@@ -22,11 +23,9 @@ class ContentCreate extends React.Component {
     };
   }
 
-  postContent = async (item) => {
+  postContent = async (node) => {
     this.setState({ isLoading: true });
-    const response = await Api.create(this.apiResource, item);
-
-    console.log(`postContent: ${JSON.stringify(response)}`);
+    await Api.create(this.apiResource, node);
 
     this.setState({
       isLoading: false,
@@ -39,11 +38,9 @@ class ContentCreate extends React.Component {
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/" />;
-    }
+    if (this.state.redirect) { return <Redirect to="/" />; }
 
-      const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
+    const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
 
     return (
       <div>
@@ -51,7 +48,7 @@ class ContentCreate extends React.Component {
         <div className={loaderStyles}>
           <div className="ui text loader">Working...</div>
         </div>
-        <ContentForm item={this.state.item}
+        <ContentForm node={this.state.node}
                      isNew={true}
                      onFormSubmit={this.postContent}
                      onFormCancel={this.onFormCancel}/>
