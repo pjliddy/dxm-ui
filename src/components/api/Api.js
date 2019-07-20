@@ -16,7 +16,7 @@ const create = (resource, body) => {
     );
 };
 
-const list = (resource) => {
+const index = (resource) => {
   return fetch(`${API_BASE_URL}/${resource}`)
     .then(response => response.json())
     .then(
@@ -77,7 +77,7 @@ const destroy = (resource, id) => {
 
 module.exports = {
   create,
-  list,
+  index,
   read,
   update,
   destroy

@@ -5,7 +5,7 @@ import Api from '../api/Api';
 class ContentList extends React.Component {
   constructor() {
     super();
-    
+
     this.apiResource = 'nodes';
     this.state = {
       nodes: [],
@@ -13,9 +13,9 @@ class ContentList extends React.Component {
     };
   }
 
-  getContentIndex = async () => {
+  listContent = async () => {
     this.setState({ isLoading: true });
-    const response = await Api.list(this.apiResource);
+    const response = await Api.index(this.apiResource);
     this.setState({
       isLoading: false,
       nodes: response
@@ -25,7 +25,7 @@ class ContentList extends React.Component {
   deleteContent = async (id) => {
     this.setState({ isLoading: true });
     await Api.destroy(this.apiResource, id);
-    this.getContentIndex();
+    this.listContent();
     this.setState({ isLoading: false });
   }
 
@@ -63,7 +63,7 @@ class ContentList extends React.Component {
   }
 
   componentDidMount() {
-    this.getContentIndex();
+    this.listContent();
   }
 
   render() {

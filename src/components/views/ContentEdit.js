@@ -6,7 +6,7 @@ import ContentForm from '../ContentForm';
 class ContentEdit extends React.Component {
   constructor() {
     super();
-    
+
     this.apiResource = 'nodes';
     this.state = {
       node: {
@@ -23,7 +23,7 @@ class ContentEdit extends React.Component {
     };
   }
 
-  getContent = async (id) => {
+  showContent = async (id) => {
     this.setState({ isLoading: true });
     const response = await Api.read(this.apiResource, id);
     this.setState({
@@ -32,7 +32,7 @@ class ContentEdit extends React.Component {
     });
   }
 
-  putContent = async () => {
+  updateContent = async () => {
     this.setState({ isLoading: true });
     await Api.update(this.apiResource, this.state.node);
     this.setState({
@@ -46,7 +46,7 @@ class ContentEdit extends React.Component {
   }
 
   componentDidMount() {
-    this.getContent(this.props.match.params.id);
+    this.showContent(this.props.match.params.id);
   }
 
   handleLoader() {
@@ -62,7 +62,7 @@ class ContentEdit extends React.Component {
     } else {
       return(
         <ContentForm node={this.state.node}
-                     onFormSubmit={this.putContent}
+                     onFormSubmit={this.updateContent}
                      onFormCancel={this.onFormCancel}/>
       );
     }
@@ -76,13 +76,13 @@ class ContentEdit extends React.Component {
     return (
       <div>
         <h1>Edit Content</h1>
-          <div className={loaderStyles}>
-            <div className="ui text loader">Working...</div>
-          </div>
-          <ContentForm node={this.state.node}
-                       onFormSubmit={this.putContent}
-                       onFormCancel={this.onFormCancel}/>
+        <div className={loaderStyles}>
+          <div className="ui text loader">Working...</div>
         </div>
+        <ContentForm node={this.state.node}
+                     onFormSubmit={this.updateContent}
+                     onFormCancel={this.onFormCancel}/>
+      </div>
     );
   }
 };

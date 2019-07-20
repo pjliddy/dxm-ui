@@ -23,7 +23,7 @@ class ContentCreate extends React.Component {
     };
   }
 
-  postContent = async (node) => {
+  createContent = async (node) => {
     this.setState({ isLoading: true });
     await Api.create(this.apiResource, node);
 
@@ -50,7 +50,7 @@ class ContentCreate extends React.Component {
         </div>
         <ContentForm node={this.state.node}
                      isNew={true}
-                     onFormSubmit={this.postContent}
+                     onFormSubmit={this.createContent}
                      onFormCancel={this.onFormCancel}/>
        </div>
     );
