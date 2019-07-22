@@ -5,9 +5,9 @@ const create = (resource, body) => {
       method: 'POST',
       body: JSON.stringify(body)
   })
+    .then(response => response.json())
     .then(
       (response) => {
-        console.log(`api.create(): ${JSON.stringify(response)}`);
         return response;
       },
       (error) => {
@@ -34,7 +34,6 @@ const read = (resource, id) => {
     .then(response => response.json())
     .then(
       (response) => {
-        console.log(`api.read(): ${JSON.stringify(response)}`);
         return response;
       },
       (error) => {
@@ -48,9 +47,9 @@ const update = (resource, body) => {
       method: 'PUT',
       body: JSON.stringify(body)
   })
+    .then(response => response.json())
     .then(
       (response) => {
-        console.log(`api.update(): ${JSON.stringify(response)}`);
         return response;
       },
       (error) => {
@@ -63,9 +62,9 @@ const destroy = (resource, id) => {
   return fetch(`${API_BASE_URL}/${resource}/${id}`, {
       method: 'DELETE'
   })
+    .then(response => response.json())
     .then(
       (response) => {
-        console.log(`api.destroy(): ${JSON.stringify(response)}`);
         return response;
       },
       (error) => {
@@ -73,7 +72,6 @@ const destroy = (resource, id) => {
       }
     );
 };
-
 
 module.exports = {
   create,
