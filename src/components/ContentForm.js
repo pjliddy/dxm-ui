@@ -1,10 +1,12 @@
 import React from 'react';
-import Api from './api/Api';
+
+const SITE_REPO_URL = 'https://dxm-site-repo.s3.amazonaws.com';
+const CONTENT_LAKE_URL = 'https://dxm-content-lake.s3.amazonaws.com';
 
 class ContentForm extends React.Component {
   constructor() {
     super();
-    
+
     this.apiResource = 'compose';
     this.state = {
       node: {
@@ -40,22 +42,13 @@ class ContentForm extends React.Component {
   }
 
   onPreview = () => {
-    const body = {
-      data: this.state.node,
-      templateId: this.state.node.contentType
-    };
+    const node = this.state.node;
+    window.open(`${SITE_REPO_URL}/${node.contentType}/${node.id}.html`);
+  }
 
-    Api.create(this.apiResource, body)
-      .then(response => {
-        return response.text();
-      })
-      .then(response => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(response, "text/html");
-        const html = doc.documentElement.outerHTML;
-        const newWindow = window.open();
-        newWindow.document.body.outerHTML = html;
-      })
+  onShowLake = () => {
+    const node = this.state.node;
+    window.open(`${CONTENT_LAKE_URL}/${node.contentType}/${node.id}.json`);
   }
 
   onSaveAndPreview = (event) => {
@@ -86,6 +79,7 @@ class ContentForm extends React.Component {
     let dateCreatedField = null;
     let dateModifiedField = null;
     let previewButton = null;
+    let lakeButton = null;
 
     if (!isNew) {
       idField = <div className="disabled field">
@@ -96,6 +90,7 @@ class ContentForm extends React.Component {
                          value={node.id}
                          readOnly />
                 </div>;
+
       dateCreatedField =  <div className="disabled field">
                             <label htmlFor="dateCreated">Date Created</label>
                             <input name="dateCreated"
@@ -113,10 +108,16 @@ class ContentForm extends React.Component {
                                    value={node.dateModified}
                                    readOnly />
                           </div>;
+
       previewButton = <button className="ui secondary basic button"
                               onClick={this.onPreview}>
                         Preview
                       </button>;
+
+      lakeButton = <button className="ui secondary basic button"
+                            onClick={this.onShowLake}>
+                      Content Lake
+                    </button>;
     }
 
     return(
@@ -164,6 +165,7 @@ class ContentForm extends React.Component {
                   onClick={this.onFormCancel}>
             Cancel
           </button>
+          {lakeButton}
           {previewButton}
           <button className="ui primary button"
                   onClick={this.onFormSubmit}>
