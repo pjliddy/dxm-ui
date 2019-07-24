@@ -109,13 +109,15 @@ class ContentForm extends React.Component {
                                    readOnly />
                           </div>;
 
-      previewButton = <button className="ui secondary basic button"
+      previewButton = <button className="ui button"
                               onClick={this.onPreview}>
+                        <i className="desktop icon"></i>
                         Preview
                       </button>;
 
-      lakeButton = <button className="ui secondary basic button"
-                            onClick={this.onShowLake}>
+      lakeButton = <button className="ui button"
+                           onClick={this.onShowLake}>
+                      <i className="code icon"></i>
                       Content Lake
                     </button>;
     }
@@ -162,13 +164,17 @@ class ContentForm extends React.Component {
         {dateModifiedField}
         <div>
           <button className="ui secondary basic button"
+                  title="Cancel"
                   onClick={this.onFormCancel}>
+            <i className="close icon"></i>
             Cancel
           </button>
           {lakeButton}
           {previewButton}
           <button className="ui primary button"
+                  title="Save"
                   onClick={this.onFormSubmit}>
+            <i className="save icon"></i>
             Save
           </button>
         </div>

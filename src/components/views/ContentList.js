@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Api from '../api/Api';
 
+// add to app config JS object
+const SITE_REPO_URL = 'https://dxm-site-repo.s3.amazonaws.com';
+const CONTENT_LAKE_URL = 'https://dxm-content-lake.s3.amazonaws.com';
+
 class ContentList extends React.Component {
   constructor() {
     super();
@@ -29,6 +33,14 @@ class ContentList extends React.Component {
     this.setState({ isLoading: false });
   }
 
+  onPreview = (node) => {
+    window.open(`${SITE_REPO_URL}/${node.contentType}/${node.id}.html`);
+  }
+
+  onShowLake = (node) => {
+    window.open(`${CONTENT_LAKE_URL}/${node.contentType}/${node.id}.json`);
+  }
+
   renderList() {
     return this.state.nodes.map(node => {
       const linkPath = `/content/edit/${node.id}`;
@@ -52,6 +64,20 @@ class ContentList extends React.Component {
           <td className="collapsing">
             <div className="ui icon buttons">
               <button className="ui basic button"
+                      data-tooltip="Show JSON"
+                      data-position="top right"
+                      onClick={() => this.onShowLake(node)}>
+                <i className="code icon"></i>
+              </button>
+              <button className="ui basic button"
+                      data-tooltip="Preview in Browser"
+                      data-position="top right"
+                      onClick={() => this.onPreview(node)}>
+                <i className="desktop icon"></i>
+              </button>
+              <button className="ui basic button"
+                      data-tooltip="Delete Content" 
+                      data-position="top right"
                       onClick={() => this.deleteContent(node.id)}>
                 <i className="trash alternate outline icon"></i>
               </button>
@@ -72,6 +98,7 @@ class ContentList extends React.Component {
     return (
       <div>
         <Link to="/content/new" className="ui right floated primary button">
+          <i className="plus sqaure icon"></i>
           New Content
         </Link>
         <h1>Content List</h1>
