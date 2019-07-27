@@ -1,7 +1,10 @@
 const API_BASE_URL = 'https://kiuhmwwxi4.execute-api.us-east-1.amazonaws.com/dxm-api';
 
-const create = (resource, body) => {
-  return fetch(`${API_BASE_URL}/${resource}`, {
+const create = (body, resource, params) => {
+  const url = new URL(`${API_BASE_URL}/${resource}`);
+  url.search = new URLSearchParams(params);
+
+  return fetch(url, {
       method: 'POST',
       body: JSON.stringify(body)
   })
@@ -29,7 +32,7 @@ const index = (resource) => {
     );
 };
 
-const read = (resource, id) => {
+const read = (id, resource) => {
   return fetch(`${API_BASE_URL}/${resource}/${id}`)
     .then(response => response.json())
     .then(
@@ -42,7 +45,7 @@ const read = (resource, id) => {
     );
 };
 
-const update = (resource, body) => {
+const update = (body, resource) => {
   return fetch(`${API_BASE_URL}/${resource}/${body.id}`, {
       method: 'PUT',
       body: JSON.stringify(body)
@@ -58,7 +61,7 @@ const update = (resource, body) => {
     );
 };
 
-const destroy = (resource, id) => {
+const destroy = (id, resource) => {
   return fetch(`${API_BASE_URL}/${resource}/${id}`, {
       method: 'DELETE'
   })

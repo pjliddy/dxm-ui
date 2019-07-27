@@ -1,40 +1,50 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Api from '../api/Api';
-import ContentForm from '../ContentForm';
+import AssetForm from '../AssetForm';
 
-class ContentEdit extends React.Component {
+/*
+  S3 Object:
+  {
+      "Key": "assets/apollo.jpg",
+      "LastModified": "2019-07-25T15:35:43.000Z",
+      "ETag": "\"41e9525c71922900254ae99762bb4585\"",
+      "Size": 462901,
+      "StorageClass": "STANDARD"
+  }
+*/
+
+class AssetEdit extends React.Component {
   constructor() {
     super();
 
-    this.apiResource = 'nodes';
+    this.apiResource = 'assets';
     this.state = {
-      node: {
+      asset: {
         id: '',
         contentType: '',
         title: '',
-        subTitle: '',
-        copyText: '',
         dateCreated: '',
         dateModified: ''
       },
       redirect: false,
-      isLoading: false
+      isLoading: false,
+      selectedFile: ''
     };
   }
 
-  showContent = async (id) => {
+  showAsset = async (id) => {
     this.setState({ isLoading: true });
     const response = await Api.read(id, this.apiResource);
     this.setState({
-      node: response,
+      asset: response,
       isLoading: false
     });
   }
 
-  updateContent = async () => {
+  updateAsset = async () => {
     this.setState({ isLoading: true });
-    await Api.update(this.state.node, this.apiResource);
+    await Api.update(this.state.asset, this.apiResource);
 
     this.setState({
       isLoading: false,
@@ -47,26 +57,27 @@ class ContentEdit extends React.Component {
   }
 
   componentDidMount() {
-    this.showContent(this.props.match.params.id);
+    this.showAsset(this.props.match.params.id);
   }
 
   render() {
-    if (this.state.redirect) { return <Redirect to="/" />; }
+    if (this.state.redirect) { return <Redirect to="/assets" />; }
 
     const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
 
     return (
       <div>
-        <h1>Edit Content</h1>
+        <h1>Edit Asset</h1>
         <div className={loaderStyles}>
           <div className="ui text loader">Working...</div>
         </div>
-        <ContentForm node={this.state.node}
-                     onFormSubmit={this.updateContent}
-                     onFormCancel={this.onFormCancel}/>
+        <AssetForm asset={this.state.asset}
+                   onFormSubmit={this.updateAsset}
+                   onFormCancel={this.onFormCancel}/>
       </div>
     );
   }
-};
 
-export default ContentEdit;
+}
+
+export default AssetEdit;

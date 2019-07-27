@@ -28,7 +28,7 @@ class ContentList extends React.Component {
 
   deleteContent = async (id) => {
     this.setState({ isLoading: true });
-    await Api.destroy(this.apiResource, id);
+    await Api.destroy(id, this.apiResource);
     this.listContent();
     this.setState({ isLoading: false });
   }
@@ -76,7 +76,7 @@ class ContentList extends React.Component {
                 <i className="desktop icon"></i>
               </button>
               <button className="ui basic button"
-                      data-tooltip="Delete Content" 
+                      data-tooltip="Delete Content"
                       data-position="top right"
                       onClick={() => this.deleteContent(node.id)}>
                 <i className="trash alternate outline icon"></i>

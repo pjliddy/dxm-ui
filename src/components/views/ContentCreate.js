@@ -25,7 +25,7 @@ class ContentCreate extends React.Component {
 
   createContent = async (node) => {
     this.setState({ isLoading: true });
-    await Api.create(this.apiResource, node);
+    await Api.create(node, this.apiResource);
 
     this.setState({
       isLoading: false,

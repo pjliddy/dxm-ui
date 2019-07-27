@@ -5,6 +5,8 @@ import ContentList from './views/ContentList';
 import ContentCreate from './views/ContentCreate';
 import ContentEdit from './views/ContentEdit';
 import AssetList from './views/AssetList';
+import AssetEdit from './views/AssetEdit';
+import AssetCreate from './views/AssetCreate';
 
 const App = () => {
   return (
@@ -15,6 +17,8 @@ const App = () => {
         <Route path="/content/edit/:id" exact component={ContentEdit} />
         <Route path="/content/new" exact component={ContentCreate} />
         <Route path="/assets" exact component={AssetList} />
+        <Route path="/assets/edit/:id" exact component={AssetEdit} />
+        <Route path="/assets/new" exact component={AssetCreate} />
       </HashRouter>
     </div>
   )
