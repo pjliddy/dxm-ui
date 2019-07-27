@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Api from '../api/Api';
 import AssetForm from '../AssetForm';
+import axios from 'axios';
 
 const ASSET_REPO_BUCKET = 'dxm-file-repo';
 const ASSET_REPO_PATH = 'assets';
@@ -26,19 +27,35 @@ class AssetCreate extends React.Component {
   }
 
   createAsset = async ({asset, file}) => {
-
-    console.log(`asset: ${JSON.stringify(asset)}`);
-    console.log(`asset: ${JSON.stringify(file)}`);
-
     this.setState({ isLoading: true });
 
     // get presignded URL from assets Api
-    const response = await this.getPresignedUrl(asset, file);
-
+    const presignedResponse = await this.getPresignedUrl(asset, file);
 
     // post file to presigned URL
-    console.log(`presignedUrl: ${JSON.stringify(response.uploadURL)}`);
+    console.log(`presignedUrl: ${JSON.stringify(presignedResponse.uploadURL)}`);
 
+    console.log(`file.type: ${file.type}`);
+
+    // const formData = new FormData();
+    // formData.append("file", file);
+
+    const config = {
+      headers: {
+        'Content-Type': file.type
+      },
+      onUploadProgress: progressEvent => {
+        console.log(`${progressEvent.loaded} bytes`);
+      },
+    }
+
+    axios.put(presignedResponse.uploadURL, file, config)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      })
 
     // on success
     // create asset node in db
@@ -53,10 +70,10 @@ class AssetCreate extends React.Component {
 
   getPresignedUrl = async (asset, file) => {
     const s3Params = {
-      Bucket: ASSET_REPO_BUCKET,
-      Key:  `${ASSET_REPO_PATH}/${file.name}`,
-      ContentType: file.type,
-      ACL: 'public-read',
+      'Bucket': ASSET_REPO_BUCKET,
+      'Key':  `${ASSET_REPO_PATH}/${file.name}`,
+      'ContentType': file.type,
+      'ACL': 'public-read',
     };
 
     const urlParams = {
