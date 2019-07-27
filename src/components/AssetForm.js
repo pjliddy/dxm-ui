@@ -12,7 +12,7 @@ class AssetForm extends React.Component {
         title: '',
         dateCreated: '',
         dateModified: '',
-        selectedFile: ''
+        url: ''
       },
       isNew: false,
       selectedFile: ''
@@ -29,23 +29,11 @@ class AssetForm extends React.Component {
   }
 
   handleFileChange = (event) => {
-    // const { asset } = { ...this.state };
-    // const currentState = asset;
-    // currentState.selectedFile = event.target.files[0];
-
     this.setState({ selectedFile: event.target.files[0] });
-
-    console.log(`handleFileChange: ${JSON.stringify(this.state.asset)}`);
   }
 
   onFormSubmit = (event) => {
     event.preventDefault();
-
-    // const formData = new FormData();
-    //
-    // for ( const key in this.state.asset ) {
-    //   formData.append(key, this.state.asset[key]);
-    // }
 
     const data = {
       asset: this.state.asset,

@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Api from '../api/Api';
 
-// const ASSET_REPO_URL = 'https://dxm-file-repo.s3.amazonaws.com';
-
 class AssetList extends React.Component {
   constructor() {
     super();
@@ -47,8 +45,6 @@ class AssetList extends React.Component {
       }
     */
     return this.state.assets.map(asset => {
-      // const srcPath = `${ASSET_REPO_URL}/${asset.Key}`;
-      // const fileName = asset.Key.substring(asset.Key.lastIndexOf('/') + 1);
       const linkPath = `/assets/edit/${asset.id}`;
 
       return (

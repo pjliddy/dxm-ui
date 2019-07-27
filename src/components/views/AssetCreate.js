@@ -18,7 +18,8 @@ class AssetCreate extends React.Component {
         contentType: '',
         title: '',
         dateCreated: '',
-        dateModified: ''
+        dateModified: '',
+        url: ''
       },
       redirect: false,
       isLoading: false,
@@ -30,37 +31,16 @@ class AssetCreate extends React.Component {
     this.setState({ isLoading: true });
 
     // get presignded URL from assets Api
-    const presignedResponse = await this.getPresignedUrl(asset, file);
+    const { uploadURL } = await this.getPresignedUrl(asset, file);
 
-    // post file to presigned URL
-    console.log(`presignedUrl: ${JSON.stringify(presignedResponse.uploadURL)}`);
+    asset.url = await this.uploadAsset(uploadURL, file)
 
-    console.log(`file.type: ${file.type}`);
+    this.setState({ asset: asset });
 
-    // const formData = new FormData();
-    // formData.append("file", file);
+    // what if upload fails?
 
-    const config = {
-      headers: {
-        'Content-Type': file.type
-      },
-      onUploadProgress: progressEvent => {
-        console.log(`${progressEvent.loaded} bytes`);
-      },
-    }
-
-    axios.put(presignedResponse.uploadURL, file, config)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      })
-
-    // on success
-    // create asset node in db
-
-    // await Api.create(asset, this.apiResource);
+    // on success, create asset node in db
+    await Api.create(asset, this.apiResource);
 
     this.setState({
       isLoading: false,
@@ -72,19 +52,36 @@ class AssetCreate extends React.Component {
     const s3Params = {
       'Bucket': ASSET_REPO_BUCKET,
       'Key':  `${ASSET_REPO_PATH}/${file.name}`,
-      'ContentType': file.type,
       'ACL': 'public-read',
+      'ContentType': file.type,
+      'ContentDisposition': 'inline',
     };
 
-    const urlParams = {
-      getSignedUrl: true
-    };
-
+    const urlParams = { getSignedUrl: true };
     const response = await Api.create(s3Params, this.apiResource, urlParams);
 
-    console.log(JSON.stringify(response));
-
     return response;
+  }
+
+  uploadAsset = async (uploadUrl, file) => {
+    try {
+      // post file to presigned URL
+      const config = {
+        headers: {
+          'ACL': 'public-read',
+          'Content-Type': file.type,
+          'Content-Disposition': 'inline'
+        },
+        onUploadProgress: progressEvent => {
+          console.log(`${progressEvent.loaded} bytes`);
+        }
+      }
+
+      const response = await axios.put(uploadUrl, file, config);
+      return response.config.url.split('?')[0];
+    } catch (error) {
+      return error;
+    }
   }
 
   onFormCancel = () => {

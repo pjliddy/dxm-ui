@@ -25,7 +25,8 @@ class AssetEdit extends React.Component {
         contentType: '',
         title: '',
         dateCreated: '',
-        dateModified: ''
+        dateModified: '',
+        url: ''
       },
       redirect: false,
       isLoading: false,
@@ -74,6 +75,9 @@ class AssetEdit extends React.Component {
         <AssetForm asset={this.state.asset}
                    onFormSubmit={this.updateAsset}
                    onFormCancel={this.onFormCancel}/>
+
+        <img className="ui fluid image" src={this.state.asset.url}></img>
+
       </div>
     );
   }
