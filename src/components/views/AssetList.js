@@ -44,7 +44,7 @@ class AssetList extends React.Component {
           "StorageClass": "STANDARD"
       }
     */
-    return this.state.assets.map(asset => {
+    return this.state.assets.filter(asset => asset.contentType === 'asset').map(asset => {
       const linkPath = `/assets/edit/${asset.id}`;
 
       return (
