@@ -118,7 +118,7 @@ class ContentForm extends React.Component {
       lakeButton = <button className="ui button"
                            onClick={this.onShowLake}>
                       <i className="code icon"></i>
-                      Content Lake
+                      Show JSON
                     </button>;
     }
 
