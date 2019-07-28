@@ -54,7 +54,7 @@ class AssetCreate extends React.Component {
       'Key':  `${ASSET_REPO_PATH}/${file.name}`,
       'ACL': 'public-read',
       'ContentType': file.type,
-      'ContentDisposition': 'inline',
+      // 'ContentDisposition': 'inline'
     };
 
     const urlParams = { getSignedUrl: true };
@@ -70,10 +70,11 @@ class AssetCreate extends React.Component {
         headers: {
           'ACL': 'public-read',
           'Content-Type': file.type,
-          'Content-Disposition': 'inline'
+          // 'Content-Disposition': 'inline'
         },
         onUploadProgress: progressEvent => {
-          console.log(`${progressEvent.loaded} bytes`);
+          const progress = Number.parseInt(progressEvent.loaded / file.size * 100, 10);
+          console.log(`Progress: ${progress}%`);
         }
       }
 
