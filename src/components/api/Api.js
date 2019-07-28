@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://kiuhmwwxi4.execute-api.us-east-1.amazonaws.com/dxm-api';
+const API_BASE_URL = require('../../config').API_BASE_URL
 
 const create = (body, resource, params) => {
   const url = new URL(`${API_BASE_URL}/${resource}`);

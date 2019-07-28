@@ -3,9 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Api from '../api/Api';
 import AssetForm from '../AssetForm';
 import axios from 'axios';
-
-const ASSET_REPO_BUCKET = 'dxm-file-repo';
-const ASSET_REPO_PATH = 'assets';
+import { ASSET_REPO_BUCKET, ASSET_REPO_PATH}  from '../../config';
 
 class AssetCreate extends React.Component {
   constructor() {

@@ -1,7 +1,5 @@
 import React from 'react';
-
-const SITE_REPO_URL = 'https://dxm-site-repo.s3.amazonaws.com';
-const CONTENT_LAKE_URL = 'https://dxm-content-lake.s3.amazonaws.com';
+import { SITE_REPO_URL, CONTENT_LAKE_URL } from '../config';
 
 class ContentForm extends React.Component {
   constructor() {

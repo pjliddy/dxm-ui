@@ -1,10 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Api from '../api/Api';
-
-// add to app config JS object
-const SITE_REPO_URL = 'https://dxm-site-repo.s3.amazonaws.com';
-const CONTENT_LAKE_URL = 'https://dxm-content-lake.s3.amazonaws.com';
+import { CONTENT_LAKE_URL, SITE_REPO_URL}  from '../../config';
 
 class ContentList extends React.Component {
   constructor() {
