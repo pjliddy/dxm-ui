@@ -48,32 +48,26 @@ class AssetList extends React.Component {
       const linkPath = `/assets/edit/${asset.id}`;
 
       return (
-        <tr key={asset.id}>
-          <td>
-            <Link to={linkPath} className="asset">
+        <div className="item"
+             key={asset.id}>
+          <img className="ui small image"
+               src={asset.url}
+               alt="alt text placeholder"></img>
+          <div className="content">
+            <Link to={linkPath} className="header">
               {asset.title}
             </Link>
-          </td>
-          <td>
-            {asset.contentType}
-          </td>
-          <td className="collapsing">
-            {asset.id}
-          </td>
-          <td className="collapsing">
-            {asset.dateModified}
-          </td>
-          <td className="collapsing">
-            <div className="ui icon buttons">
-              <button className="ui basic button"
-                      data-tooltip="Delete Asset"
-                      data-position="top right"
-                      onClick={() => this.deleteAsset(asset.id)}>
-                <i className="trash alternate outline icon"></i>
-              </button>
-            </div>
-          </td>
-        </tr>
+            <div className="description">{asset.dateModified}</div>
+          </div>
+          <div className="ui icon buttons right floated content">
+            <button className="ui basic button"
+                    data-tooltip="Delete Asset"
+                    data-position="top right"
+                    onClick={() => this.deleteAsset(asset.id)}>
+              <i className="trash alternate outline icon"></i>
+            </button>
+          </div>
+        </div>
       );
     });
   }
@@ -91,25 +85,10 @@ class AssetList extends React.Component {
         <div className={loaderStyles}>
           <div className="ui text loader">Working...</div>
         </div>
-        {/*
-          <div className="ui divided relaxed list">
-            {this.renderList()}
-          </div>
-        */}
-        <table className="ui celled striped compact table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Content Type</th>
-              <th>ID</th>
-              <th>Date Modified</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderList()}
-          </tbody>
-        </table>
+
+        <div className="ui divided relaxed list">
+          {this.renderList()}
+        </div>
       </div>
     )
   }
