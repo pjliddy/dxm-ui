@@ -75,11 +75,6 @@ class AssetEdit extends React.Component {
         <AssetForm asset={this.state.asset}
                    onFormSubmit={this.updateAsset}
                    onFormCancel={this.onFormCancel}/>
-
-        <img className="ui fluid image"
-             src={this.state.asset.url}
-             alt="alt text placeholder"></img>
-
       </div>
     );
   }

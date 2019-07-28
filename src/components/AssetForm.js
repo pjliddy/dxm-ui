@@ -99,9 +99,16 @@ class AssetForm extends React.Component {
                                    value={asset.dateModified}
                                    readOnly />
                           </div>;
+      fileInput = <div className="field">
+                   <label htmlFor="dateModified">File</label>
+                   <img className="ui big image"
+                        src={this.state.asset.url}
+                        alt="alt text placeholder"></img>
+
+                 </div>;
     } else {
       fileInput = <div className="required field">
-                    <label htmlFor="file">file</label>
+                    <label htmlFor="file">File</label>
                     <input name="fileName"
                            type="file"
                            onChange={this.handleFileChange} />
