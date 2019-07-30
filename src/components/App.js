@@ -9,8 +9,10 @@ import AssetEdit from './views/AssetEdit';
 import AssetCreate from './views/AssetCreate';
 
 const App = () => {
+  const containerStyle = { margin: '10px 0 20px' };
+  
   return (
-    <div className="ui container">
+    <div className="ui container" style={containerStyle}>
       <HashRouter basename='/'>
         <Header />
         <Route path="/" exact component={ContentList} />

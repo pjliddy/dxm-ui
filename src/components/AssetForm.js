@@ -107,10 +107,14 @@ class AssetForm extends React.Component {
                                    readOnly />
                           </div>;
 
-      imagePreview = <img className="ui big image"
-                       src={this.state.asset.url}
-                       alt="alt text placeholder">
-                     </img>;
+      imagePreview =  <div>
+                        <div class="ui hidden divider"></div>
+                        <img className="ui big image"
+                         src={this.state.asset.url}
+                         alt="alt text placeholder">
+                       </img>
+                       <div class="ui divider"></div>
+                     </div>;
 
       jsonButton = <button className="ui button"
                           onClick={this.onShowJson}>
