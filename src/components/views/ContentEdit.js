@@ -36,6 +36,8 @@ class ContentEdit extends React.Component {
     this.setState({ isLoading: true });
     await Api.update(this.state.node, this.apiResource);
 
+    // update content without mutating
+
     this.setState({
       isLoading: false,
       redirect: true

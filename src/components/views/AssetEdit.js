@@ -2,6 +2,8 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Api from '../api/Api';
 import AssetForm from '../AssetForm';
+import { ASSET_REPO_BUCKET, ASSET_REPO_PATH}  from '../../config';
+import axios from 'axios';
 
 /*
   S3 Object:
@@ -43,14 +45,59 @@ class AssetEdit extends React.Component {
     });
   }
 
-  updateAsset = async () => {
+  updateAsset = async ({asset, file}) => {
     this.setState({ isLoading: true });
+    // only if asset changes
+    const { uploadURL } = await this.getPresignedUrl(asset, file);
+
+    // update asset without mutating
+
+    asset.url = await this.uploadAsset(uploadURL, file)
+
     await Api.update(this.state.asset, this.apiResource);
 
     this.setState({
       isLoading: false,
       redirect: true
     });
+  }
+
+  getPresignedUrl = async (asset, file) => {
+    const s3Params = {
+      'Bucket': ASSET_REPO_BUCKET,
+      'Key':  `${ASSET_REPO_PATH}/${file.name}`,
+      'ACL': 'public-read',
+      'ContentType': file.type,
+      // 'ContentDisposition': 'inline'
+    };
+
+    const urlParams = { getSignedUrl: true };
+    const response = await Api.create(s3Params, this.apiResource, urlParams);
+
+    return response;
+  }
+
+  // make into shared component, along with getPresignedUrl
+  uploadAsset = async (uploadUrl, file) => {
+    try {
+      // post file to presigned URL
+      const config = {
+        headers: {
+          'ACL': 'public-read',
+          'Content-Type': file.type,
+          // 'Content-Disposition': 'inline'
+        },
+        onUploadProgress: progressEvent => {
+          const progress = Number.parseInt(progressEvent.loaded / file.size * 100, 10);
+          console.log(`Progress: ${progress}%`);
+        }
+      }
+
+      const response = await axios.put(uploadUrl, file, config);
+      return response.config.url.split('?')[0];
+    } catch (error) {
+      return error;
+    }
   }
 
   onFormCancel = () => {

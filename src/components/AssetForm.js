@@ -68,7 +68,7 @@ class AssetForm extends React.Component {
     const isNew = this.state.isNew
 
     let idField = null;
-    let fileInput = null;
+    let imagePreview = null;
     let dateCreatedField = null;
     let dateModifiedField = null;
 
@@ -99,20 +99,11 @@ class AssetForm extends React.Component {
                                    value={asset.dateModified}
                                    readOnly />
                           </div>;
-      fileInput = <div className="field">
-                   <label htmlFor="dateModified">File</label>
-                   <img className="ui big image"
-                        src={this.state.asset.url}
-                        alt="alt text placeholder"></img>
 
-                 </div>;
-    } else {
-      fileInput = <div className="required field">
-                    <label htmlFor="file">File</label>
-                    <input name="fileName"
-                           type="file"
-                           onChange={this.handleFileChange} />
-                  </div>;
+      imagePreview = <img className="ui big image"
+                       src={this.state.asset.url}
+                       alt="alt text placeholder">
+                     </img>;
     }
 
     /*
@@ -143,7 +134,13 @@ class AssetForm extends React.Component {
                  value={asset.title}
                  onChange={this.handleChange} />
         </div>
-        {fileInput}
+        <div className="field">
+          <label htmlFor="file">File</label>
+          <input name="fileName"
+                 type="file"
+                 onChange={this.handleFileChange} />
+          {imagePreview}
+        </div>
         {dateCreatedField}
         {dateModifiedField}
         <div>

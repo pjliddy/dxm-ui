@@ -16,6 +16,7 @@ class AssetList extends React.Component {
   listAssets = async () => {
     this.setState({ isLoading: true });
     const response = await Api.index(this.apiResource);
+    
     this.setState({
       isLoading: false,
       assets: response
@@ -25,6 +26,7 @@ class AssetList extends React.Component {
   deleteAsset = async (id) => {
     this.setState({ isLoading: true });
     await Api.destroy(id, this.apiResource);
+
     this.listAssets();
     this.setState({ isLoading: false });
   }

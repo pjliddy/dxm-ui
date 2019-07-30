@@ -61,6 +61,7 @@ class AssetCreate extends React.Component {
     return response;
   }
 
+  // make into shared component, along with getPresignedUrl
   uploadAsset = async (uploadUrl, file) => {
     try {
       // post file to presigned URL
