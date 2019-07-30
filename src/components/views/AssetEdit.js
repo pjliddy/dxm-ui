@@ -28,7 +28,12 @@ class AssetEdit extends React.Component {
         title: '',
         dateCreated: '',
         dateModified: '',
-        url: ''
+        url: '',
+        file: {
+          name: '',
+          size: '',
+          type: ''
+        }
       },
       redirect: false,
       isLoading: false,
@@ -48,15 +53,30 @@ class AssetEdit extends React.Component {
   /*
     Need to delete existing asset image if updated
   */
-  
+
   updateAsset = async ({asset, file}) => {
     this.setState({ isLoading: true });
+
     // only if asset changes
     const { uploadURL } = await this.getPresignedUrl(asset, file);
 
     // update asset without mutating
+    const fileData = {
+      name: file.name,
+      size: file.size,
+      type: file.type
+    };
 
+    console.log(JSON.stringify(fileData));
+
+    // const { asset } = { ...this.state };
+    // const currentState = asset;
+    asset.file = fileData;
     asset.url = await this.uploadAsset(uploadURL, file)
+
+    this.setState({
+      asset: asset
+    })
 
     await Api.update(this.state.asset, this.apiResource);
 

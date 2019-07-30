@@ -13,7 +13,12 @@ class AssetForm extends React.Component {
         title: '',
         dateCreated: '',
         dateModified: '',
-        url: ''
+        url: '',
+        file: {
+          name: '',
+          size: '',
+          type: ''
+        }
       },
       isNew: false,
       selectedFile: ''
@@ -30,7 +35,20 @@ class AssetForm extends React.Component {
   }
 
   handleFileChange = (event) => {
-    this.setState({ selectedFile: event.target.files[0] });
+    const fileObj = event.target.files[0];
+    const fileData = {
+      name: fileObj.name,
+      size: fileObj.size,
+      type: fileObj.type
+    };
+    const { asset } = { ...this.state };
+    const currentState = asset;
+    currentState.file = fileData;
+
+    this.setState({
+      file: currentState.file,
+      selectedFile: fileObj
+    });
   }
 
   onFormSubmit = (event) => {
@@ -87,7 +105,7 @@ class AssetForm extends React.Component {
                          placeholder="id"
                          value={asset.id}
                          readOnly />
-                </div>;
+                 </div>;
 
       dateCreatedField =  <div className="disabled field">
                             <label htmlFor="dateCreated">Date Created</label>
@@ -108,12 +126,12 @@ class AssetForm extends React.Component {
                           </div>;
 
       imagePreview =  <div>
-                        <div class="ui hidden divider"></div>
+                        <div className="ui hidden divider"></div>
                         <img className="ui big image"
                          src={this.state.asset.url}
                          alt="alt text placeholder">
                        </img>
-                       <div class="ui divider"></div>
+                       <div className="ui divider"></div>
                      </div>;
 
       jsonButton = <button className="ui button"
@@ -121,7 +139,7 @@ class AssetForm extends React.Component {
                      <i className="code icon"></i>
                      Show JSON
                    </button>;
-    }
+  }
 
     /*
       create upload component in React?
