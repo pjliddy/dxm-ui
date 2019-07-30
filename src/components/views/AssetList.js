@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Api from '../api/Api';
+import { CONTENT_LAKE_URL }  from '../../config';
 
 class AssetList extends React.Component {
   constructor() {
@@ -16,7 +17,7 @@ class AssetList extends React.Component {
   listAssets = async () => {
     this.setState({ isLoading: true });
     const response = await Api.index(this.apiResource);
-    
+
     this.setState({
       isLoading: false,
       assets: response
@@ -29,6 +30,10 @@ class AssetList extends React.Component {
 
     this.listAssets();
     this.setState({ isLoading: false });
+  }
+
+  onShowJson = (node) => {
+    window.open(`${CONTENT_LAKE_URL}/${node.contentType}/${node.id}.json`);
   }
 
   componentDidMount() {
@@ -62,6 +67,12 @@ class AssetList extends React.Component {
             <div className="description">{asset.dateModified}</div>
           </div>
           <div className="ui icon buttons right floated content">
+            <button className="ui basic button"
+                    data-tooltip="Show JSON"
+                    data-position="top right"
+                    onClick={() => this.onShowJson(asset)}>
+              <i className="code icon"></i>
+            </button>
             <button className="ui basic button"
                     data-tooltip="Delete Asset"
                     data-position="top right"

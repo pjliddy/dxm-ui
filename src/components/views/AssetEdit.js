@@ -45,6 +45,10 @@ class AssetEdit extends React.Component {
     });
   }
 
+  /*
+    Need to delete existing asset image if updated
+  */
+  
   updateAsset = async ({asset, file}) => {
     this.setState({ isLoading: true });
     // only if asset changes

@@ -1,4 +1,5 @@
 import React from 'react';
+import { CONTENT_LAKE_URL } from '../config';
 
 class AssetForm extends React.Component {
   constructor() {
@@ -48,6 +49,11 @@ class AssetForm extends React.Component {
     this.props.onFormCancel();
   }
 
+  onShowJson = () => {
+    const asset = this.state.asset;
+    window.open(`${CONTENT_LAKE_URL}/${asset.contentType}/${asset.id}.json`);
+  }
+
   assetToState() {
     if (this.props.asset.id && this.props.asset.id !== this.state.asset.id ) {
       this.setState({ asset: this.props.asset });
@@ -71,6 +77,7 @@ class AssetForm extends React.Component {
     let imagePreview = null;
     let dateCreatedField = null;
     let dateModifiedField = null;
+    let jsonButton = null;
 
     if (!isNew) {
       idField = <div className="disabled field">
@@ -104,6 +111,12 @@ class AssetForm extends React.Component {
                        src={this.state.asset.url}
                        alt="alt text placeholder">
                      </img>;
+
+      jsonButton = <button className="ui button"
+                          onClick={this.onShowJson}>
+                     <i className="code icon"></i>
+                     Show JSON
+                   </button>;
     }
 
     /*
@@ -150,6 +163,7 @@ class AssetForm extends React.Component {
             <i className="close icon"></i>
             Cancel
           </button>
+          {jsonButton}
           <button className="ui primary button"
                   title="Save"
                   onClick={this.onFormSubmit}>

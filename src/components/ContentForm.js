@@ -44,7 +44,7 @@ class ContentForm extends React.Component {
     window.open(`${SITE_REPO_URL}/${node.contentType}/${node.id}.html`);
   }
 
-  onShowLake = () => {
+  onShowJson = () => {
     const node = this.state.node;
     window.open(`${CONTENT_LAKE_URL}/${node.contentType}/${node.id}.json`);
   }
@@ -114,7 +114,7 @@ class ContentForm extends React.Component {
                       </button>;
 
       lakeButton = <button className="ui button"
-                           onClick={this.onShowLake}>
+                           onClick={this.onShowJson}>
                       <i className="code icon"></i>
                       Show JSON
                     </button>;

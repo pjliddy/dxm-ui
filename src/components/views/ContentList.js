@@ -34,7 +34,7 @@ class ContentList extends React.Component {
     window.open(`${SITE_REPO_URL}/${node.contentType}/${node.id}.html`);
   }
 
-  onShowLake = (node) => {
+  onShowJson = (node) => {
     window.open(`${CONTENT_LAKE_URL}/${node.contentType}/${node.id}.json`);
   }
 
@@ -63,7 +63,7 @@ class ContentList extends React.Component {
               <button className="ui basic button"
                       data-tooltip="Show JSON"
                       data-position="top right"
-                      onClick={() => this.onShowLake(node)}>
+                      onClick={() => this.onShowJson(node)}>
                 <i className="code icon"></i>
               </button>
               <button className="ui basic button"
