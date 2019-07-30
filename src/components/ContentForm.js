@@ -49,11 +49,6 @@ class ContentForm extends React.Component {
     window.open(`${CONTENT_LAKE_URL}/${node.contentType}/${node.id}.json`);
   }
 
-  onSaveAndPreview = (event) => {
-    this.onFormSubmit(event);
-    this.onPreview(event);
-  }
-
   nodeToState() {
     if (this.props.node.id && this.props.node.id !== this.state.node.id ) {
       this.setState({ node: this.props.node });
@@ -77,7 +72,7 @@ class ContentForm extends React.Component {
     let dateCreatedField = null;
     let dateModifiedField = null;
     let previewButton = null;
-    let lakeButton = null;
+    let jsonButton = null;
 
     if (!isNew) {
       idField = <div className="disabled field">
@@ -113,7 +108,7 @@ class ContentForm extends React.Component {
                         Preview
                       </button>;
 
-      lakeButton = <button className="ui button"
+      jsonButton = <button className="ui button"
                            onClick={this.onShowJson}>
                       <i className="code icon"></i>
                       Show JSON
@@ -167,7 +162,7 @@ class ContentForm extends React.Component {
             <i className="close icon"></i>
             Cancel
           </button>
-          {lakeButton}
+          {jsonButton}
           {previewButton}
           <button className="ui primary button"
                   title="Save"
