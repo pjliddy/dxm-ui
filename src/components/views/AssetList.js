@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Api from '../api/Api';
-import { CONTENT_LAKE_URL }  from '../../config';
+import { ASSET_RESOURCE, CONTENT_LAKE_URL }  from '../../config';
 
 class AssetList extends React.Component {
   constructor() {
     super();
 
-    this.apiResource = 'assets';
+    this.apiResource = ASSET_RESOURCE;
     this.state = {
       assets: [],
       isLoading: false
@@ -33,7 +33,7 @@ class AssetList extends React.Component {
   }
 
   onShowJson = (node) => {
-    window.open(`${CONTENT_LAKE_URL}/${node.contentType}/${node.id}.json`);
+    window.open(`${CONTENT_LAKE_URL}/${node.dataType}/${node.id}.json`);
   }
 
   componentDidMount() {
@@ -51,7 +51,7 @@ class AssetList extends React.Component {
           "StorageClass": "STANDARD"
       }
     */
-    return this.state.assets.filter(asset => asset.contentType === 'asset').map(asset => {
+    return this.state.assets.filter(asset => asset.dataType === 'asset').map(asset => {
       const linkPath = `/assets/edit/${asset.id}`;
 
       return (

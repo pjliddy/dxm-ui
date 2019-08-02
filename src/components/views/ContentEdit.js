@@ -2,16 +2,17 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Api from '../api/Api';
 import ContentForm from '../ContentForm';
+import { CONTENT_RESOURCE }  from '../../config';
 
 class ContentEdit extends React.Component {
   constructor() {
     super();
 
-    this.apiResource = 'nodes';
+    this.apiResource = CONTENT_RESOURCE;
     this.state = {
       node: {
         id: '',
-        contentType: '',
+        dataType: '',
         title: '',
         subTitle: '',
         copyText: '',

@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Api from '../api/Api';
 import AssetForm from '../AssetForm';
-import { ASSET_REPO_BUCKET, ASSET_REPO_PATH}  from '../../config';
+import { ASSET_RESOURCE, ASSET_REPO_BUCKET, ASSET_REPO_PATH}  from '../../config';
 import axios from 'axios';
 
 /*
@@ -20,11 +20,11 @@ class AssetEdit extends React.Component {
   constructor() {
     super();
 
-    this.apiResource = 'assets';
+    this.apiResource = ASSET_RESOURCE;
     this.state = {
       asset: {
         id: '',
-        contentType: '',
+        dataType: '',
         title: '',
         dateCreated: '',
         dateModified: '',

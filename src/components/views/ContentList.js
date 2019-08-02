@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Api from '../api/Api';
-import { CONTENT_LAKE_URL, SITE_REPO_URL}  from '../../config';
+import { CONTENT_RESOURCE, CONTENT_LAKE_URL, SITE_REPO_URL}  from '../../config';
 
 class ContentList extends React.Component {
   constructor() {
     super();
 
-    this.apiResource = 'nodes';
+    this.apiResource = CONTENT_RESOURCE;
     this.state = {
       nodes: [],
       isLoading: false
@@ -31,15 +31,15 @@ class ContentList extends React.Component {
   }
 
   onPreview = (node) => {
-    window.open(`${SITE_REPO_URL}/${node.contentType}/${node.id}.html`);
+    window.open(`${SITE_REPO_URL}/${node.dataType}/${node.id}.html`);
   }
 
   onShowJson = (node) => {
-    window.open(`${CONTENT_LAKE_URL}/${node.contentType}/${node.id}.json`);
+    window.open(`${CONTENT_LAKE_URL}/${node.dataType}/${node.id}.json`);
   }
 
   renderList() {
-    return this.state.nodes.filter(node => node.contentType !== 'asset').map(node => {
+    return this.state.nodes.filter(node => node.dataType !== 'asset').map(node => {
       const linkPath = `/content/edit/${node.id}`;
 
       return(
@@ -50,7 +50,7 @@ class ContentList extends React.Component {
             </Link>
           </td>
           <td>
-            {node.contentType}
+            {node.dataType}
           </td>
           <td className="collapsing">
             {node.id}
@@ -106,7 +106,7 @@ class ContentList extends React.Component {
           <thead>
             <tr>
               <th>Title</th>
-              <th>Content Type</th>
+              <th>Data Type</th>
               <th>ID</th>
               <th>Date Modified</th>
               <th></th>

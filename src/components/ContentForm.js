@@ -9,7 +9,7 @@ class ContentForm extends React.Component {
     this.state = {
       node: {
         id: '',
-        contentType: 'content',
+        dataType: 'content',
         title: '',
         subTitle: '',
         copyText: '',
@@ -41,12 +41,12 @@ class ContentForm extends React.Component {
 
   onPreview = () => {
     const node = this.state.node;
-    window.open(`${SITE_REPO_URL}/${node.contentType}/${node.id}.html`);
+    window.open(`${SITE_REPO_URL}/${node.dataType}/${node.id}.html`);
   }
 
   onShowJson = () => {
     const node = this.state.node;
-    window.open(`${CONTENT_LAKE_URL}/${node.contentType}/${node.id}.json`);
+    window.open(`${CONTENT_LAKE_URL}/${node.dataType}/${node.id}.json`);
   }
 
   nodeToState() {
@@ -120,13 +120,13 @@ class ContentForm extends React.Component {
         <p>All fields must have values. Validation to be added.</p>
         {idField}
         <div className="required field">
-          <label htmlFor="contentType">Content Type</label>
-          <select name="contentType"
+          <label htmlFor="dataType">Data Type</label>
+          <select name="dataType"
                  type="text"
                  placeholder="content type"
-                 value={node.contentType}
+                 value={node.dataType}
                  onChange={this.handleChange}>
-                    <option value="">Content Type</option>
+                    <option value="">Data Type</option>
                     <option value="content">Content</option>
           </select>
         </div>

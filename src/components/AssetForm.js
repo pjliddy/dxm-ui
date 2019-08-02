@@ -1,15 +1,15 @@
 import React from 'react';
-import { CONTENT_LAKE_URL } from '../config';
+import { ASSET_RESOURCE, CONTENT_LAKE_URL } from '../config';
 
 class AssetForm extends React.Component {
   constructor() {
     super();
 
-    this.apiResource = 'assets';
+    this.apiResource = ASSET_RESOURCE;
     this.state = {
       asset: {
         id: '',
-        contentType: 'asset',
+        dataType: 'asset',
         title: '',
         dateCreated: '',
         dateModified: '',
@@ -69,7 +69,7 @@ class AssetForm extends React.Component {
 
   onShowJson = () => {
     const asset = this.state.asset;
-    window.open(`${CONTENT_LAKE_URL}/${asset.contentType}/${asset.id}.json`);
+    window.open(`${CONTENT_LAKE_URL}/${asset.dataType}/${asset.id}.json`);
   }
 
   assetToState() {
@@ -151,13 +151,13 @@ class AssetForm extends React.Component {
         <p>All fields must have values. Validation to be added.</p>
         {idField}
         <div className="required field">
-          <label htmlFor="contentType">Content Type</label>
-          <select name="contentType"
+          <label htmlFor="dataType">Data Type</label>
+          <select name="dataType"
                  type="text"
                  placeholder="content type"
-                 value={asset.contentType}
+                 value={asset.dataType}
                  onChange={this.handleChange}>
-                    <option value="">Content Type</option>
+                    <option value="">Data Type</option>
                     <option value="asset">Asset</option>
           </select>
         </div>
