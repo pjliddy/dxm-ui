@@ -39,7 +39,7 @@ class ContentList extends React.Component {
   }
 
   renderList() {
-    return this.state.nodes.filter(node => node.dataType !== 'asset').map(node => {
+    return this.state.nodes.filter(node => node.dataType === 'content').map(node => {
       const linkPath = `/content/edit/${node.id}`;
 
       return(

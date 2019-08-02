@@ -91,8 +91,7 @@ class AssetEdit extends React.Component {
       'Bucket': ASSET_REPO_BUCKET,
       'Key':  `${ASSET_REPO_PATH}/${file.name}`,
       'ACL': 'public-read',
-      'ContentType': file.type,
-      // 'ContentDisposition': 'inline'
+      'ContentType': file.type
     };
 
     const urlParams = { getSignedUrl: true };
@@ -108,8 +107,7 @@ class AssetEdit extends React.Component {
       const config = {
         headers: {
           'ACL': 'public-read',
-          'Content-Type': file.type,
-          // 'Content-Disposition': 'inline'
+          'Content-Type': file.type
         },
         onUploadProgress: progressEvent => {
           const progress = Number.parseInt(progressEvent.loaded / file.size * 100, 10);
