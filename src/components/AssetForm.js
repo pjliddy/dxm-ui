@@ -70,7 +70,6 @@ class AssetForm extends React.Component {
     });
   }
 
-
   // onShowJson = () => {
   //   const asset = this.state.asset;
   //   window.open(`${CONTENT_LAKE_URL}/${asset.dataType}/${asset.id}.json`);

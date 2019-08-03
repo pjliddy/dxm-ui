@@ -1,16 +1,12 @@
 import React from 'react';
 
+import ShowJson from './ShowJson';
+import BrowserPreview from './BrowserPreview';
+import Field from './Field';
+
 class ContentForm extends React.Component {
   state = {
-    content: {
-      id: '',
-      dataType: 'content',
-      title: '',
-      subTitle: '',
-      copyText: '',
-      dateCreated: '',
-      dateModified: ''
-    },
+    content: { },
     isNew: false
   };
 
@@ -38,123 +34,90 @@ class ContentForm extends React.Component {
     this.props.onFormSubmit(this.state.content);
   }
 
-  // create controlled field component
   handleChange = (event) => {
     const { content } = { ...this.state };
-    const currentState = content;
     const { name, value } = event.target;
-    currentState[name] = value;
+    content[name] = value;
 
-    this.setState({ content: currentState });
+    this.setState({ content: content });
   }
-
-
-
-  // onPreview = () => {
-  //   const content = this.state.content;
-  //   window.open(`${SITE_REPO_URL}/${content.dataType}/${content.id}.html`);
-  // }
-
-  // onShowJson = () => {
-  //   const content = this.state.content;
-  //   window.open(`${CONTENT_LAKE_URL}/${content.dataType}/${content.id}.json`);
-  // }
 
   render() {
     const content = this.state.content;
-    const isNew = this.props.isNew
-
-    let idField = null;
-    let dateCreatedField = null;
-    let dateModifiedField = null;
-    let previewButton = null;
-    let jsonButton = null;
-
-    // move to separate functions / conditional components
-
-    if (!isNew) {
-      idField = <div className="disabled field">
-                  <label htmlFor="id">ID</label>
-                  <input name="id"
-                         type="text"
-                         placeholder="id"
-                         value={content.id}
-                         readOnly />
-                </div>;
-
-      dateCreatedField =  <div className="disabled field">
-                            <label htmlFor="dateCreated">Date Created</label>
-                            <input name="dateCreated"
-                                   type="text"
-                                   placeholder="date created"
-                                   value={content.dateCreated}
-                                   readOnly />
-                          </div>;
-
-      dateModifiedField = <div className="disabled field">
-                            <label htmlFor="dateModified">Date Modified</label>
-                            <input name="dateModified"
-                                   type="text"
-                                   placeholder="date modifed"
-                                   value={content.dateModified}
-                                   readOnly />
-                          </div>;
-
-      previewButton = <button className="ui button"
-                              onClick={this.onPreview}>
-                        <i className="desktop icon"></i>
-                        Preview
-                      </button>;
-
-      jsonButton = <button className="ui button"
-                           onClick={this.onShowJson}>
-                      <i className="code icon"></i>
-                      Show JSON
-                    </button>;
-    }
+    const isNew = this.props.isNew;
 
     return(
       <div className="ui form">
         <p>All fields must have values. Validation to be added.</p>
-        {idField}
+
+        <Field type="text"
+               name="id"
+               label="ID"
+               placeholder="id"
+               value={content.id}
+               hidden={isNew}
+               disabled={true}
+               readOnly={true}>
+        </Field>
+
+        <Field type="select"
+               name="dataType"
+               label="Data Type"
+               placeholder="data type"
+               value={content.dataType}
+               onChange={this.handleChange}>
+          <option value="">Select Data Type...</option>
+          <option value="content">Content</option>
+        </Field>
 
 
-        <div className="required field">
-          <label htmlFor="dataType">Data Type</label>
-          <select name="dataType"
-                 type="text"
-                 placeholder="content type"
-                 value={content.dataType}
-                 onChange={this.handleChange}>
-                    <option value="">Data Type</option>
-                    <option value="content">Content</option>
-          </select>
-        </div>
-        <div className="required field">
-          <label htmlFor="title">Title</label>
-          <input name="title"
-                 type="text"
-                 placeholder="title"
-                 value={content.title}
-                 onChange={this.handleChange} />
-        </div>
-        <div className="required field">
-          <label htmlFor="subTitle">Subtitle</label>
-          <input name="subTitle"
-                 type="text"
-                 placeholder="subtitle"
-                 value={content.subTitle}
-                 onChange={this.handleChange} />
-        </div>
-        <div className="required field">
-          <label htmlFor="copyText">Copy Text</label>
-          <textarea name="copyText"
-                 placeholder="copy text"
-                 value={content.copyText}
-                 onChange={this.handleChange}></textarea>
-        </div>
-        {dateCreatedField}
-        {dateModifiedField}
+        <Field type="text"
+               name="title"
+               label="Title"
+               placeholder="title"
+               value={content.title}
+               required={true}
+               onChange={this.handleChange}>
+        </Field>
+
+        <Field type="text"
+               name="subTitle"
+               label="Subtitle"
+               placeholder="subtitle"
+               value={content.subTitle}
+               required={true}
+               onChange={this.handleChange}>
+        </Field>
+
+        <Field type="textarea"
+               name="copyText"
+               label="Copy Text"
+               placeholder="copy text"
+               value={content.copyText}
+               required={true}
+               onChange={this.handleChange}>
+        </Field>
+
+        <Field type="text"
+               name="dateCreated"
+               label="Date Created"
+               placeholder="date created"
+               value={content.dateCreated}
+               hidden={isNew}
+               disabled={true}
+               readOnly={true}>
+        </Field>
+
+        <Field type="text"
+               name="dateModified"
+               label="Date Modified"
+               placeholder="date modified"
+               value={content.dateModified}
+               hidden={isNew}
+               disabled={true}
+               readOnly={true}>
+        </Field>
+
         <div>
           <button className="ui secondary basic button"
                   title="Cancel"
@@ -162,8 +125,14 @@ class ContentForm extends React.Component {
             <i className="close icon"></i>
             Cancel
           </button>
-          {jsonButton}
-          {previewButton}
+          <ShowJson node={content}
+                    hidden={isNew}>
+            Show JSON
+          </ShowJson>
+          <BrowserPreview node={content}
+                          hidden={isNew}>
+            Preview
+          </BrowserPreview>
           <button className="ui primary button"
                   title="Save"
                   onClick={this.onFormSubmit}>

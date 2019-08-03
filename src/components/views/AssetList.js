@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchAssets } from '../../actions';
 
 import ButtonDelete from '../ButtonDelete';
-import ButtonJson from '../ButtonJson';
+import ShowJson from '../ShowJson';
 
 /*
   S3 Object:
@@ -43,7 +43,7 @@ class AssetList extends React.Component {
             </div>
           </div>
           <div className="ui icon buttons right floated content">
-            <ButtonJson node={asset} />
+            <ShowJson node={asset} />
             <ButtonDelete node={asset} />
           </div>
         </div>

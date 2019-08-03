@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { fetchContents } from '../../actions';
 
 import ButtonDelete from '../ButtonDelete';
-import ButtonJson from '../ButtonJson';
-import ButtonPreview from '../ButtonPreview';
+import ShowJson from '../ShowJson';
+import BrowserPreview from '../BrowserPreview';
 
 class ContentList extends React.Component {
   componentDidMount() {
@@ -35,9 +35,9 @@ class ContentList extends React.Component {
           </td>
           <td className="collapsing">
             <div className="ui icon buttons">
-              <ButtonJson node={content} />
-              <ButtonPreview node={content} />
-              <ButtonDelete node={content} />
+              <ShowJson node={content} type="icon"/>
+              <BrowserPreview node={content} type="icon"/>
+              <ButtonDelete node={content} type="icon"/>
             </div>
           </td>
         </tr>
