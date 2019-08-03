@@ -1,58 +1,18 @@
 import React from 'react';
 
 class ContentForm extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      content: {
-        id: '',
-        dataType: 'content',
-        title: '',
-        subTitle: '',
-        copyText: '',
-        dateCreated: '',
-        dateModified: ''
-      },
-      isNew: false
-    };
-  }
-
-  // create controlled field component
-  handleChange = (event) => {
-    const { content } = { ...this.state };
-    const currentState = content;
-    const { name, value } = event.target;
-    currentState[name] = value;
-
-    this.setState({ content: currentState });
-  }
-
-  onFormSubmit = (event) => {
-    event.preventDefault();
-    this.props.onFormSubmit(this.state.content);
-  }
-
-  onFormCancel = (event) => {
-    event.preventDefault();
-    this.props.onFormCancel();
-  }
-
-  // onPreview = () => {
-  //   const content = this.state.content;
-  //   window.open(`${SITE_REPO_URL}/${content.dataType}/${content.id}.html`);
-  // }
-
-  // onShowJson = () => {
-  //   const content = this.state.content;
-  //   window.open(`${CONTENT_LAKE_URL}/${content.dataType}/${content.id}.json`);
-  // }
-
-  // contentToState() {
-  //   if (this.props.content.id && this.props.content.id !== this.state.content.id ) {
-  //     this.setState({ content: this.props.content });
-  //   }
-  // }
+  state = {
+    content: {
+      id: '',
+      dataType: 'content',
+      title: '',
+      subTitle: '',
+      copyText: '',
+      dateCreated: '',
+      dateModified: ''
+    },
+    isNew: false
+  };
 
   componentDidMount() {
     this.setState({
@@ -67,6 +27,38 @@ class ContentForm extends React.Component {
       });
     }
   }
+
+  onFormCancel = (event) => {
+    event.preventDefault();
+    this.props.onFormCancel();
+  }
+
+  onFormSubmit = (event) => {
+    event.preventDefault();
+    this.props.onFormSubmit(this.state.content);
+  }
+
+  // create controlled field component
+  handleChange = (event) => {
+    const { content } = { ...this.state };
+    const currentState = content;
+    const { name, value } = event.target;
+    currentState[name] = value;
+
+    this.setState({ content: currentState });
+  }
+
+
+
+  // onPreview = () => {
+  //   const content = this.state.content;
+  //   window.open(`${SITE_REPO_URL}/${content.dataType}/${content.id}.html`);
+  // }
+
+  // onShowJson = () => {
+  //   const content = this.state.content;
+  //   window.open(`${CONTENT_LAKE_URL}/${content.dataType}/${content.id}.json`);
+  // }
 
   render() {
     const content = this.state.content;
@@ -179,13 +171,6 @@ class ContentForm extends React.Component {
             Save
           </button>
         </div>
-
-        <div className="ui segment">
-          <code>
-            {JSON.stringify(this.props.content)}
-          </code>
-        </div>
-
       </div>
     );
   }

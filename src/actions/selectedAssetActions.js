@@ -9,3 +9,5 @@ export const fetchAsset = (id) => async (dispatch) => {
     payload: response
   });
 };
+
+// add clear selectedAsset action 

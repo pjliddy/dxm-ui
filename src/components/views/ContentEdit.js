@@ -6,20 +6,24 @@ import { fetchContent, updateContent } from '../../actions';
 import ContentForm from '../ContentForm';
 
 class ContentEdit extends React.Component {
-  constructor() {
-    super();
+  state = {
+    content: { },
+    redirect: false,
+    isLoading: false
+  };
 
-    this.state = {
-      content: { },
-      redirect: false,
-      isLoading: false
-    };
+  componentDidMount() {
+    this.props.fetchContent(this.props.match.params.id)
+  }
+
+  onFormCancel = () => {
+    this.setState({ redirect: true });
   }
 
   updateContent = async (content) => {
     this.setState({ isLoading: true });
 
-    this.props.updateContent(content);
+    await this.props.updateContent(content);
 
     this.setState({
       isLoading: false,
@@ -27,15 +31,8 @@ class ContentEdit extends React.Component {
     });
   }
 
-  onFormCancel = () => {
-    this.setState({ redirect: true });
-  }
-
-  componentDidMount() {
-    this.props.fetchContent(this.props.match.params.id)
-  }
-
   render() {
+    // create redirect component
     if (this.state.redirect) { return <Redirect to="/" />; }
 
     const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;

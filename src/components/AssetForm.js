@@ -1,30 +1,49 @@
 import React from 'react';
-import { ASSET_RESOURCE, CONTENT_LAKE_URL } from '../config';
+// import { ASSET_RESOURCE  } from '../config';
 
 class AssetForm extends React.Component {
-  constructor() {
-    super();
+  state = {
+    asset: {
+      id: '',
+      dataType: 'asset',
+      title: '',
+      dateCreated: '',
+      dateModified: '',
+      url: '',
+      file: { }
+    },
+    isNew: false,
+    selectedFile: ''
+  };
 
-    this.apiResource = ASSET_RESOURCE;
-    this.state = {
-      asset: {
-        id: '',
-        dataType: 'asset',
-        title: '',
-        dateCreated: '',
-        dateModified: '',
-        url: '',
-        file: {
-          name: '',
-          size: '',
-          type: ''
-        }
-      },
-      isNew: false,
-      selectedFile: ''
-    };
+  componentDidMount() {
+    this.setState({
+      isNew: this.props.isNew
+    });
   }
 
+  componentDidUpdate() {
+    if (this.props.asset.id && !this.state.asset.id) {
+      this.setState({
+        asset: this.props.asset,
+      });
+    }
+  }
+
+  onFormCancel = (event) => {
+    event.preventDefault();
+    this.props.onFormCancel();
+  }
+
+  onFormSubmit = (event) => {
+    event.preventDefault();
+    this.props.onFormSubmit({
+      asset: this.state.asset,
+      file: this.state.selectedFile
+    });
+  }
+
+  // create controlled field component
   handleChange = (event) => {
     const { asset } = { ...this.state };
     const currentState = asset;
@@ -51,51 +70,23 @@ class AssetForm extends React.Component {
     });
   }
 
-  onFormSubmit = (event) => {
-    event.preventDefault();
 
-    const data = {
-      asset: this.state.asset,
-      file: this.state.selectedFile
-    };
-
-    this.props.onFormSubmit(data);
-  }
-
-  onFormCancel = (event) => {
-    event.preventDefault();
-    this.props.onFormCancel();
-  }
-
-  onShowJson = () => {
-    const asset = this.state.asset;
-    window.open(`${CONTENT_LAKE_URL}/${asset.dataType}/${asset.id}.json`);
-  }
-
-  assetToState() {
-    if (this.props.asset.id && this.props.asset.id !== this.state.asset.id ) {
-      this.setState({ asset: this.props.asset });
-    }
-  }
-
-  componentDidMount() {
-    this.setState({ isNew: this.props.isNew });
-    this.assetToState();
-  }
-
-  componentDidUpdate() {
-    this.assetToState();
-  }
+  // onShowJson = () => {
+  //   const asset = this.state.asset;
+  //   window.open(`${CONTENT_LAKE_URL}/${asset.dataType}/${asset.id}.json`);
+  // }
 
   render() {
     const asset = this.state.asset;
-    const isNew = this.state.isNew
+    const isNew = this.props.isNew
 
     let idField = null;
     let imagePreview = null;
     let dateCreatedField = null;
     let dateModifiedField = null;
     let jsonButton = null;
+
+    // move to separate functions / conditional components
 
     if (!isNew) {
       idField = <div className="disabled field">

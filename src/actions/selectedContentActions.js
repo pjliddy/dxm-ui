@@ -9,3 +9,5 @@ export const fetchContent = (id) => async (dispatch) => {
     payload: response
   });
 };
+
+// add clear selectedContent action 

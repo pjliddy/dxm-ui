@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchContent } from '../../actions';
+import { fetchAsset, updateAsset } from '../../actions';
 
 import axios from 'axios';
 
@@ -22,36 +22,19 @@ import { ASSET_RESOURCE, ASSET_REPO_BUCKET, ASSET_REPO_PATH}  from '../../config
 */
 
 class AssetEdit extends React.Component {
-  constructor() {
-    super();
+  state = {
+    asset: { },
+    redirect: false,
+    isLoading: false,
+    selectedFile: ''
+  };
 
-    this.state = {
-      asset: {
-        id: '',
-        dataType: '',
-        title: '',
-        dateCreated: '',
-        dateModified: '',
-        url: '',
-        file: {
-          name: '',
-          size: '',
-          type: ''
-        }
-      },
-      redirect: false,
-      isLoading: false,
-      selectedFile: ''
-    };
+  componentDidMount() {
+    this.props.fetchAsset(this.props.match.params.id)
   }
 
-  showAsset = async (id) => {
-    this.setState({ isLoading: true });
-    const response = await Api.read(id, ASSET_RESOURCE);
-    this.setState({
-      asset: response,
-      isLoading: false
-    });
+  onFormCancel = () => {
+    this.setState({ redirect: true });
   }
 
   /*
@@ -64,14 +47,11 @@ class AssetEdit extends React.Component {
     // only if asset changes
     const { uploadURL } = await this.getPresignedUrl(asset, file);
 
-    // update asset without mutating
     const fileData = {
       name: file.name,
       size: file.size,
       type: file.type
     };
-
-    console.log(JSON.stringify(fileData));
 
     // const { asset } = { ...this.state };
     // const currentState = asset;
@@ -126,28 +106,21 @@ class AssetEdit extends React.Component {
     }
   }
 
-  onFormCancel = () => {
-    this.setState({ redirect: true });
-  }
-
-  componentDidMount() {
-    this.showAsset(this.props.match.params.id);
-  }
-
   render() {
     if (this.state.redirect) { return <Redirect to="/assets" />; }
 
-    // const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
+    const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
 
     return (
       <div>
         <h1>Edit Asset</h1>
-        {/*
-          <div className={loaderStyles}>
-            <div className="ui text loader">Working...</div>
-          </div>
-        */}
-        <AssetForm asset={this.state.asset}
+
+        {/* make loader component  */}
+        <div className={loaderStyles}>
+          <div className="ui text loader">Working...</div>
+        </div>
+
+        <AssetForm asset={this.props.asset}
                    onFormSubmit={this.updateAsset}
                    onFormCancel={this.onFormCancel}/>
       </div>
@@ -160,6 +133,6 @@ const mapStateToProps = (state) => {
   return { asset: state.selectedAsset };
 }
 
-export default connect(mapStateToProps, { fetchContent }) (AssetEdit);
+export default connect(mapStateToProps, { fetchAsset, updateAsset }) (AssetEdit);
 
 // export default AssetEdit;
