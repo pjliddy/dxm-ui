@@ -10,7 +10,7 @@ class ContentCreate extends React.Component {
 
     this.apiResource = CONTENT_RESOURCE;
     this.state = {
-      node: {
+      content: {
         id: '',
         dataType: '',
         title: '',
@@ -24,9 +24,9 @@ class ContentCreate extends React.Component {
     };
   }
 
-  createContent = async (node) => {
+  createContent = async (content) => {
     this.setState({ isLoading: true });
-    await Api.create(node, this.apiResource);
+    await Api.create(content, this.apiResource);
 
     this.setState({
       isLoading: false,
@@ -49,7 +49,7 @@ class ContentCreate extends React.Component {
         <div className={loaderStyles}>
           <div className="ui text loader">Working...</div>
         </div>
-        <ContentForm node={this.state.node}
+        <ContentForm content={this.state.content}
                      isNew={true}
                      onFormSubmit={this.createContent}
                      onFormCancel={this.onFormCancel}/>

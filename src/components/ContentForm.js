@@ -1,13 +1,11 @@
 import React from 'react';
-import { SITE_REPO_URL, CONTENT_LAKE_URL } from '../config';
 
 class ContentForm extends React.Component {
   constructor() {
     super();
 
-    this.apiResource = 'compose';
     this.state = {
-      node: {
+      content: {
         id: '',
         dataType: 'content',
         title: '',
@@ -20,18 +18,19 @@ class ContentForm extends React.Component {
     };
   }
 
+  // create controlled field component
   handleChange = (event) => {
-    const { node } = { ...this.state };
-    const currentState = node;
+    const { content } = { ...this.state };
+    const currentState = content;
     const { name, value } = event.target;
     currentState[name] = value;
 
-    this.setState({ node: currentState });
+    this.setState({ content: currentState });
   }
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit(this.state.node);
+    this.props.onFormSubmit(this.state.content);
   }
 
   onFormCancel = (event) => {
@@ -39,34 +38,39 @@ class ContentForm extends React.Component {
     this.props.onFormCancel();
   }
 
-  onPreview = () => {
-    const node = this.state.node;
-    window.open(`${SITE_REPO_URL}/${node.dataType}/${node.id}.html`);
-  }
+  // onPreview = () => {
+  //   const content = this.state.content;
+  //   window.open(`${SITE_REPO_URL}/${content.dataType}/${content.id}.html`);
+  // }
 
-  onShowJson = () => {
-    const node = this.state.node;
-    window.open(`${CONTENT_LAKE_URL}/${node.dataType}/${node.id}.json`);
-  }
+  // onShowJson = () => {
+  //   const content = this.state.content;
+  //   window.open(`${CONTENT_LAKE_URL}/${content.dataType}/${content.id}.json`);
+  // }
 
-  nodeToState() {
-    if (this.props.node.id && this.props.node.id !== this.state.node.id ) {
-      this.setState({ node: this.props.node });
-    }
-  }
+  // contentToState() {
+  //   if (this.props.content.id && this.props.content.id !== this.state.content.id ) {
+  //     this.setState({ content: this.props.content });
+  //   }
+  // }
 
   componentDidMount() {
-    this.setState({ isNew: this.props.isNew });
-    this.nodeToState();
+    this.setState({
+      isNew: this.props.isNew
+    });
   }
 
   componentDidUpdate() {
-    this.nodeToState();
+    if (this.props.content.id && !this.state.content.id) {
+      this.setState({
+        content: this.props.content,
+      });
+    }
   }
 
   render() {
-    const node = this.state.node;
-    const isNew = this.state.isNew
+    const content = this.state.content;
+    const isNew = this.props.isNew
 
     let idField = null;
     let dateCreatedField = null;
@@ -74,13 +78,15 @@ class ContentForm extends React.Component {
     let previewButton = null;
     let jsonButton = null;
 
+    // move to separate functions / conditional components
+
     if (!isNew) {
       idField = <div className="disabled field">
                   <label htmlFor="id">ID</label>
                   <input name="id"
                          type="text"
                          placeholder="id"
-                         value={node.id}
+                         value={content.id}
                          readOnly />
                 </div>;
 
@@ -89,7 +95,7 @@ class ContentForm extends React.Component {
                             <input name="dateCreated"
                                    type="text"
                                    placeholder="date created"
-                                   value={node.dateCreated}
+                                   value={content.dateCreated}
                                    readOnly />
                           </div>;
 
@@ -98,7 +104,7 @@ class ContentForm extends React.Component {
                             <input name="dateModified"
                                    type="text"
                                    placeholder="date modifed"
-                                   value={node.dateModified}
+                                   value={content.dateModified}
                                    readOnly />
                           </div>;
 
@@ -119,12 +125,14 @@ class ContentForm extends React.Component {
       <div className="ui form">
         <p>All fields must have values. Validation to be added.</p>
         {idField}
+
+
         <div className="required field">
           <label htmlFor="dataType">Data Type</label>
           <select name="dataType"
                  type="text"
                  placeholder="content type"
-                 value={node.dataType}
+                 value={content.dataType}
                  onChange={this.handleChange}>
                     <option value="">Data Type</option>
                     <option value="content">Content</option>
@@ -135,7 +143,7 @@ class ContentForm extends React.Component {
           <input name="title"
                  type="text"
                  placeholder="title"
-                 value={node.title}
+                 value={content.title}
                  onChange={this.handleChange} />
         </div>
         <div className="required field">
@@ -143,14 +151,14 @@ class ContentForm extends React.Component {
           <input name="subTitle"
                  type="text"
                  placeholder="subtitle"
-                 value={node.subTitle}
+                 value={content.subTitle}
                  onChange={this.handleChange} />
         </div>
         <div className="required field">
           <label htmlFor="copyText">Copy Text</label>
           <textarea name="copyText"
                  placeholder="copy text"
-                 value={node.copyText}
+                 value={content.copyText}
                  onChange={this.handleChange}></textarea>
         </div>
         {dateCreatedField}
@@ -171,6 +179,13 @@ class ContentForm extends React.Component {
             Save
           </button>
         </div>
+
+        <div className="ui segment">
+          <code>
+            {JSON.stringify(this.props.content)}
+          </code>
+        </div>
+
       </div>
     );
   }

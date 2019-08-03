@@ -1,43 +1,25 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import Api from '../api/Api';
+import { connect } from 'react-redux';
+import { fetchContent, updateContent } from '../../actions';
+
 import ContentForm from '../ContentForm';
-import { CONTENT_RESOURCE }  from '../../config';
 
 class ContentEdit extends React.Component {
   constructor() {
     super();
 
-    this.apiResource = CONTENT_RESOURCE;
     this.state = {
-      node: {
-        id: '',
-        dataType: '',
-        title: '',
-        subTitle: '',
-        copyText: '',
-        dateCreated: '',
-        dateModified: ''
-      },
+      content: { },
       redirect: false,
       isLoading: false
     };
   }
 
-  showContent = async (id) => {
+  updateContent = async (content) => {
     this.setState({ isLoading: true });
-    const response = await Api.read(id, this.apiResource);
-    this.setState({
-      node: response,
-      isLoading: false
-    });
-  }
 
-  updateContent = async () => {
-    this.setState({ isLoading: true });
-    await Api.update(this.state.node, this.apiResource);
-
-    // update content without mutating
+    this.props.updateContent(content);
 
     this.setState({
       isLoading: false,
@@ -50,7 +32,7 @@ class ContentEdit extends React.Component {
   }
 
   componentDidMount() {
-    this.showContent(this.props.match.params.id);
+    this.props.fetchContent(this.props.match.params.id)
   }
 
   render() {
@@ -61,10 +43,13 @@ class ContentEdit extends React.Component {
     return (
       <div>
         <h1>Edit Content</h1>
+
+        {/* make loader component  */}
         <div className={loaderStyles}>
           <div className="ui text loader">Working...</div>
         </div>
-        <ContentForm node={this.state.node}
+
+        <ContentForm content={this.props.content}
                      onFormSubmit={this.updateContent}
                      onFormCancel={this.onFormCancel}/>
       </div>
@@ -72,4 +57,8 @@ class ContentEdit extends React.Component {
   }
 };
 
-export default ContentEdit;
+const mapStateToProps = (state) => {
+  return { content: state.selectedContent };
+}
+
+export default connect(mapStateToProps, { fetchContent, updateContent }) (ContentEdit);

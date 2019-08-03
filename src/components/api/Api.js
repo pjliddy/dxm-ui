@@ -1,5 +1,6 @@
 const API_BASE_URL = require('../../config').API_BASE_URL
 
+// POST includes params for getSignedUrl for S3 authentication
 const create = (body, resource, params) => {
   const url = new URL(`${API_BASE_URL}/${resource}`);
   url.search = new URLSearchParams(params);

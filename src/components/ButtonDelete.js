@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteNode, deleteAsset } from '../actions';
+import { deleteContent, deleteAsset } from '../actions';
 
 class ButtonDelete extends React.Component {
   handleClick(id) {
     switch (this.props.node.dataType) {
       case 'content':
       default:
-        this.props.deleteNode(id);
+        this.props.deleteContent(id);
         break;
       case 'asset':
         this.props.deleteAsset(id);
@@ -26,4 +26,4 @@ class ButtonDelete extends React.Component {
   }
 }
 
-export default connect(null, { deleteNode, deleteAsset }) (ButtonDelete);
+export default connect(null, { deleteContent, deleteAsset }) (ButtonDelete);

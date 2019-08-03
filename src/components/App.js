@@ -16,8 +16,8 @@ const App = () => {
       <HashRouter basename='/'>
         <Header />
         <Route path="/" exact component={ContentList} />
-        <Route path="/content/edit/:id" exact component={ContentEdit} />
-        <Route path="/content/new" exact component={ContentCreate} />
+        <Route path="/contents/edit/:id" exact component={ContentEdit} />
+        <Route path="/contents/new" exact component={ContentCreate} />
         <Route path="/assets" exact component={AssetList} />
         <Route path="/assets/edit/:id" exact component={AssetEdit} />
         <Route path="/assets/new" exact component={AssetCreate} />

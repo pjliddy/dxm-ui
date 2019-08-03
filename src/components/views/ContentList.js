@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchNodes } from '../../actions';
+import { fetchContents } from '../../actions';
 
 import ButtonDelete from '../ButtonDelete';
 import ButtonJson from '../ButtonJson';
@@ -9,30 +9,31 @@ import ButtonPreview from '../ButtonPreview';
 
 class ContentList extends React.Component {
   renderList() {
-    return this.props.nodes.map(node => {
-      const linkPath = `/content/edit/${node.id}`;
+    return this.props.contents.map(content => {
+      const linkPath = `/contents/edit/${content.id}`;
 
+      // make ContentListItem component
       return(
-        <tr key={node.id}>
+        <tr key={content.id}>
           <td>
-            <Link to={linkPath} className="node">
-              {node.title}
+            <Link to={linkPath}>
+              {content.title}
             </Link>
           </td>
           <td>
-            {node.dataType}
+            {content.dataType}
           </td>
           <td className="collapsing">
-            {node.id}
+            {content.id}
           </td>
           <td className="collapsing">
-            {node.dateModified}
+            {content.dateModified}
           </td>
           <td className="collapsing">
             <div className="ui icon buttons">
-              <ButtonJson node={node} />
-              <ButtonPreview node={node} />
-              <ButtonDelete node={node} />
+              <ButtonJson node={content} />
+              <ButtonPreview node={content} />
+              <ButtonDelete node={content} />
             </div>
           </td>
         </tr>
@@ -41,7 +42,7 @@ class ContentList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchNodes();
+    this.props.fetchContents();
   }
 
   render() {
@@ -79,7 +80,7 @@ class ContentList extends React.Component {
 };
 
 const mapStateToProps = (state) => {
-  return { nodes: state.nodes };
+  return { contents: state.contents };
 }
 
-export default connect(mapStateToProps, { fetchNodes }) (ContentList);
+export default connect(mapStateToProps, { fetchContents }) (ContentList);

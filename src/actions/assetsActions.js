@@ -10,9 +10,17 @@ export const fetchAssets = () => async (dispatch) => {
   });
 };
 
-export const deleteAsset = (id) => async (dispatch) => {
-  console.log(`deleteAsset action`);
+export const fetchAsset = (id) => async (dispatch) => {
+  const response = await Api.read(id, ASSET_RESOURCE);
 
+  dispatch({
+    type: 'FETCH_ASSET',
+    payload: response
+  });
+};
+
+
+export const deleteAsset = (id) => async (dispatch) => {
   await Api.destroy(id, ASSET_RESOURCE);
 
   dispatch({

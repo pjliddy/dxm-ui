@@ -1,9 +1,14 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchContent } from '../../actions';
+
+import axios from 'axios';
+
 import Api from '../api/Api';
 import AssetForm from '../AssetForm';
+
 import { ASSET_RESOURCE, ASSET_REPO_BUCKET, ASSET_REPO_PATH}  from '../../config';
-import axios from 'axios';
 
 /*
   S3 Object:
@@ -20,7 +25,6 @@ class AssetEdit extends React.Component {
   constructor() {
     super();
 
-    this.apiResource = ASSET_RESOURCE;
     this.state = {
       asset: {
         id: '',
@@ -43,7 +47,7 @@ class AssetEdit extends React.Component {
 
   showAsset = async (id) => {
     this.setState({ isLoading: true });
-    const response = await Api.read(id, this.apiResource);
+    const response = await Api.read(id, ASSET_RESOURCE);
     this.setState({
       asset: response,
       isLoading: false
@@ -78,7 +82,7 @@ class AssetEdit extends React.Component {
       asset: asset
     })
 
-    await Api.update(this.state.asset, this.apiResource);
+    await Api.update(this.state.asset, ASSET_RESOURCE);
 
     this.setState({
       isLoading: false,
@@ -95,7 +99,7 @@ class AssetEdit extends React.Component {
     };
 
     const urlParams = { getSignedUrl: true };
-    const response = await Api.create(s3Params, this.apiResource, urlParams);
+    const response = await Api.create(s3Params, ASSET_RESOURCE, urlParams);
 
     return response;
   }
@@ -133,14 +137,16 @@ class AssetEdit extends React.Component {
   render() {
     if (this.state.redirect) { return <Redirect to="/assets" />; }
 
-    const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
+    // const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
 
     return (
       <div>
         <h1>Edit Asset</h1>
-        <div className={loaderStyles}>
-          <div className="ui text loader">Working...</div>
-        </div>
+        {/*
+          <div className={loaderStyles}>
+            <div className="ui text loader">Working...</div>
+          </div>
+        */}
         <AssetForm asset={this.state.asset}
                    onFormSubmit={this.updateAsset}
                    onFormCancel={this.onFormCancel}/>
@@ -150,4 +156,10 @@ class AssetEdit extends React.Component {
 
 }
 
-export default AssetEdit;
+const mapStateToProps = (state) => {
+  return { asset: state.selectedAsset };
+}
+
+export default connect(mapStateToProps, { fetchContent }) (AssetEdit);
+
+// export default AssetEdit;

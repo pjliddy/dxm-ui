@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import nodesReducer from './nodesReducer';
 import assetsReducer from './assetsReducer';
+import contentsReducer from './contentsReducer';
+import selectedContentReducer from './selectedContentReducer';
 
 export default combineReducers({
-  nodes: nodesReducer,
-  assets: assetsReducer
+  assets: assetsReducer,
+  contents: contentsReducer,
+  selectedContent: selectedContentReducer
 });
