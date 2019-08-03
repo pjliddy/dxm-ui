@@ -8,6 +8,10 @@ import ButtonJson from '../ButtonJson';
 import ButtonPreview from '../ButtonPreview';
 
 class ContentList extends React.Component {
+  componentDidMount() {
+    this.props.fetchContents();
+  }
+
   renderList() {
     return this.props.contents.map(content => {
       const linkPath = `/contents/edit/${content.id}`;
@@ -39,10 +43,6 @@ class ContentList extends React.Component {
         </tr>
       );
     });
-  }
-
-  componentDidMount() {
-    this.props.fetchContents();
   }
 
   render() {

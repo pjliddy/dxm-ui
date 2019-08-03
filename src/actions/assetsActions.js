@@ -10,15 +10,15 @@ export const fetchAssets = () => async (dispatch) => {
   });
 };
 
-export const fetchAsset = (id) => async (dispatch) => {
-  const response = await Api.read(id, ASSET_RESOURCE);
+
+export const updateAsset = (asset) => async (dispatch) => {
+  const response = await Api.update(asset, ASSET_RESOURCE);
 
   dispatch({
-    type: 'FETCH_ASSET',
+    type: 'UPDATE_ASSET',
     payload: response
   });
 };
-
 
 export const deleteAsset = (id) => async (dispatch) => {
   await Api.destroy(id, ASSET_RESOURCE);
