@@ -5,19 +5,17 @@ import BrowserPreview from './BrowserPreview';
 import Field from './Field';
 
 class ContentForm extends React.Component {
-  state = {
-    content: { },
-    isNew: false
-  };
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-    this.setState({
-      isNew: this.props.isNew
-    });
+    this.state = {
+      content: props.content,
+      isNew: props.isNew
+    };
   }
 
   componentDidUpdate() {
-    if (this.props.content.id && !this.state.content.id) {
+    if (this.props.content && this.props.content !== this.state.content) {
       this.setState({
         content: this.props.content,
       });

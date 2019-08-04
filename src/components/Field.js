@@ -5,15 +5,6 @@ class Field extends React.Component {
     super(props);
 
     this.state = {
-      disabled: props.disabled,
-      hidden: props.hidden,
-      label: props.label,
-      name: props.name,
-      placeholder: props.placeholder,
-      onChange: props.onChange,
-      readOnly: props.readOnly,
-      required: false,
-      type: props.type,
       value: props.value
     };
 
@@ -22,7 +13,7 @@ class Field extends React.Component {
 
   handleChange = (event) => {
     this.setState({ value: event.target.value });
-    this.state.onChange(event);
+    this.props.onChange(event);
   }
 
   componentDidUpdate() {
@@ -32,28 +23,26 @@ class Field extends React.Component {
   }
 
   renderInput = () => {
-    switch(this.state.type) {
+    switch(this.props.type) {
       case 'text':
       default:
         return this.renderTextInput();
-        break;
       case 'select':
         return this.renderSelect();
       case 'textarea':
         return this.renderTextArea();
-        break;
     }
   }
 
   renderTextInput = () => {
-    const fieldClasses = `${this.state.required ? 'required ' : ''}${this.state.disabled ? 'disabled ' : ''}field`;
+    const fieldClasses = `${this.props.required ? 'required ' : ''}${this.props.disabled ? 'disabled ' : ''}field`;
 
     return(
       <div className={fieldClasses}>
-        <label htmlFor={this.state.name}>{this.state.label}</label>
-        <input name={this.state.name}
-               type={this.state.type}
-               placeholder={this.state.placeholder}
+        <label htmlFor={this.props.name}>{this.props.label}</label>
+        <input name={this.props.name}
+               type={this.props.type}
+               placeholder={this.props.placeholder}
                value={this.state.value}
                onChange={this.handleChange} />
       </div>
@@ -61,13 +50,13 @@ class Field extends React.Component {
   }
 
   renderSelect = () => {
-    const fieldClasses = `${this.state.required ? 'required ' : ''}${this.state.disabled ? 'disabled ' : ''}field`;
+    const fieldClasses = `${this.props.required ? 'required ' : ''}${this.props.disabled ? 'disabled ' : ''}field`;
 
     return(
       <div className={fieldClasses}>
-      <label htmlFor={this.state.name}>{this.state.label}</label>
-        <select name={this.state.name}
-                placeholder="content type"
+      <label htmlFor={this.props.name}>{this.props.label}</label>
+        <select name={this.props.name}
+                placeholder={this.props.placeholder}
                 value={this.state.value}
                 onChange={this.handleChange}>
           {this.children}
@@ -77,13 +66,13 @@ class Field extends React.Component {
   }
 
   renderTextArea = () => {
-    const fieldClasses = `${this.state.required ? 'required ' : ''}${this.state.disabled ? 'disabled ' : ''}field`;
+    const fieldClasses = `${this.props.required ? 'required ' : ''}${this.props.disabled ? 'disabled ' : ''}field`;
 
     return(
       <div className={fieldClasses}>
-        <label htmlFor={this.state.name}>{this.state.label}</label>
-        <textarea name={this.state.name}
-                  placeholder={this.state.placeholder}
+        <label htmlFor={this.props.name}>{this.props.label}</label>
+        <textarea name={this.props.name}
+                  placeholder={this.props.placeholder}
                   value={this.state.value}
                   onChange={this.handleChange}></textarea>
       </div>
