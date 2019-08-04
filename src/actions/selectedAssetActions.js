@@ -10,4 +10,9 @@ export const fetchAsset = (id) => async (dispatch) => {
   });
 };
 
-// add clear selectedAsset action 
+export const deslectAsset = () => async (dispatch) => {
+  dispatch({
+    type: 'DESELECT_ASSET',
+    payload: { }
+  })
+};

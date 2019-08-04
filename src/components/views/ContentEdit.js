@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchContent, updateContent } from '../../actions';
+import { fetchContent, updateContent, deselectContent } from '../../actions';
 
 import ContentForm from '../ContentForm';
 
@@ -58,4 +58,4 @@ const mapStateToProps = (state) => {
   return { content: state.selectedContent };
 }
 
-export default connect(mapStateToProps, { fetchContent, updateContent }) (ContentEdit);
+export default connect(mapStateToProps, { fetchContent, updateContent, deselectContent }) (ContentEdit);

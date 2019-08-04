@@ -10,4 +10,9 @@ export const fetchContent = (id) => async (dispatch) => {
   });
 };
 
-// add clear selectedContent action 
+export const deselectContent = () => async (dispatch) => {
+  dispatch({
+    type: 'DESELECT_CONTENT',
+    payload: { }
+  })
+};

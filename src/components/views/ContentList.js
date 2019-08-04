@@ -50,7 +50,7 @@ class ContentList extends React.Component {
 
     return (
       <div>
-        <Link to="/content/new" className="ui right floated primary button">
+        <Link to="/contents/new" className="ui right floated primary button">
           <i className="plus sqaure icon"></i>
           New Content
         </Link>

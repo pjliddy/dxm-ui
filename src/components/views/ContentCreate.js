@@ -1,14 +1,13 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+
 import Api from '../api/Api';
 import ContentForm from '../ContentForm';
-import { CONTENT_RESOURCE }  from '../../config';
 
 class ContentCreate extends React.Component {
   constructor() {
     super();
 
-    this.apiResource = CONTENT_RESOURCE;
     this.state = {
       content: {
         id: '',
