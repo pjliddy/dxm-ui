@@ -1,29 +1,32 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchContent, updateContent, deselectContent } from '../../actions';
+import { fetchContent, updateContent, deselectContent, updateSelectedContent } from '../../actions';
 
 import ContentForm from '../ContentForm';
 
 class ContentEdit extends React.Component {
   state = {
-    content: { },
     redirect: false,
     isLoading: false
   };
 
   componentDidMount() {
-    this.props.fetchContent(this.props.match.params.id)
+    this.props.fetchContent(this.props.match.params.id);
+  }
+
+  componentWillUnmount() {
+    this.props.deselectContent();
   }
 
   onFormCancel = () => {
     this.setState({ redirect: true });
   }
 
-  updateContent = async (content) => {
+  updateContent = async () => {
     this.setState({ isLoading: true });
 
-    await this.props.updateContent(content);
+    await this.props.updateContent();
 
     this.setState({
       isLoading: false,
@@ -47,6 +50,7 @@ class ContentEdit extends React.Component {
         </div>
 
         <ContentForm content={this.props.content}
+                     onFormUpdate={this.props.updateSelectedContent}
                      onFormSubmit={this.updateContent}
                      onFormCancel={this.onFormCancel}/>
       </div>
@@ -58,4 +62,4 @@ const mapStateToProps = (state) => {
   return { content: state.selectedContent };
 }
 
-export default connect(mapStateToProps, { fetchContent, updateContent, deselectContent }) (ContentEdit);
+export default connect(mapStateToProps, { fetchContent, updateContent, deselectContent, updateSelectedContent }) (ContentEdit);

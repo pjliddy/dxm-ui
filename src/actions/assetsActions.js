@@ -10,6 +10,14 @@ export const fetchAssets = () => async (dispatch) => {
   });
 };
 
+export const createAsset = (asset) => async (dispatch) => {
+  const response = await Api.create(asset, ASSET_RESOURCE);
+
+  dispatch({
+    type: 'CREATE_ASSET',
+    payload: response
+  });
+};
 
 export const updateAsset = (asset) => async (dispatch) => {
   const response = await Api.update(asset, ASSET_RESOURCE);

@@ -1,25 +1,8 @@
 import React from 'react';
 
 class Field extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: props.value
-    };
-
-    this.children = props.children;
-  }
-
   handleChange = (event) => {
-    this.setState({ value: event.target.value });
     this.props.onChange(event);
-  }
-
-  componentDidUpdate() {
-    if (this.props.value && !this.state.value) {
-      this.setState({ value: this.props.value });
-    }
   }
 
   renderInput = () => {
@@ -43,7 +26,7 @@ class Field extends React.Component {
         <input name={this.props.name}
                type={this.props.type}
                placeholder={this.props.placeholder}
-               value={this.state.value}
+               value={this.props.value}
                onChange={this.handleChange} />
       </div>
     );
@@ -57,9 +40,9 @@ class Field extends React.Component {
       <label htmlFor={this.props.name}>{this.props.label}</label>
         <select name={this.props.name}
                 placeholder={this.props.placeholder}
-                value={this.state.value}
+                value={this.props.value}
                 onChange={this.handleChange}>
-          {this.children}
+          {this.props.children}
         </select>
       </div>
     );
@@ -73,13 +56,17 @@ class Field extends React.Component {
         <label htmlFor={this.props.name}>{this.props.label}</label>
         <textarea name={this.props.name}
                   placeholder={this.props.placeholder}
-                  value={this.state.value}
+                  value={this.props.value}
                   onChange={this.handleChange}></textarea>
       </div>
     );
   }
 
   render() {
+    if (this.props.hidden) {
+      return null;
+    }
+
     return this.renderInput();
   }
 }

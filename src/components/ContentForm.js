@@ -9,17 +9,8 @@ class ContentForm extends React.Component {
     super(props);
 
     this.state = {
-      content: props.content,
-      isNew: props.isNew
+      content: props.content
     };
-  }
-
-  componentDidUpdate() {
-    if (this.props.content && this.props.content !== this.state.content) {
-      this.setState({
-        content: this.props.content,
-      });
-    }
   }
 
   onFormCancel = (event) => {
@@ -29,19 +20,19 @@ class ContentForm extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit(this.state.content);
+
+    this.props.onFormSubmit();
   }
 
   handleChange = (event) => {
     const { content } = { ...this.state };
     const { name, value } = event.target;
-    content[name] = value;
 
-    this.setState({ content: content });
+    this.props.onFormUpdate({ name, value });
   }
 
   render() {
-    const content = this.state.content;
+    const content = this.props.content;
     const isNew = this.props.isNew;
 
     return(

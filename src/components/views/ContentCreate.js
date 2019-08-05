@@ -11,7 +11,7 @@ class ContentCreate extends React.Component {
     this.state = {
       content: {
         id: '',
-        dataType: '',
+        dataType: 'content',
         title: '',
         subTitle: '',
         copyText: '',

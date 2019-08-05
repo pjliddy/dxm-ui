@@ -10,7 +10,17 @@ export const fetchContents = () => async (dispatch) => {
   });
 };
 
-export const updateContent = (content) => async (dispatch) => {
+export const createContent = (content) => async (dispatch) => {
+  const response = await Api.create(content, CONTENT_RESOURCE);
+
+  dispatch({
+    type: 'CREATE_CONTENT',
+    payload: response
+  });
+};
+
+export const updateContent = (content) => async (dispatch, getState) => {
+  const content = getState().selectedContent;
   const response = await Api.update(content, CONTENT_RESOURCE);
 
   dispatch({
@@ -26,6 +36,6 @@ export const deleteContent = (id) => async (dispatch) => {
 
   dispatch({
     type: 'DELETE_CONTENT',
-    payload: { id: id }
+    payload: { id }
   });
 };
