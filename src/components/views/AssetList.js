@@ -13,7 +13,7 @@ class AssetList extends React.Component {
 
   renderList() {
     return this.props.assets.map(asset => {
-      const linkPath = `/assets/edit/${asset.id}`;
+      const linkPath = `/assets/${asset.id}/edit`;
 
       return (
         <div className="item"

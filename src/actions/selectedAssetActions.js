@@ -10,6 +10,15 @@ export const fetchAsset = (id) => async (dispatch) => {
   });
 };
 
+export const newAsset = () => async (dispatch, getState) => {
+  const asset = getState().selectedAsset;
+
+  dispatch({
+    type: 'NEW_ASSET',
+    payload: asset
+  });
+};
+
 export const deselectAsset = () => async (dispatch) => {
   dispatch({
     type: 'DESELECT_ASSET',

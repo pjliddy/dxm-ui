@@ -14,6 +14,8 @@ export default (state = initialContentState, action) => {
   switch (action.type) {
     case 'FETCH_CONTENT':
       return action.payload;
+    case 'NEW_CONTENT':
+      return action.payload;
     case 'DESELECT_CONTENT':
       return initialContentState;
     case 'UPDATE_SELECTED_CONTENT':

@@ -1,8 +1,6 @@
 import React from 'react';
-import ShowJson from './ShowJson';
 import Field from './Field';
-
-// import { ASSET_RESOURCE  } from '../config';
+import ShowJson from './ShowJson';
 
 class AssetForm extends React.Component {
   state = {
@@ -16,8 +14,7 @@ class AssetForm extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit(this.props.selectedFile);
-    this.props.onFormSubmit();
+    this.props.onFormSubmit(this.state.selectedFile);
   }
 
   handleChange = (event) => {
@@ -26,32 +23,15 @@ class AssetForm extends React.Component {
   }
 
   handleFileChange = (event) => {
-    console.log(`handleFileChange(): ${event.target.files[0].name}`)
-
     const { name } = event.target;
     const value = event.target.files[0];
+
     this.props.onFormUpdate({ name, value });
 
-    console.log(value);
-
-    // const fileData = {
-    //   name: fileObj.name,
-    //   size: fileObj.size,
-    //   type: fileObj.type
-    // };
-    // const { asset } = { ...this.state };
-    // const currentState = asset;
-    // currentState.file = fileData;
-    //
-    // this.setState({
-    //   selectedFile: value
-    // });
+    this.setState({
+      selectedFile: value
+    });
   }
-
-  // onShowJson = () => {
-  //   const asset = this.state.asset;
-  //   window.open(`${CONTENT_LAKE_URL}/${asset.dataType}/${asset.id}.json`);
-  // }
 
   render() {
     const asset = this.props.asset;

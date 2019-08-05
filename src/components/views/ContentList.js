@@ -14,7 +14,7 @@ class ContentList extends React.Component {
 
   renderList() {
     return this.props.contents.map(content => {
-      const linkPath = `/contents/edit/${content.id}`;
+      const linkPath = `/contents/${content.id}/edit`;
 
       return(
         <tr key={content.id}>

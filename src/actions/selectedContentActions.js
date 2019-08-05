@@ -10,6 +10,15 @@ export const fetchContent = (id) => async (dispatch) => {
   });
 };
 
+export const newContent = () => async (dispatch, getState) => {
+  const content = getState().selectedContent;
+
+  dispatch({
+    type: 'NEW_CONTENT',
+    payload: content
+  });
+};
+
 export const deselectContent = () => async (dispatch) => {
   dispatch({
     type: 'DESELECT_CONTENT',

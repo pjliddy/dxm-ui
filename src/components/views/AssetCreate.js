@@ -1,44 +1,52 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { newAsset, createAsset, deselectAsset, updateSelectedAsset } from '../../actions';
+
 import Api from '../api/Api';
-import AssetForm from '../AssetForm';
 import axios from 'axios';
-import { ASSET_RESOURCE, ASSET_REPO_BUCKET, ASSET_REPO_PATH }  from '../../config';
+import { ASSET_REPO_BUCKET, ASSET_REPO_PATH, ASSET_RESOURCE }  from '../../config';
+
+import AssetForm from '../AssetForm';
 
 class AssetCreate extends React.Component {
-  constructor() {
-    super();
+  state = {
+    redirect: false,
+    isLoading: false,
+    selectedFile: ''
+  };
 
-    this.apiResource = ASSET_RESOURCE;
-    this.state = {
-      asset: {
-        id: '',
-        dataType: '',
-        title: '',
-        dateCreated: '',
-        dateModified: '',
-        url: ''
-      },
-      redirect: false,
-      isLoading: false,
-      selectedFile: ''
-    };
+  componentDidMount() {
+    this.props.newAsset();
   }
 
-  createAsset = async ({asset, file}) => {
+  componentWillUnmount() {
+    this.props.deselectAsset();
+  }
+
+  onFormCancel = () => {
+    this.setState({ redirect: true });
+  }
+
+  createAsset = async (fileObj) => {
     this.setState({ isLoading: true });
 
-    // get presignded URL from assets Api
-    const { uploadURL } = await this.getPresignedUrl(asset, file);
+    const fileData = {
+      name: fileObj.name,
+      size: fileObj.size,
+      type: fileObj.type
+    };
 
-    asset.url = await this.uploadAsset(uploadURL, file)
+    // get presigned URL from assets Api
+    const { uploadURL } = await this.getPresignedUrl(fileObj);
+    const url = await this.uploadAsset(uploadURL, fileObj);
 
-    this.setState({ asset: asset });
+    this.props.updateSelectedAsset({ 'name': 'file', 'value': fileData });
+    this.props.updateSelectedAsset({ 'name': 'url', 'value': url });
 
     // what if upload fails?
-
     // on success, create asset node in db
-    await Api.create(asset, this.apiResource);
+    await this.props.createAsset(this.props.asset);
 
     this.setState({
       isLoading: false,
@@ -46,17 +54,15 @@ class AssetCreate extends React.Component {
     });
   }
 
-  getPresignedUrl = async (asset, file) => {
+  getPresignedUrl = async (file) => {
     const s3Params = {
       'Bucket': ASSET_REPO_BUCKET,
       'Key':  `${ASSET_REPO_PATH}/${file.name}`,
       'ACL': 'public-read',
-      'ContentType': file.type,
-      // 'ContentDisposition': 'inline'
+      'ContentType': file.type
     };
-
     const urlParams = { getSignedUrl: true };
-    const response = await Api.create(s3Params, this.apiResource, urlParams);
+    const response = await Api.create(s3Params, ASSET_RESOURCE, urlParams);
 
     return response;
   }
@@ -68,8 +74,7 @@ class AssetCreate extends React.Component {
       const config = {
         headers: {
           'ACL': 'public-read',
-          'Content-Type': file.type,
-          // 'Content-Disposition': 'inline'
+          'Content-Type': file.type
         },
         onUploadProgress: progressEvent => {
           const progress = Number.parseInt(progressEvent.loaded / file.size * 100, 10);
@@ -84,10 +89,6 @@ class AssetCreate extends React.Component {
     }
   }
 
-  onFormCancel = () => {
-    this.setState({ redirect: true });
-  }
-
   render() {
     if (this.state.redirect) { return <Redirect to="/assets" />; }
 
@@ -99,8 +100,9 @@ class AssetCreate extends React.Component {
         <div className={loaderStyles}>
           <div className="ui text loader">Working...</div>
         </div>
-        <AssetForm asset={this.state.asset}
+        <AssetForm asset={this.props.asset}
                    isNew={true}
+                   onFormUpdate={this.props.updateSelectedAsset}
                    onFormSubmit={this.createAsset}
                    onFormCancel={this.onFormCancel}/>
        </div>
@@ -108,4 +110,10 @@ class AssetCreate extends React.Component {
   }
 }
 
-export default AssetCreate;
+const mapStateToProps = (state) => {
+  return { asset: state.selectedAsset };
+}
+
+const mapDispatchToProps = { newAsset, createAsset, deselectAsset, updateSelectedAsset };
+
+export default connect(mapStateToProps, mapDispatchToProps) (AssetCreate);

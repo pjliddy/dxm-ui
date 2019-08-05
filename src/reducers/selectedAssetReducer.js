@@ -2,18 +2,20 @@ const initialAssetState = {
   id: '',
   dataType: 'asset',
   title: '',
-  dateCreated: '',
-  dateModified: '',
   url: '',
-  file: { }
+  file: { },
+  dateCreated: '',
+  dateModified: ''
 };
 
 export default (state = initialAssetState, action) => {
   switch (action.type) {
     case 'FETCH_ASSET':
       return action.payload;
+    case 'NEW_ASSET':
+        return action.payload;
     case 'DESELECT_ASSET':
-      return action.payload;
+      return initialAssetState;
     case 'UPDATE_SELECTED_ASSET':
       return { ...state, [action.payload.name]: action.payload.value }
     default:

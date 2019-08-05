@@ -1,40 +1,37 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { newContent, createContent, deselectContent, updateSelectedContent } from '../../actions';
 
-import Api from '../api/Api';
 import ContentForm from '../ContentForm';
 
 class ContentCreate extends React.Component {
-  constructor() {
-    super();
+  state = {
+    redirect: false,
+    isLoading: false
+  };
 
-    this.state = {
-      content: {
-        id: '',
-        dataType: 'content',
-        title: '',
-        subTitle: '',
-        copyText: '',
-        dateCreated: '',
-        dateModified: ''
-      },
-      redirect: false,
-      isLoading: false
-    };
+  componentDidMount() {
+    this.props.newContent();
   }
 
-  createContent = async (content) => {
+  componentWillUnmount() {
+    this.props.deselectContent();
+  }
+
+  onFormCancel = () => {
+    this.setState({ redirect: true });
+  }
+
+  createContent = async () => {
     this.setState({ isLoading: true });
-    await Api.create(content, this.apiResource);
+
+    await this.props.createContent(this.props.content);
 
     this.setState({
       isLoading: false,
       redirect: true
     });
-  }
-
-  onFormCancel = () => {
-    this.setState({ redirect: true });
   }
 
   render() {
@@ -48,8 +45,9 @@ class ContentCreate extends React.Component {
         <div className={loaderStyles}>
           <div className="ui text loader">Working...</div>
         </div>
-        <ContentForm content={this.state.content}
+        <ContentForm content={this.props.content}
                      isNew={true}
+                     onFormUpdate={this.props.updateSelectedContent}
                      onFormSubmit={this.createContent}
                      onFormCancel={this.onFormCancel}/>
        </div>
@@ -57,4 +55,10 @@ class ContentCreate extends React.Component {
   }
 };
 
-export default ContentCreate;
+const mapStateToProps = (state) => {
+  return { content: state.selectedContent };
+}
+
+const mapDispatchToProps = { newContent, createContent, deselectContent, updateSelectedContent };
+
+export default connect(mapStateToProps, mapDispatchToProps) (ContentCreate);
