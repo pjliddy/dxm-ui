@@ -83,6 +83,7 @@ class AssetCreate extends React.Component {
       }
 
       const response = await axios.put(uploadUrl, file, config);
+
       return response.config.url.split('?')[0];
     } catch (error) {
       return error;
@@ -97,9 +98,12 @@ class AssetCreate extends React.Component {
     return (
       <div>
         <h1>New Asset</h1>
+
+        {/* make loader component  */}
         <div className={loaderStyles}>
           <div className="ui text loader">Working...</div>
         </div>
+
         <AssetForm asset={this.props.asset}
                    isNew={true}
                    onFormUpdate={this.props.updateSelectedAsset}

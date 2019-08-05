@@ -33,35 +33,25 @@ class AssetEdit extends React.Component {
     Need to delete existing asset image if updated
   */
 
-  updateAsset = async () => {
+  updateAsset = async (fileObj) => {
     this.setState({ isLoading: true });
 
-    console.log(`updateAsset(): ${this.props.asset}`)
+    const fileData = {
+      name: fileObj.name,
+      size: fileObj.size,
+      type: fileObj.type
+    };
 
-    // handle file stuff
+    // Only execute if file object has changed???
 
-    // only if asset changes
-    // const { uploadURL } = await this.getPresignedUrl(this.props.asset, file);
-    //
-    // const fileData = {
-    //   name: file.name,
-    //   size: file.size,
-    //   type: file.type
-    // };
+    // get presigned URL from assets Api
+    const { uploadURL } = await this.getPresignedUrl(fileObj);
+    const url = await this.uploadAsset(uploadURL, fileObj);
 
-    // get s3 url and add to state
-    
-    // asset.file = fileData;
-    // asset.url = await this.uploadAsset(uploadURL, file)
-    //
-    // this.setState({
-    //   asset: asset
-    // })
+    this.props.updateSelectedAsset({ 'name': 'file', 'value': fileData });
+    this.props.updateSelectedAsset({ 'name': 'url', 'value': url });
 
-    // end handle file stuff
-
-    // await Api.update(this.state.asset, ASSET_RESOURCE);
-    // await this.props.updateAsset();
+    await this.props.updateAsset(this.props.asset);
 
     this.setState({
       isLoading: false,
@@ -69,15 +59,13 @@ class AssetEdit extends React.Component {
     });
   }
 
-  getPresignedUrl = async () => {
-    const file = this.props.asset.file;
+  getPresignedUrl = async (file) => {
     const s3Params = {
       'Bucket': ASSET_REPO_BUCKET,
       'Key':  `${ASSET_REPO_PATH}/${file.name}`,
       'ACL': 'public-read',
       'ContentType': file.type
     };
-
     const urlParams = { getSignedUrl: true };
     const response = await Api.create(s3Params, ASSET_RESOURCE, urlParams);
 
@@ -100,6 +88,7 @@ class AssetEdit extends React.Component {
       }
 
       const response = await axios.put(uploadUrl, file, config);
+
       return response.config.url.split('?')[0];
     } catch (error) {
       return error;
