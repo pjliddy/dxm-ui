@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchAsset, updateAsset } from '../../actions';
+import { fetchAsset, updateAsset, deselectAsset, updateSelectedAsset } from '../../actions';
 
 import axios from 'axios';
 
@@ -10,20 +10,8 @@ import AssetForm from '../AssetForm';
 
 import { ASSET_RESOURCE, ASSET_REPO_BUCKET, ASSET_REPO_PATH}  from '../../config';
 
-/*
-  S3 Object:
-  {
-      "Key": "assets/apollo.jpg",
-      "LastModified": "2019-07-25T15:35:43.000Z",
-      "ETag": "\"41e9525c71922900254ae99762bb4585\"",
-      "Size": 462901,
-      "StorageClass": "STANDARD"
-  }
-*/
-
 class AssetEdit extends React.Component {
   state = {
-    asset: { },
     redirect: false,
     isLoading: false,
     selectedFile: ''
@@ -31,6 +19,10 @@ class AssetEdit extends React.Component {
 
   componentDidMount() {
     this.props.fetchAsset(this.props.match.params.id)
+  }
+
+  componentWillUnmount() {
+    this.props.deselectAsset();
   }
 
   onFormCancel = () => {
@@ -41,28 +33,35 @@ class AssetEdit extends React.Component {
     Need to delete existing asset image if updated
   */
 
-  updateAsset = async ({asset, file}) => {
+  updateAsset = async () => {
     this.setState({ isLoading: true });
 
+    console.log(`updateAsset(): ${this.props.asset}`)
+
+    // handle file stuff
+
     // only if asset changes
-    const { uploadURL } = await this.getPresignedUrl(asset, file);
+    // const { uploadURL } = await this.getPresignedUrl(this.props.asset, file);
+    //
+    // const fileData = {
+    //   name: file.name,
+    //   size: file.size,
+    //   type: file.type
+    // };
 
-    const fileData = {
-      name: file.name,
-      size: file.size,
-      type: file.type
-    };
+    // get s3 url and add to state
+    
+    // asset.file = fileData;
+    // asset.url = await this.uploadAsset(uploadURL, file)
+    //
+    // this.setState({
+    //   asset: asset
+    // })
 
-    // const { asset } = { ...this.state };
-    // const currentState = asset;
-    asset.file = fileData;
-    asset.url = await this.uploadAsset(uploadURL, file)
+    // end handle file stuff
 
-    this.setState({
-      asset: asset
-    })
-
-    await Api.update(this.state.asset, ASSET_RESOURCE);
+    // await Api.update(this.state.asset, ASSET_RESOURCE);
+    // await this.props.updateAsset();
 
     this.setState({
       isLoading: false,
@@ -70,7 +69,8 @@ class AssetEdit extends React.Component {
     });
   }
 
-  getPresignedUrl = async (asset, file) => {
+  getPresignedUrl = async () => {
+    const file = this.props.asset.file;
     const s3Params = {
       'Bucket': ASSET_REPO_BUCKET,
       'Key':  `${ASSET_REPO_PATH}/${file.name}`,
@@ -121,18 +121,18 @@ class AssetEdit extends React.Component {
         </div>
 
         <AssetForm asset={this.props.asset}
+                   onFormUpdate={this.props.updateSelectedAsset}
                    onFormSubmit={this.updateAsset}
                    onFormCancel={this.onFormCancel}/>
       </div>
     );
   }
-
 }
 
 const mapStateToProps = (state) => {
   return { asset: state.selectedAsset };
 }
 
-export default connect(mapStateToProps, { fetchAsset, updateAsset }) (AssetEdit);
+const mapDispatchToProps = { fetchAsset, updateAsset, deselectAsset, updateSelectedAsset };
 
-// export default AssetEdit;
+export default connect(mapStateToProps, mapDispatchToProps) (AssetEdit);

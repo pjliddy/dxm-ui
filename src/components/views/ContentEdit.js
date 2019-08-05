@@ -5,6 +5,8 @@ import { fetchContent, updateContent, deselectContent, updateSelectedContent } f
 
 import ContentForm from '../ContentForm';
 
+// research containers for wrapping forms, etc.
+
 class ContentEdit extends React.Component {
   state = {
     redirect: false,
@@ -62,4 +64,6 @@ const mapStateToProps = (state) => {
   return { content: state.selectedContent };
 }
 
-export default connect(mapStateToProps, { fetchContent, updateContent, deselectContent, updateSelectedContent }) (ContentEdit);
+const mapDispatchToProps = { fetchContent, updateContent, deselectContent, updateSelectedContent };
+
+export default connect(mapStateToProps, mapDispatchToProps) (ContentEdit);

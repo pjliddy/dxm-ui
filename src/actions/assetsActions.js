@@ -19,7 +19,8 @@ export const createAsset = (asset) => async (dispatch) => {
   });
 };
 
-export const updateAsset = (asset) => async (dispatch) => {
+export const updateAsset = (asset) => async (dispatch, getState) => {
+  const asset = getState().selectedAsset;
   const response = await Api.update(asset, ASSET_RESOURCE);
 
   dispatch({

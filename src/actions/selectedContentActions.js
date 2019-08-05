@@ -14,12 +14,12 @@ export const deselectContent = () => async (dispatch) => {
   dispatch({
     type: 'DESELECT_CONTENT',
     payload: { }
-  })
+  });
 };
 
 export const updateSelectedContent = ( prop ) => async (dispatch) => {
   dispatch({
     type: 'UPDATE_SELECTED_CONTENT',
     payload: prop
-  })
+  });
 }

@@ -1,34 +1,13 @@
 import React from 'react';
+import ShowJson from './ShowJson';
+import Field from './Field';
+
 // import { ASSET_RESOURCE  } from '../config';
 
 class AssetForm extends React.Component {
   state = {
-    asset: {
-      id: '',
-      dataType: 'asset',
-      title: '',
-      dateCreated: '',
-      dateModified: '',
-      url: '',
-      file: { }
-    },
-    isNew: false,
     selectedFile: ''
   };
-
-  componentDidMount() {
-    this.setState({
-      isNew: this.props.isNew
-    });
-  }
-
-  componentDidUpdate() {
-    if (this.props.asset.id && !this.state.asset.id) {
-      this.setState({
-        asset: this.props.asset,
-      });
-    }
-  }
 
   onFormCancel = (event) => {
     event.preventDefault();
@@ -37,37 +16,36 @@ class AssetForm extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit({
-      asset: this.state.asset,
-      file: this.state.selectedFile
-    });
+    this.props.onFormSubmit(this.props.selectedFile);
+    this.props.onFormSubmit();
   }
 
-  // create controlled field component
   handleChange = (event) => {
-    const { asset } = { ...this.state };
-    const currentState = asset;
     const { name, value } = event.target;
-    currentState[name] = value;
-
-    this.setState({ asset: currentState });
+    this.props.onFormUpdate({ name, value });
   }
 
   handleFileChange = (event) => {
-    const fileObj = event.target.files[0];
-    const fileData = {
-      name: fileObj.name,
-      size: fileObj.size,
-      type: fileObj.type
-    };
-    const { asset } = { ...this.state };
-    const currentState = asset;
-    currentState.file = fileData;
+    console.log(`handleFileChange(): ${event.target.files[0].name}`)
 
-    this.setState({
-      file: currentState.file,
-      selectedFile: fileObj
-    });
+    const { name } = event.target;
+    const value = event.target.files[0];
+    this.props.onFormUpdate({ name, value });
+
+    console.log(value);
+
+    // const fileData = {
+    //   name: fileObj.name,
+    //   size: fileObj.size,
+    //   type: fileObj.type
+    // };
+    // const { asset } = { ...this.state };
+    // const currentState = asset;
+    // currentState.file = fileData;
+    //
+    // this.setState({
+    //   selectedFile: value
+    // });
   }
 
   // onShowJson = () => {
@@ -76,60 +54,8 @@ class AssetForm extends React.Component {
   // }
 
   render() {
-    const asset = this.state.asset;
+    const asset = this.props.asset;
     const isNew = this.props.isNew
-
-    let idField = null;
-    let imagePreview = null;
-    let dateCreatedField = null;
-    let dateModifiedField = null;
-    let jsonButton = null;
-
-    // move to separate functions / conditional components
-
-    if (!isNew) {
-      idField = <div className="disabled field">
-                  <label htmlFor="id">ID</label>
-                  <input name="id"
-                         type="text"
-                         placeholder="id"
-                         value={asset.id}
-                         readOnly />
-                 </div>;
-
-      dateCreatedField =  <div className="disabled field">
-                            <label htmlFor="dateCreated">Date Created</label>
-                            <input name="dateCreated"
-                                   type="text"
-                                   placeholder="date created"
-                                   value={asset.dateCreated}
-                                   readOnly />
-                          </div>;
-
-      dateModifiedField = <div className="disabled field">
-                            <label htmlFor="dateModified">Date Modified</label>
-                            <input name="dateModified"
-                                   type="text"
-                                   placeholder="date modifed"
-                                   value={asset.dateModified}
-                                   readOnly />
-                          </div>;
-
-      imagePreview =  <div>
-                        <div className="ui hidden divider"></div>
-                        <img className="ui big image"
-                         src={this.state.asset.url}
-                         alt="alt text placeholder">
-                       </img>
-                       <div className="ui divider"></div>
-                     </div>;
-
-      jsonButton = <button className="ui button"
-                          onClick={this.onShowJson}>
-                     <i className="code icon"></i>
-                     Show JSON
-                   </button>;
-  }
 
     /*
       create upload component in React?
@@ -139,35 +65,75 @@ class AssetForm extends React.Component {
     return(
       <div className="ui form">
         <p>All fields must have values. Validation to be added.</p>
-        {idField}
-        <div className="required field">
-          <label htmlFor="dataType">Data Type</label>
-          <select name="dataType"
-                 type="text"
-                 placeholder="content type"
-                 value={asset.dataType}
-                 onChange={this.handleChange}>
-                    <option value="">Data Type</option>
-                    <option value="asset">Asset</option>
-          </select>
-        </div>
-        <div className="required field">
-          <label htmlFor="title">Title</label>
-          <input name="title"
-                 type="text"
-                 placeholder="title"
-                 value={asset.title}
-                 onChange={this.handleChange} />
-        </div>
+
+        <Field type="text"
+               name="id"
+               label="ID"
+               placeholder="id"
+               value={asset.id}
+               hidden={isNew}
+               disabled={true}
+               readOnly={true}>
+        </Field>
+
+        <Field type="select"
+               name="dataType"
+               label="Data Type"
+               placeholder="data type"
+               value={asset.dataType}
+               onChange={this.handleChange}>
+          <option value="">Select Data Type...</option>
+          <option value="asset">Asset</option>
+        </Field>
+
+        <Field type="text"
+               name="title"
+               label="Title"
+               placeholder="title"
+               value={asset.title}
+               required={true}
+               onChange={this.handleChange}>
+        </Field>
+
+
         <div className="field">
           <label htmlFor="file">File</label>
-          <input name="fileName"
+          <input name="file"
                  type="file"
                  onChange={this.handleFileChange} />
-          {imagePreview}
+
+          {!isNew ? (
+            <div>
+              <div className="ui hidden divider"></div>
+              <img className="ui big image"
+                   src={this.props.asset.url}
+                   alt="alt text placeholder">
+               </img>
+               <div className="ui divider"></div>
+             </div>
+           ) : ''}
         </div>
-        {dateCreatedField}
-        {dateModifiedField}
+
+        <Field type="text"
+               name="dateCreated"
+               label="Date Created"
+               placeholder="date created"
+               value={asset.dateCreated}
+               hidden={isNew}
+               disabled={true}
+               readOnly={true}>
+        </Field>
+
+        <Field type="text"
+               name="dateModified"
+               label="Date Modified"
+               placeholder="date modified"
+               value={asset.dateModified}
+               hidden={isNew}
+               disabled={true}
+               readOnly={true}>
+        </Field>
+
         <div>
           <button className="ui secondary basic button"
                   title="Cancel"
@@ -175,7 +141,10 @@ class AssetForm extends React.Component {
             <i className="close icon"></i>
             Cancel
           </button>
-          {jsonButton}
+          <ShowJson node={asset}
+                    hidden={isNew}>
+            Show JSON
+          </ShowJson>
           <button className="ui primary button"
                   title="Save"
                   onClick={this.onFormSubmit}>

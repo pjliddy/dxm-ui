@@ -16,7 +16,6 @@ class ContentList extends React.Component {
     return this.props.contents.map(content => {
       const linkPath = `/contents/edit/${content.id}`;
 
-      // make ContentListItem component
       return(
         <tr key={content.id}>
           <td>
@@ -83,4 +82,7 @@ const mapStateToProps = (state) => {
   return { contents: state.contents };
 }
 
-export default connect(mapStateToProps, { fetchContents }) (ContentList);
+const mapDispatchToProps = { fetchContents }
+
+
+export default connect(mapStateToProps, mapDispatchToProps) (ContentList);

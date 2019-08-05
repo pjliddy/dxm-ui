@@ -19,7 +19,7 @@ export const createContent = (content) => async (dispatch) => {
   });
 };
 
-export const updateContent = (content) => async (dispatch, getState) => {
+export const updateContent = () => async (dispatch, getState) => {
   const content = getState().selectedContent;
   const response = await Api.update(content, CONTENT_RESOURCE);
 

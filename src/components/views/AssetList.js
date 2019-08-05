@@ -6,17 +6,6 @@ import { fetchAssets } from '../../actions';
 import ButtonDelete from '../ButtonDelete';
 import ShowJson from '../ShowJson';
 
-/*
-  S3 Object:
-  {
-      "Key": "assets/apollo.jpg",
-      "LastModified": "2019-07-25T15:35:43.000Z",
-      "ETag": "\"41e9525c71922900254ae99762bb4585\"",
-      "Size": 462901,
-      "StorageClass": "STANDARD"
-  }
-*/
-
 class AssetList extends React.Component {
   componentDidMount() {
     this.props.fetchAssets();
@@ -43,8 +32,8 @@ class AssetList extends React.Component {
             </div>
           </div>
           <div className="ui icon buttons right floated content">
-            <ShowJson node={asset} />
-            <ButtonDelete node={asset} />
+            <ShowJson node={asset} type="icon"/>
+            <ButtonDelete node={asset} type="icon"/>
           </div>
         </div>
       );
@@ -78,4 +67,6 @@ const mapStateToProps = (state) => {
   return { assets: state.assets };
 }
 
-export default connect(mapStateToProps, { fetchAssets }) (AssetList);
+const mapDispatchToProps = { fetchAssets }
+
+export default connect(mapStateToProps, mapDispatchToProps) (AssetList);

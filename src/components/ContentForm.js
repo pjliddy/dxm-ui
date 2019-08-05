@@ -5,14 +5,6 @@ import BrowserPreview from './BrowserPreview';
 import Field from './Field';
 
 class ContentForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      content: props.content
-    };
-  }
-
   onFormCancel = (event) => {
     event.preventDefault();
     this.props.onFormCancel();
@@ -20,14 +12,11 @@ class ContentForm extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-
     this.props.onFormSubmit();
   }
 
   handleChange = (event) => {
-    const { content } = { ...this.state };
     const { name, value } = event.target;
-
     this.props.onFormUpdate({ name, value });
   }
 

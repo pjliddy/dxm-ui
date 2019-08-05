@@ -10,9 +10,16 @@ export const fetchAsset = (id) => async (dispatch) => {
   });
 };
 
-export const deslectAsset = () => async (dispatch) => {
+export const deselectAsset = () => async (dispatch) => {
   dispatch({
     type: 'DESELECT_ASSET',
     payload: { }
-  })
+  });
 };
+
+export const updateSelectedAsset = ( prop ) => async (dispatch) => {
+  dispatch({
+    type: 'UPDATE_SELECTED_ASSET',
+    payload: prop
+  });
+}
