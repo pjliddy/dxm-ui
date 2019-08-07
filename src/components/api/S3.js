@@ -42,7 +42,7 @@ export const uploadAsset = async (uploadUrl, file) => {
   }
 }
 
-export const updateAssetFile = async (url, fileObj) => {
+export const updateAssetFile = (url, fileObj) => {
   const fileData = {
     name: fileObj.name,
     size: fileObj.size,
@@ -51,4 +51,6 @@ export const updateAssetFile = async (url, fileObj) => {
 
   updateSelectedAsset({ 'name': 'file', 'value': fileData });
   updateSelectedAsset({ 'name': 'url', 'value': url });
+
+  return;
 }

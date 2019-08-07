@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { newAsset, createAsset, deselectAsset, updateSelectedAsset } from '../../actions';
 
-import { getPresignedUrl, uploadAsset } from '../api/S3';
+import { getPresignedUrl, uploadAsset /*, updateAssetFile */ } from '../api/S3';
 import AssetForm from '../forms/AssetForm';
 
 class AssetCreate extends React.Component {
@@ -35,6 +35,8 @@ class AssetCreate extends React.Component {
 
       // what if upload fails?
 
+      // updateAssetFile(url, fileObj);
+
       // MOVE TO LIB FILE
       const fileData = {
         name: fileObj.name,
@@ -45,6 +47,8 @@ class AssetCreate extends React.Component {
       this.props.updateSelectedAsset({ 'name': 'file', 'value': fileData });
       this.props.updateSelectedAsset({ 'name': 'url', 'value': url });
       // END MOVE TO LIB FILE
+
+      // console.log(this.props.asset);
 
       // on success, create asset node in db
       await this.props.createAsset(this.props.asset);

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchAsset, updateAsset, deselectAsset, updateSelectedAsset } from '../../actions';
 
-import { getPresignedUrl, uploadAsset } from '../api/S3';
+import { getPresignedUrl, uploadAsset /*, updateAssetFile */ } from '../api/S3';
 import AssetForm from '../forms/AssetForm';
 
 class AssetEdit extends React.Component {
@@ -37,6 +37,8 @@ class AssetEdit extends React.Component {
       const url = await uploadAsset(uploadURL, fileObj);
       // what if upload fails?
 
+      // updateAssetFile(url, fileObj);
+
       // MOVE TO LIB FILE
       const fileData = {
         name: fileObj.name,
@@ -47,6 +49,8 @@ class AssetEdit extends React.Component {
       this.props.updateSelectedAsset({ 'name': 'file', 'value': fileData });
       this.props.updateSelectedAsset({ 'name': 'url', 'value': url });
       // END MOVE TO LIB FILE
+
+      // console.log(this.props.asset);
 
       // on success, create asset node in db
       await this.props.updateAsset(this.props.asset);
@@ -69,7 +73,7 @@ class AssetEdit extends React.Component {
       <div>
         <h1>Edit Asset</h1>
 
-        {/* make loader component  */}
+        {/* make loader component */}
         <div className={loaderStyles}>
           <div className="ui text loader">Working...</div>
         </div>
