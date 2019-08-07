@@ -1,9 +1,9 @@
-const Api = require('../api/Api');
-const axios = require('axios');
-const { ASSET_RESOURCE, ASSET_REPO_BUCKET, ASSET_REPO_PATH } = require('../../config');
-const { updateSelectedAsset } = require('../../actions');
+import Api from '../api/Api';
+import axios from 'axios';
+import { ASSET_RESOURCE, ASSET_REPO_BUCKET, ASSET_REPO_PATH } from '../../config';
+import { updateSelectedAsset } from '../../actions';
 
-const getPresignedUrl = async (file) => {
+export const getPresignedUrl = async (file) => {
   const s3Params = {
     'Bucket': ASSET_REPO_BUCKET,
     'Key':  `${ASSET_REPO_PATH}/${file.name}`,
@@ -16,7 +16,7 @@ const getPresignedUrl = async (file) => {
   return response;
 }
 
-const uploadAsset = async (uploadUrl, file) => {
+export const uploadAsset = async (uploadUrl, file) => {
   try {
     // post file to presigned URL
     const config = {
@@ -42,7 +42,7 @@ const uploadAsset = async (uploadUrl, file) => {
   }
 }
 
-const updateAssetFile = async (url, fileObj) => {
+export const updateAssetFile = async (url, fileObj) => {
   const fileData = {
     name: fileObj.name,
     size: fileObj.size,
@@ -52,9 +52,3 @@ const updateAssetFile = async (url, fileObj) => {
   updateSelectedAsset({ 'name': 'file', 'value': fileData });
   updateSelectedAsset({ 'name': 'url', 'value': url });
 }
-
-module.exports = {
-  getPresignedUrl,
-  uploadAsset,
-  updateAssetFile
-};
