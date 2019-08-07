@@ -1,9 +1,9 @@
 import React from 'react';
 
 import Field from './Field';
-import Button from './Button';
-import ShowJsonButton from './ShowJsonButton';
-import BrowserPreviewButton from './BrowserPreviewButton';
+import Button from '../buttons/Button';
+import ShowJsonButton from '../buttons/ShowJsonButton';
+import BrowserPreviewButton from '../buttons/BrowserPreviewButton';
 
 class ContentForm extends React.Component {
   onFormCancel = (event) => {
@@ -94,17 +94,17 @@ class ContentForm extends React.Component {
         <div>
           <Button buttonType="secondary"
                   iconType="close"
-                  tooltipText="Cancel New Content"
-                  tooltipPosition="top right"
+                  tooltipText="Cancel"
+                  tooltipPosition="top center"
                   onClick={this.onFormCancel}>Cancel</Button>
           <ShowJsonButton node={content}
-                    hidden={isNew}></ShowJsonButton>
+                          hidden={isNew}></ShowJsonButton>
           <BrowserPreviewButton node={content}
-                          hidden={isNew}></BrowserPreviewButton>
+                                hidden={isNew}></BrowserPreviewButton>
           <Button buttonType="primary"
                   iconType="save"
                   tooltipText="Save Content"
-                  tooltipPosition="top right"
+                  tooltipPosition="top center"
                   onClick={this.onFormSubmit}>Save</Button>
         </div>
       </div>

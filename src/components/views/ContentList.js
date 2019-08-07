@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchContents, deleteContent } from '../../actions';
 
-import Button from '../Button';
-import ShowJsonButton from '../ShowJsonButton';
-import BrowserPreviewButton from '../BrowserPreviewButton';
+import Button from '../buttons/Button';
+import ShowJsonButton from '../buttons/ShowJsonButton';
+import BrowserPreviewButton from '../buttons/BrowserPreviewButton';
 
 class ContentList extends React.Component {
   componentDidMount() {
@@ -65,7 +65,7 @@ class ContentList extends React.Component {
                       buttonType="primary"
                       iconType="plus"
                       tooltipText="New Content"
-                      tooltipPosition="top right">
+                      tooltipPosition="top center">
                 New Content
               </Button>
             </div>

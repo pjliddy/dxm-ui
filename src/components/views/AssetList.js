@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchAssets, deleteAsset } from '../../actions';
 
-import Button from '../Button';
-import ShowJsonButton from '../ShowJsonButton';
+import Button from '../buttons/Button';
+import ShowJsonButton from '../buttons/ShowJsonButton';
 
 class AssetList extends React.Component {
   componentDidMount() {
@@ -36,7 +36,7 @@ class AssetList extends React.Component {
             <Button buttonType="icon"
                     iconType="trash alternate outline"
                     tooltipText="Delete Asset"
-                    tooltipPosition="top right"
+                    tooltipPosition="top center"
                     onClick={() => this.props.deleteAsset(asset.id)}>
               Delete Asset
             </Button>

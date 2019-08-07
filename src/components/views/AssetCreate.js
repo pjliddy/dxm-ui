@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { newAsset, createAsset, deselectAsset, updateSelectedAsset } from '../../actions';
 
 import { getPresignedUrl, uploadAsset } from '../api/S3';
-import AssetForm from '../AssetForm';
+import AssetForm from '../forms/AssetForm';
 
 class AssetCreate extends React.Component {
   state = {

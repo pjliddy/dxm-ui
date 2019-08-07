@@ -1,7 +1,7 @@
 import React from 'react';
 import Field from './Field';
-import Button from './Button';
-import ShowJsonButton from './ShowJsonButton';
+import Button from '../buttons/Button';
+import ShowJsonButton from '../buttons/ShowJsonButton';
 
 class AssetForm extends React.Component {
   state = {
@@ -40,6 +40,7 @@ class AssetForm extends React.Component {
 
     /*
       create upload component in React?
+      make file input component?
       disable upload button during upload?
     */
 
@@ -74,7 +75,6 @@ class AssetForm extends React.Component {
                required={true}
                onChange={this.handleChange}></Field>
 
-        // make file input component
         <div className="field">
           <label htmlFor="file">File</label>
           <input name="file"
@@ -114,15 +114,15 @@ class AssetForm extends React.Component {
         <div>
           <Button buttonType="secondary"
                   iconType="close"
-                  tooltipText="Cancel New Asset"
-                  tooltipPosition="top right"
+                  tooltipText="Cancel"
+                  tooltipPosition="top center"
                   onClick={this.onFormCancel}>Cancel</Button>
           <ShowJsonButton node={asset}
                     hidden={isNew}></ShowJsonButton>
           <Button buttonType="primary"
                   iconType="save"
                   tooltipText="Save Asset"
-                  tooltipPosition="top right"
+                  tooltipPosition="top center"
                   onClick={this.onFormSubmit}>Save</Button>
         </div>
       </div>

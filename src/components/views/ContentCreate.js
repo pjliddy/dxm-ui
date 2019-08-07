@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { newContent, createContent, deselectContent, updateSelectedContent } from '../../actions';
 
-import ContentForm from '../ContentForm';
+import ContentForm from '../forms/ContentForm';
 
 class ContentCreate extends React.Component {
   state = {

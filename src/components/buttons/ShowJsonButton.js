@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './Button';
-import { CONTENT_LAKE_URL }  from '../config';
+import { CONTENT_LAKE_URL }  from '../../config';
 
 const ShowJsonButton = ({ node, type, hidden, children }) => {
   const onShowJsonButton = (node) => {
@@ -14,8 +14,8 @@ const ShowJsonButton = ({ node, type, hidden, children }) => {
   return (
     <Button buttonType={type}
             iconType="code"
-            tooltipText="ShowJsonButton"
-            tooltipPosition="top right"
+            tooltipText="Show JSON"
+            tooltipPosition="top center"
             onClick={() => onShowJsonButton(node)}>
       Show JSON
     </Button>

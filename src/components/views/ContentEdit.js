@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchContent, updateContent, deselectContent, updateSelectedContent } from '../../actions';
 
-import ContentForm from '../ContentForm';
+import ContentForm from '../forms/ContentForm';
 
 // research containers for wrapping forms, etc.
 

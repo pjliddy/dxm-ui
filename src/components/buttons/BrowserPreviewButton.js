@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './Button';
-import { SITE_REPO_URL }  from '../config';
+import { SITE_REPO_URL }  from '../../config';
 
 const BrowserPreviewButton = ({node, type, hidden, children}) => {
   const onPreview = (node) => {
@@ -15,7 +15,7 @@ const BrowserPreviewButton = ({node, type, hidden, children}) => {
     <Button buttonType={type}
             iconType="desktop"
             tooltipText="Preview in Browser"
-            tooltipPosition="top right"
+            tooltipPosition="top center"
             onClick={() => onPreview(node)}>
       Preview in Browser
     </Button>
