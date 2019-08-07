@@ -1,8 +1,9 @@
 import React from 'react';
 
-import ShowJson from './ShowJson';
-import BrowserPreview from './BrowserPreview';
 import Field from './Field';
+import Button from './Button';
+import ShowJsonButton from './ShowJsonButton';
+import BrowserPreviewButton from './BrowserPreviewButton';
 
 class ContentForm extends React.Component {
   onFormCancel = (event) => {
@@ -35,8 +36,7 @@ class ContentForm extends React.Component {
                value={content.id}
                hidden={isNew}
                disabled={true}
-               readOnly={true}>
-        </Field>
+               readOnly={true}></Field>
 
         <Field type="select"
                name="dataType"
@@ -55,8 +55,7 @@ class ContentForm extends React.Component {
                placeholder="title"
                value={content.title}
                required={true}
-               onChange={this.handleChange}>
-        </Field>
+               onChange={this.handleChange}></Field>
 
         <Field type="text"
                name="subTitle"
@@ -64,8 +63,7 @@ class ContentForm extends React.Component {
                placeholder="subtitle"
                value={content.subTitle}
                required={true}
-               onChange={this.handleChange}>
-        </Field>
+               onChange={this.handleChange}></Field>
 
         <Field type="textarea"
                name="copyText"
@@ -73,8 +71,7 @@ class ContentForm extends React.Component {
                placeholder="copy text"
                value={content.copyText}
                required={true}
-               onChange={this.handleChange}>
-        </Field>
+               onChange={this.handleChange}></Field>
 
         <Field type="text"
                name="dateCreated"
@@ -83,8 +80,7 @@ class ContentForm extends React.Component {
                value={content.dateCreated}
                hidden={isNew}
                disabled={true}
-               readOnly={true}>
-        </Field>
+               readOnly={true}></Field>
 
         <Field type="text"
                name="dateModified"
@@ -93,30 +89,23 @@ class ContentForm extends React.Component {
                value={content.dateModified}
                hidden={isNew}
                disabled={true}
-               readOnly={true}>
-        </Field>
+               readOnly={true}></Field>
 
         <div>
-          <button className="ui secondary basic button"
-                  title="Cancel"
-                  onClick={this.onFormCancel}>
-            <i className="close icon"></i>
-            Cancel
-          </button>
-          <ShowJson node={content}
-                    hidden={isNew}>
-            Show JSON
-          </ShowJson>
-          <BrowserPreview node={content}
-                          hidden={isNew}>
-            Preview
-          </BrowserPreview>
-          <button className="ui primary button"
-                  title="Save"
-                  onClick={this.onFormSubmit}>
-            <i className="save icon"></i>
-            Save
-          </button>
+          <Button buttonType="secondary"
+                  iconType="close"
+                  tooltipText="Cancel New Content"
+                  tooltipPosition="top right"
+                  onClick={this.onFormCancel}>Cancel</Button>
+          <ShowJsonButton node={content}
+                    hidden={isNew}></ShowJsonButton>
+          <BrowserPreviewButton node={content}
+                          hidden={isNew}></BrowserPreviewButton>
+          <Button buttonType="primary"
+                  iconType="save"
+                  tooltipText="Save Content"
+                  tooltipPosition="top right"
+                  onClick={this.onFormSubmit}>Save</Button>
         </div>
       </div>
     );

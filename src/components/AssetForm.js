@@ -1,6 +1,7 @@
 import React from 'react';
 import Field from './Field';
-import ShowJson from './ShowJson';
+import Button from './Button';
+import ShowJsonButton from './ShowJsonButton';
 
 class AssetForm extends React.Component {
   state = {
@@ -53,8 +54,7 @@ class AssetForm extends React.Component {
                value={asset.id}
                hidden={isNew}
                disabled={true}
-               readOnly={true}>
-        </Field>
+               readOnly={true}></Field>
 
         <Field type="select"
                name="dataType"
@@ -72,10 +72,9 @@ class AssetForm extends React.Component {
                placeholder="title"
                value={asset.title}
                required={true}
-               onChange={this.handleChange}>
-        </Field>
+               onChange={this.handleChange}></Field>
 
-
+        // make file input component
         <div className="field">
           <label htmlFor="file">File</label>
           <input name="file"
@@ -101,8 +100,7 @@ class AssetForm extends React.Component {
                value={asset.dateCreated}
                hidden={isNew}
                disabled={true}
-               readOnly={true}>
-        </Field>
+               readOnly={true}></Field>
 
         <Field type="text"
                name="dateModified"
@@ -111,26 +109,21 @@ class AssetForm extends React.Component {
                value={asset.dateModified}
                hidden={isNew}
                disabled={true}
-               readOnly={true}>
-        </Field>
+               readOnly={true}></Field>
 
         <div>
-          <button className="ui secondary basic button"
-                  title="Cancel"
-                  onClick={this.onFormCancel}>
-            <i className="close icon"></i>
-            Cancel
-          </button>
-          <ShowJson node={asset}
-                    hidden={isNew}>
-            Show JSON
-          </ShowJson>
-          <button className="ui primary button"
-                  title="Save"
-                  onClick={this.onFormSubmit}>
-            <i className="save icon"></i>
-            Save
-          </button>
+          <Button buttonType="secondary"
+                  iconType="close"
+                  tooltipText="Cancel New Asset"
+                  tooltipPosition="top right"
+                  onClick={this.onFormCancel}>Cancel</Button>
+          <ShowJsonButton node={asset}
+                    hidden={isNew}></ShowJsonButton>
+          <Button buttonType="primary"
+                  iconType="save"
+                  tooltipText="Save Asset"
+                  tooltipPosition="top right"
+                  onClick={this.onFormSubmit}>Save</Button>
         </div>
       </div>
     );

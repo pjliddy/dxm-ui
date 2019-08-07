@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchAssets } from '../../actions';
+import { fetchAssets, deleteAsset } from '../../actions';
 
-import ButtonDelete from '../ButtonDelete';
-import ShowJson from '../ShowJson';
+import Button from '../Button';
+import ShowJsonButton from '../ShowJsonButton';
 
 class AssetList extends React.Component {
   componentDidMount() {
@@ -32,8 +32,14 @@ class AssetList extends React.Component {
             </div>
           </div>
           <div className="ui icon buttons right floated content">
-            <ShowJson node={asset} type="icon"/>
-            <ButtonDelete node={asset} type="icon"/>
+            <ShowJsonButton node={asset} type="icon"/>
+            <Button buttonType="icon"
+                    iconType="trash alternate outline"
+                    tooltipText="Delete Asset"
+                    tooltipPosition="top right"
+                    onClick={() => this.props.deleteAsset(asset.id)}>
+              Delete Asset
+            </Button>
           </div>
         </div>
       );
@@ -45,11 +51,21 @@ class AssetList extends React.Component {
 
     return (
       <div>
-        <Link to="/assets/new" className="ui right floated primary button">
-          <i className="plus sqaure icon"></i>
-          New Asset
-        </Link>
-        <h1>Asset List</h1>
+        <div className="ui two column grid">
+          <div className="row">
+            <div className="left floated column">
+            <h1>Asset List</h1>
+            </div>
+            <div className="right floated right aligned column">
+              <Button linkTo="/assets/new"
+                      buttonType="primary"
+                      iconType="plus">
+                New Asset
+              </Button>
+            </div>
+          </div>
+        </div>
+
         {/*
           <div className={loaderStyles}>
             <div className="ui text loader">Working...</div>
@@ -67,6 +83,6 @@ const mapStateToProps = (state) => {
   return { assets: state.assets };
 }
 
-const mapDispatchToProps = { fetchAssets }
+const mapDispatchToProps = { fetchAssets, deleteAsset }
 
 export default connect(mapStateToProps, mapDispatchToProps) (AssetList);

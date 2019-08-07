@@ -36,8 +36,6 @@ class AssetCreate extends React.Component {
       // what if upload fails?
 
       // MOVE TO LIB FILE
-
-      // update state
       const fileData = {
         name: fileObj.name,
         size: fileObj.size,
@@ -47,7 +45,6 @@ class AssetCreate extends React.Component {
       this.props.updateSelectedAsset({ 'name': 'file', 'value': fileData });
       this.props.updateSelectedAsset({ 'name': 'url', 'value': url });
       // END MOVE TO LIB FILE
-
 
       // on success, create asset node in db
       await this.props.createAsset(this.props.asset);

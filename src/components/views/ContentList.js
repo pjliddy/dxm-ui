@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchContents } from '../../actions';
+import { fetchContents, deleteContent } from '../../actions';
 
-import ButtonDelete from '../ButtonDelete';
-import ShowJson from '../ShowJson';
-import BrowserPreview from '../BrowserPreview';
+import Button from '../Button';
+import ShowJsonButton from '../ShowJsonButton';
+import BrowserPreviewButton from '../BrowserPreviewButton';
 
 class ContentList extends React.Component {
   componentDidMount() {
@@ -34,9 +34,15 @@ class ContentList extends React.Component {
           </td>
           <td className="collapsing">
             <div className="ui icon buttons">
-              <ShowJson node={content} type="icon"/>
-              <BrowserPreview node={content} type="icon"/>
-              <ButtonDelete node={content} type="icon"/>
+              <ShowJsonButton node={content} type="icon"/>
+              <BrowserPreviewButton node={content} type="icon"/>
+              <Button buttonType="icon"
+                      iconType="trash alternate outline"
+                      tooltipText="Delete Content"
+                      tooltipPosition="top right"
+                      onClick={() => this.props.deleteContent(content.id)}>
+                Delete Content
+              </Button>
             </div>
           </td>
         </tr>
@@ -49,16 +55,29 @@ class ContentList extends React.Component {
 
     return (
       <div>
-        <Link to="/contents/new" className="ui right floated primary button">
-          <i className="plus sqaure icon"></i>
-          New Content
-        </Link>
-        <h1>Content List</h1>
+        <div className="ui two column grid">
+          <div className="row">
+            <div className="left floated column">
+              <h1>Content List</h1>
+            </div>
+            <div className="right floated right aligned column">
+              <Button linkTo="/contents/new"
+                      buttonType="primary"
+                      iconType="plus"
+                      tooltipText="New Content"
+                      tooltipPosition="top right">
+                New Content
+              </Button>
+            </div>
+          </div>
+        </div>
+
         {/*
           <div className={loaderStyles}>
             <div className="ui text loader">Working...</div>
           </div>
         */}
+
         <table className="ui celled striped compact table">
           <thead>
             <tr>
@@ -82,7 +101,7 @@ const mapStateToProps = (state) => {
   return { contents: state.contents };
 }
 
-const mapDispatchToProps = { fetchContents }
+const mapDispatchToProps = { fetchContents, deleteContent };
 
 
 export default connect(mapStateToProps, mapDispatchToProps) (ContentList);
