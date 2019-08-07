@@ -1,4 +1,7 @@
 const API_BASE_URL = require('../../config').API_BASE_URL
+// import { API_BASE_URL }  from '../../config';
+
+// convert to class?
 
 // POST includes params for getSignedUrl for S3 authentication
 const create = (body, resource, params) => {

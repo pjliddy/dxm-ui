@@ -3,18 +3,13 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchAsset, updateAsset, deselectAsset, updateSelectedAsset } from '../../actions';
 
-import axios from 'axios';
-
-import Api from '../api/Api';
+import { getPresignedUrl, uploadAsset } from '../api/S3';
 import AssetForm from '../AssetForm';
-
-import { ASSET_RESOURCE, ASSET_REPO_BUCKET, ASSET_REPO_PATH}  from '../../config';
 
 class AssetEdit extends React.Component {
   state = {
     redirect: false,
-    isLoading: false,
-    selectedFile: ''
+    isLoading: false
   };
 
   componentDidMount() {
@@ -34,62 +29,32 @@ class AssetEdit extends React.Component {
   */
 
   updateAsset = async (fileObj) => {
-    this.setState({ isLoading: true });
-
-    const fileData = {
-      name: fileObj.name,
-      size: fileObj.size,
-      type: fileObj.type
-    };
-
-    // Only execute if file object has changed???
-
-    // get presigned URL from assets Api
-    const { uploadURL } = await this.getPresignedUrl(fileObj);
-    const url = await this.uploadAsset(uploadURL, fileObj);
-
-    this.props.updateSelectedAsset({ 'name': 'file', 'value': fileData });
-    this.props.updateSelectedAsset({ 'name': 'url', 'value': url });
-
-    await this.props.updateAsset(this.props.asset);
-
-    this.setState({
-      isLoading: false,
-      redirect: true
-    });
-  }
-
-  getPresignedUrl = async (file) => {
-    const s3Params = {
-      'Bucket': ASSET_REPO_BUCKET,
-      'Key':  `${ASSET_REPO_PATH}/${file.name}`,
-      'ACL': 'public-read',
-      'ContentType': file.type
-    };
-    const urlParams = { getSignedUrl: true };
-    const response = await Api.create(s3Params, ASSET_RESOURCE, urlParams);
-
-    return response;
-  }
-
-  // make into shared component, along with getPresignedUrl
-  uploadAsset = async (uploadUrl, file) => {
     try {
-      // post file to presigned URL
-      const config = {
-        headers: {
-          'ACL': 'public-read',
-          'Content-Type': file.type
-        },
-        onUploadProgress: progressEvent => {
-          const progress = Number.parseInt(progressEvent.loaded / file.size * 100, 10);
-          console.log(`Progress: ${progress}%`);
-        }
-      }
+      this.setState({ isLoading: true });
 
-      const response = await axios.put(uploadUrl, file, config);
+      // get presigned URL from assets Api
+      const { uploadURL } = await getPresignedUrl(fileObj);
+      const url = await uploadAsset(uploadURL, fileObj);
+      // what if upload fails?
 
-      return response.config.url.split('?')[0];
+      // MOVE TO LIB FILE
+      const fileData = {
+        name: fileObj.name,
+        size: fileObj.size,
+        type: fileObj.type
+      };
+
+      this.props.updateSelectedAsset({ 'name': 'file', 'value': fileData });
+      this.props.updateSelectedAsset({ 'name': 'url', 'value': url });
+      // END MOVE TO LIB FILE
+
+      // on success, create asset node in db
+      await this.props.updateAsset(this.props.asset);
+
+      this.setState({
+        isLoading: false,
+        redirect: true
+      });
     } catch (error) {
       return error;
     }
