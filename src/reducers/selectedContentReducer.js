@@ -1,23 +1,13 @@
-// move to import
+import { INTIAL_CONTENT_STATE } from '../config';
 
-const initialContentState = {
-  id: '',
-  dataType: 'content',
-  title: '',
-  subTitle: '',
-  copyText: '',
-  dateCreated: '',
-  dateModified: ''
-};
-
-export default (state = initialContentState, action) => {
+export default (state = INTIAL_CONTENT_STATE, action) => {
   switch (action.type) {
     case 'FETCH_CONTENT':
       return action.payload;
     case 'NEW_CONTENT':
       return action.payload;
     case 'DESELECT_CONTENT':
-      return initialContentState;
+      return INTIAL_CONTENT_STATE;
     case 'UPDATE_SELECTED_CONTENT':
       return { ...state, [action.payload.name]: action.payload.value }
     default:

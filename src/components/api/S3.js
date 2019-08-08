@@ -1,12 +1,12 @@
 import { create } from '../api/Api';
 import axios from 'axios';
-import { ASSET_RESOURCE, ASSET_REPO_BUCKET, ASSET_REPO_PATH } from '../../config';
+import { ASSET_RESOURCE, ASSET_REPO_BUCKET } from '../../config';
 import { updateSelectedAsset } from '../../actions';
 
 export const getPresignedUrl = async (file) => {
   const s3Params = {
     'Bucket': ASSET_REPO_BUCKET,
-    'Key':  `${ASSET_REPO_PATH}/${file.name}`,
+    'Key':  `${ASSET_RESOURCE}/${file.name}`,
     'ACL': 'public-read',
     'ContentType': file.type
   };
