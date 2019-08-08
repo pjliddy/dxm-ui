@@ -1,9 +1,9 @@
-import Api from '../components/api/Api';
+import { read } from '../components/api/Api';
 import { ASSET_RESOURCE }  from '../config';
 import { DESELECT_ASSET, FETCH_ASSET, NEW_ASSET, UPDATE_SELECTED_ASSET } from './types';
 
 export const fetchAsset = (id) => async (dispatch) => {
-  const response = await Api.read(id, ASSET_RESOURCE);
+  const response = await read(id, ASSET_RESOURCE);
 
   dispatch({
     type: FETCH_ASSET,

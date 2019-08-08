@@ -1,9 +1,9 @@
-import Api from '../components/api/Api';
+import { read } from '../components/api/Api';
 import { CONTENT_RESOURCE }  from '../config';
 import { DESELECT_CONTENT, FETCH_CONTENT, NEW_CONTENT, UPDATE_SELECTED_CONTENT } from './types';
 
 export const fetchContent = (id) => async (dispatch) => {
-  const response = await Api.read(id, CONTENT_RESOURCE);
+  const response = await read(id, CONTENT_RESOURCE);
 
   dispatch({
     type: FETCH_CONTENT,

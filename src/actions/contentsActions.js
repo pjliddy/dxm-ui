@@ -1,9 +1,9 @@
-import Api from '../components/api/Api';
+import { index, create, update, destroy } from '../components/api/Api';
 import { CONTENT_RESOURCE }  from '../config';
 import { CREATE_CONTENT, DELETE_CONTENT, FETCH_CONTENTS, UPDATE_CONTENT } from './types';
 
 export const fetchContents = () => async (dispatch) => {
-  const response = await Api.index(CONTENT_RESOURCE);
+  const response = await index(CONTENT_RESOURCE);
 
   dispatch({
     type: FETCH_CONTENTS,
@@ -12,7 +12,7 @@ export const fetchContents = () => async (dispatch) => {
 };
 
 export const createContent = (content) => async (dispatch) => {
-  const response = await Api.create(content, CONTENT_RESOURCE);
+  const response = await create(content, CONTENT_RESOURCE);
 
   dispatch({
     type: CREATE_CONTENT,
@@ -22,7 +22,7 @@ export const createContent = (content) => async (dispatch) => {
 
 export const updateContent = () => async (dispatch, getState) => {
   const content = getState().selectedContent;
-  const response = await Api.update(content, CONTENT_RESOURCE);
+  const response = await update(content, CONTENT_RESOURCE);
 
   dispatch({
     type: UPDATE_CONTENT,
@@ -33,7 +33,7 @@ export const updateContent = () => async (dispatch, getState) => {
 // have API delete return id as confirmation?
 
 export const deleteContent = (id) => async (dispatch) => {
-  await Api.destroy(id, CONTENT_RESOURCE);
+  await destroy(id, CONTENT_RESOURCE);
 
   dispatch({
     type: DELETE_CONTENT,

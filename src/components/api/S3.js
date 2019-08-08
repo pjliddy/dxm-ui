@@ -1,4 +1,4 @@
-import Api from '../api/Api';
+import { create } from '../api/Api';
 import axios from 'axios';
 import { ASSET_RESOURCE, ASSET_REPO_BUCKET, ASSET_REPO_PATH } from '../../config';
 import { updateSelectedAsset } from '../../actions';
@@ -11,7 +11,7 @@ export const getPresignedUrl = async (file) => {
     'ContentType': file.type
   };
   const urlParams = { getSignedUrl: true };
-  const response = await Api.create(s3Params, ASSET_RESOURCE, urlParams);
+  const response = await create(s3Params, ASSET_RESOURCE, urlParams);
 
   return response;
 }
