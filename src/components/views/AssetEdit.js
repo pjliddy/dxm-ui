@@ -9,8 +9,7 @@ import IsLoading from '../IsLoading';
 
 class AssetEdit extends React.Component {
   state = {
-    redirect: false,
-    isLoading: false
+    redirect: false
   };
 
   componentDidMount() {
@@ -29,13 +28,12 @@ class AssetEdit extends React.Component {
     Need to delete existing asset image if updated
   */
 
-  updateAsset = async (fileObj) => {
+  onFormSubmit = async (fileObj) => {
     try {
-      this.setState({ isLoading: true });
-
       // get presigned URL from assets Api
       const { uploadURL } = await getPresignedUrl(fileObj);
       const url = await uploadAsset(uploadURL, fileObj);
+
       // what if upload fails?
 
       // updateAssetFile(url, fileObj);
@@ -51,13 +49,11 @@ class AssetEdit extends React.Component {
       this.props.updateSelectedAsset({ 'name': 'url', 'value': url });
       // END MOVE TO LIB FILE
 
-      // console.log(this.props.asset);
 
       // on success, create asset node in db
       await this.props.updateAsset(this.props.asset);
 
       this.setState({
-        isLoading: false,
         redirect: true
       });
     } catch (error) {
@@ -73,16 +69,19 @@ class AssetEdit extends React.Component {
         <h1>Edit Asset</h1>
         <AssetForm asset={this.props.asset}
                    onFormUpdate={this.props.updateSelectedAsset}
-                   onFormSubmit={this.updateAsset}
+                   onFormSubmit={this.onFormSubmit}
                    onFormCancel={this.onFormCancel}/>
-         <IsLoading isLoading={this.state.isLoading} />
+         <IsLoading isLoading={this.props.isLoading} />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { asset: state.selectedAsset };
+  return {
+    asset: state.selectedAsset,
+    isLoading: state.metadata.isLoading
+  };
 }
 
 const mapDispatchToProps = { fetchAsset, updateAsset, deselectAsset, updateSelectedAsset };

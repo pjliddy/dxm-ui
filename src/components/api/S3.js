@@ -1,4 +1,4 @@
-import { create } from '../api/Api';
+import * as api from '../api/Api';
 import axios from 'axios';
 import { ASSET_RESOURCE, ASSET_REPO_BUCKET } from '../../config';
 import { updateSelectedAsset } from '../../actions';
@@ -11,7 +11,7 @@ export const getPresignedUrl = async (file) => {
     'ContentType': file.type
   };
   const urlParams = { getSignedUrl: true };
-  const response = await create(s3Params, ASSET_RESOURCE, urlParams);
+  const response = await api.create(s3Params, ASSET_RESOURCE, urlParams);
 
   return response;
 }
@@ -42,15 +42,14 @@ export const uploadAsset = async (uploadUrl, file) => {
   }
 }
 
-export const updateAssetFile = (url, fileObj) => {
+// make this an action
+export const updateAssetFile = (url, fileObj) => dispatch => {
   const fileData = {
     name: fileObj.name,
     size: fileObj.size,
     type: fileObj.type
   };
+  dispatch(updateSelectedAsset({ 'name': 'file', 'value': fileData }));
+  dispatch(updateSelectedAsset({ 'name': 'url', 'value': url }));
 
-  updateSelectedAsset({ 'name': 'file', 'value': fileData });
-  updateSelectedAsset({ 'name': 'url', 'value': url });
-
-  return;
 }

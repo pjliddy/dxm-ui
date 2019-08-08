@@ -1,15 +1,13 @@
 import { START_LOADING, STOP_LOADING } from './types';
 
-export const startLoading = () => async (dispatch) => {
-  dispatch({
-    type: START_LOADING,
-    payload: { isLoading: true }
-  });
+export const startLoading = () => {
+  return {
+    type: START_LOADING
+  };
 };
 
-export const stopLoading = () => async (dispatch) => {
-  dispatch({
-    type: START_LOADING,
-    payload: { isLoading: true }
-  });
+export const stopLoading = () => {
+  return {
+    type: STOP_LOADING
+  };
 };

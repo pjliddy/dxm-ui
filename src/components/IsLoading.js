@@ -1,6 +1,8 @@
 import React from 'react';
 
-const IsLoading = ({isLoading}) => {
+const IsLoading = props => {
+  const { isLoading } = props;
+
   const loaderStyles = `ui ${isLoading ? 'active' : ''} inverted dimmer`;
 
   if (!isLoading) return null;

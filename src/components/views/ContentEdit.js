@@ -11,7 +11,6 @@ import IsLoading from '../IsLoading';
 class ContentEdit extends React.Component {
   state = {
     redirect: false,
-    isLoading: false
   };
 
   componentDidMount() {
@@ -27,12 +26,9 @@ class ContentEdit extends React.Component {
   }
 
   updateContent = async () => {
-    this.setState({ isLoading: true });
-
     await this.props.updateContent();
 
     this.setState({
-      isLoading: false,
       redirect: true
     });
   }
@@ -48,14 +44,17 @@ class ContentEdit extends React.Component {
                      onFormUpdate={this.props.updateSelectedContent}
                      onFormSubmit={this.updateContent}
                      onFormCancel={this.onFormCancel}/>
-         <IsLoading isLoading={this.state.isLoading} />
+         <IsLoading isLoading={this.props.isLoading} />
       </div>
     );
   }
 };
 
 const mapStateToProps = (state) => {
-  return { content: state.selectedContent };
+  return {
+    content: state.selectedContent,
+    isLoading: state.metadata.isLoading
+  };
 }
 
 const mapDispatchToProps = { fetchContent, updateContent, deselectContent, updateSelectedContent };

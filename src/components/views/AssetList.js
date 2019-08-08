@@ -5,6 +5,7 @@ import { fetchAssets, deleteAsset } from '../../actions';
 
 import Button from '../buttons/Button';
 import ShowJsonButton from '../buttons/ShowJsonButton';
+import IsLoading from '../IsLoading';
 
 class AssetList extends React.Component {
   componentDidMount() {
@@ -47,8 +48,6 @@ class AssetList extends React.Component {
   }
 
   render() {
-    // const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
-
     return (
       <div>
         <div className="ui two column grid">
@@ -66,22 +65,21 @@ class AssetList extends React.Component {
           </div>
         </div>
 
-        {/*
-          <div className={loaderStyles}>
-            <div className="ui text loader">Working...</div>
-          </div>
-        */}
-        
         <div className="ui divided relaxed list">
           {this.renderList()}
         </div>
+
+        <IsLoading isLoading={this.props.isLoading} />
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  return { assets: state.assets };
+  return {
+    assets: state.assets,
+    isLoading: state.metadata.isLoading
+  };
 }
 
 const mapDispatchToProps = { fetchAssets, deleteAsset }

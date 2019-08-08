@@ -6,6 +6,7 @@ import { fetchContents, deleteContent } from '../../actions';
 import Button from '../buttons/Button';
 import ShowJsonButton from '../buttons/ShowJsonButton';
 import BrowserPreviewButton from '../buttons/BrowserPreviewButton';
+import IsLoading from '../IsLoading';
 
 class ContentList extends React.Component {
   componentDidMount() {
@@ -50,8 +51,6 @@ class ContentList extends React.Component {
   }
 
   render() {
-    // const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
-
     return (
       <div>
         <div className="ui two column grid">
@@ -71,12 +70,6 @@ class ContentList extends React.Component {
           </div>
         </div>
 
-        {/*
-          <div className={loaderStyles}>
-            <div className="ui text loader">Working...</div>
-          </div>
-        */}
-
         <table className="ui celled striped compact table">
           <thead>
             <tr>
@@ -91,13 +84,18 @@ class ContentList extends React.Component {
             {this.renderList()}
           </tbody>
         </table>
+
+        <IsLoading isLoading={this.props.isLoading} />
       </div>
     );
   }
 };
 
 const mapStateToProps = (state) => {
-  return { contents: state.contents };
+  return {
+    contents: state.contents,
+    isLoading: state.metadata.isLoading
+  };
 }
 
 const mapDispatchToProps = { fetchContents, deleteContent };

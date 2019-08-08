@@ -46,14 +46,17 @@ class ContentCreate extends React.Component {
                      onFormUpdate={this.props.updateSelectedContent}
                      onFormSubmit={this.createContent}
                      onFormCancel={this.onFormCancel}/>
-         <IsLoading isLoading={this.state.isLoading} />
+         <IsLoading isLoading={this.props.isLoading} />
        </div>
     );
   }
 };
 
 const mapStateToProps = (state) => {
-  return { content: state.selectedContent };
+  return {
+    content: state.selectedContent,
+    isLoading: state.metadata.isLoading
+  };
 }
 
 const mapDispatchToProps = { newContent, createContent, deselectContent, updateSelectedContent };
