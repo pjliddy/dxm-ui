@@ -1,14 +1,15 @@
 import { INTIAL_CONTENT_STATE } from '../config';
+import { DESELECT_CONTENT, FETCH_CONTENT, NEW_CONTENT, UPDATE_SELECTED_CONTENT } from '../actions/types';
 
 export default (state = INTIAL_CONTENT_STATE, action) => {
   switch (action.type) {
-    case 'FETCH_CONTENT':
+    case FETCH_CONTENT:
       return action.payload;
-    case 'NEW_CONTENT':
+    case NEW_CONTENT:
       return action.payload;
-    case 'DESELECT_CONTENT':
+    case DESELECT_CONTENT:
       return INTIAL_CONTENT_STATE;
-    case 'UPDATE_SELECTED_CONTENT':
+    case UPDATE_SELECTED_CONTENT:
       return { ...state, [action.payload.name]: action.payload.value }
     default:
       return state;

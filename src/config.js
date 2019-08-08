@@ -7,6 +7,9 @@ export const CONTENT_RESOURCE = 'nodes';
 export const SITE_REPO_URL = 'https://dxm-site-repo.s3.amazonaws.com';
 
 // Initial Reducer States
+export const INITIAL_METADATA_STATE = {
+  isLoading: false
+};
 export const INITIAL_ASSETS_STATE = [];
 export const INITIAL_CONTENTS_STATE = [];
 export const INITIAL_ASSET_STATE = {

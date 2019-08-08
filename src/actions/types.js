@@ -1,3 +1,7 @@
+// metadata action types
+export const START_LOADING = 'START_LOADING';
+export const STOP_LOADING = 'STOP_LOADING';
+
 // asset action types
 export const CREATE_ASSET = 'CREATE_ASSET';
 export const DELETE_ASSET = 'DELETE_ASSET';
@@ -10,7 +14,7 @@ export const DELETE_CONTENT = 'DELETE_CONTENT';
 export const FETCH_CONTENTS = 'FETCH_CONTENTS';
 export const UPDATE_CONTENT = 'UPDATE_CONTENT';
 
-// selected content actions
+// selected asset actions
 export const DESELECT_ASSET = 'DESELECT_ASSET';
 export const FETCH_ASSET = 'FETCH_ASSET';
 export const NEW_ASSET = 'NEW_ASSET';
