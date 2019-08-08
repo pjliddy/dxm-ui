@@ -71,6 +71,7 @@ class AssetList extends React.Component {
             <div className="ui text loader">Working...</div>
           </div>
         */}
+        
         <div className="ui divided relaxed list">
           {this.renderList()}
         </div>

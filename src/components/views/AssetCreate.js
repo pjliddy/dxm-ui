@@ -5,6 +5,7 @@ import { newAsset, createAsset, deselectAsset, updateSelectedAsset } from '../..
 
 import { getPresignedUrl, uploadAsset /*, updateAssetFile */ } from '../api/S3';
 import AssetForm from '../forms/AssetForm';
+import IsLoading from '../IsLoading';
 
 class AssetCreate extends React.Component {
   state = {
@@ -65,22 +66,15 @@ class AssetCreate extends React.Component {
   render() {
     if (this.state.redirect) { return <Redirect to="/assets" />; }
 
-    const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
-
     return (
       <div>
         <h1>New Asset</h1>
-
-        {/* make loader component  */}
-        <div className={loaderStyles}>
-          <div className="ui text loader">Working...</div>
-        </div>
-
         <AssetForm asset={this.props.asset}
                    isNew={true}
                    onFormUpdate={this.props.updateSelectedAsset}
                    onFormSubmit={this.createAsset}
                    onFormCancel={this.onFormCancel}/>
+         <IsLoading isLoading={this.state.isLoading} />
        </div>
     );
   }

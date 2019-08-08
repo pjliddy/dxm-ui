@@ -40,8 +40,7 @@ class ContentList extends React.Component {
                       iconType="trash alternate outline"
                       tooltipText="Delete Content"
                       tooltipPosition="top right"
-                      onClick={() => this.props.deleteContent(content.id)}>
-                Delete Content
+                      onClick={() => this.props.deleteContent(content.id)}>Delete Content
               </Button>
             </div>
           </td>

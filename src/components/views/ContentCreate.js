@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { newContent, createContent, deselectContent, updateSelectedContent } from '../../actions';
 
 import ContentForm from '../forms/ContentForm';
+import IsLoading from '../IsLoading';
 
 class ContentCreate extends React.Component {
   state = {
@@ -37,19 +38,15 @@ class ContentCreate extends React.Component {
   render() {
     if (this.state.redirect) { return <Redirect to="/" />; }
 
-    const loaderStyles = `ui ${this.state.isLoading ? 'active' : ''} inverted dimmer`;
-
     return (
       <div>
         <h1>New Content</h1>
-        <div className={loaderStyles}>
-          <div className="ui text loader">Working...</div>
-        </div>
         <ContentForm content={this.props.content}
                      isNew={true}
                      onFormUpdate={this.props.updateSelectedContent}
                      onFormSubmit={this.createContent}
                      onFormCancel={this.onFormCancel}/>
+         <IsLoading isLoading={this.state.isLoading} />
        </div>
     );
   }
