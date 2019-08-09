@@ -1,13 +1,13 @@
 import React from 'react';
-import Field from './Field';
+import { connect } from 'react-redux';
+import { selectUploadFile, deselectUploadFile } from '../../actions';
+
 import Button from '../buttons/Button';
+import Field from './Field';
+import FilePicker from './FilePicker';
 import ShowJsonButton from '../buttons/ShowJsonButton';
 
 class AssetForm extends React.Component {
-  state = {
-    selectedFile: ''
-  };
-
   onFormCancel = (event) => {
     event.preventDefault();
     this.props.onFormCancel();
@@ -15,7 +15,7 @@ class AssetForm extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit(this.state.selectedFile);
+    this.props.onFormSubmit();
   }
 
   handleChange = (event) => {
@@ -23,26 +23,9 @@ class AssetForm extends React.Component {
     this.props.onFormUpdate({ name, value });
   }
 
-  handleFileChange = (event) => {
-    const { name } = event.target;
-    const value = event.target.files[0];
-
-    this.props.onFormUpdate({ name, value });
-
-    this.setState({
-      selectedFile: value
-    });
-  }
-
   render() {
     const asset = this.props.asset;
     const isNew = this.props.isNew
-
-    /*
-      create upload component in React?
-      make file input component?
-      disable upload button during upload?
-    */
 
     return(
       <div className="ui form">
@@ -73,25 +56,16 @@ class AssetForm extends React.Component {
                placeholder="title"
                value={asset.title}
                required={true}
-               onChange={this.handleChange}></Field>
+               onChange={this.handleChange} />
 
-        <div className="field">
-          <label htmlFor="file">File</label>
-          <input name="file"
-                 type="file"
-                 onChange={this.handleFileChange} />
-
-          {!isNew ? (
-            <div>
-              <div className="ui hidden divider"></div>
-              <img className="ui big image"
-                   src={this.props.asset.url}
-                   alt="alt text placeholder">
-               </img>
-               <div className="ui divider"></div>
-             </div>
-           ) : ''}
-        </div>
+        <FilePicker asset={asset}
+                    preview={!isNew}
+                    value={this.props.upload.fileObj}
+                    required={true}
+                    progress={this.props.upload.progress}
+                    isUploading={this.props.upload.isUploading}
+                    onChange={this.props.selectUploadFile}
+                    onUnmount={this.props.deselectUploadFile} />
 
         <Field type="text"
                name="dateCreated"
@@ -130,4 +104,13 @@ class AssetForm extends React.Component {
   }
 }
 
-export default AssetForm;
+const mapStateToProps = (state) => {
+  return {
+    asset: state.selectedAsset,
+    upload: state.upload
+  };
+}
+
+const mapDispatchToProps = { selectUploadFile, deselectUploadFile };
+
+export default connect(mapStateToProps, mapDispatchToProps) (AssetForm);

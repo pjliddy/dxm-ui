@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import Field from './Field';
 import Button from '../buttons/Button';
+import Field from './Field';
 import ShowJsonButton from '../buttons/ShowJsonButton';
 import BrowserPreviewButton from '../buttons/BrowserPreviewButton';
 
@@ -112,4 +113,10 @@ class ContentForm extends React.Component {
   }
 }
 
-export default ContentForm;
+const mapStateToProps = (state) => {
+  return {
+    content: state.selectedContent
+  };
+}
+
+export default connect(mapStateToProps) (ContentForm);

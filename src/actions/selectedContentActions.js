@@ -16,7 +16,7 @@ export const fetchContent = (id) => async (dispatch) => {
   dispatch({ type: STOP_LOADING });
 };
 
-export const newContent = () => async (dispatch, getState) => {
+export const newContent = () => (dispatch, getState) => {
   const content = getState().selectedContent;
 
   dispatch({
@@ -25,14 +25,14 @@ export const newContent = () => async (dispatch, getState) => {
   });
 };
 
-export const deselectContent = () => async (dispatch) => {
+export const deselectContent = () => (dispatch) => {
   dispatch({
     type: DESELECT_CONTENT,
     payload: { }
   });
 };
 
-export const updateSelectedContent = ( prop ) => async (dispatch) => {
+export const updateSelectedContent = ( prop ) => (dispatch) => {
   dispatch({
     type: UPDATE_SELECTED_CONTENT,
     payload: prop

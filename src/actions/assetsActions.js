@@ -1,7 +1,7 @@
 import * as api from '../components/api/Api';
 import { ASSET_RESOURCE }  from '../config';
 import { CREATE_ASSET, DELETE_ASSET, FETCH_ASSETS, UPDATE_ASSET } from './types';
-import { START_LOADING, STOP_LOADING } from './types';
+import { START_LOADING, STOP_LOADING, START_REDIRECT } from './types';
 
 export const fetchAssets = () => async (dispatch) => {
   dispatch({ type: START_LOADING });
@@ -16,10 +16,10 @@ export const fetchAssets = () => async (dispatch) => {
   dispatch({ type: STOP_LOADING });
 };
 
-export const createAsset = (asset) => async (dispatch) => {
+export const createAsset = () => async (dispatch, getState) => {
   dispatch({ type: START_LOADING });
 
-  // expand with file upload stuff
+  const asset = getState().selectedAsset;
   const response = await api.create(asset, ASSET_RESOURCE);
 
   dispatch({
@@ -28,9 +28,10 @@ export const createAsset = (asset) => async (dispatch) => {
   });
 
   dispatch({ type: STOP_LOADING });
+  dispatch({ type: START_REDIRECT });
 };
 
-export const updateAsset = (asset) => async (dispatch, getState) => {
+export const updateAsset = () => async (dispatch, getState) => {
   dispatch({ type: START_LOADING });
 
   const asset = getState().selectedAsset;
@@ -42,6 +43,7 @@ export const updateAsset = (asset) => async (dispatch, getState) => {
   });
 
   dispatch({ type: STOP_LOADING });
+  dispatch({ type: START_REDIRECT });
 };
 
 export const deleteAsset = (id) => async (dispatch) => {
