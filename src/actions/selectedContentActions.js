@@ -3,17 +3,21 @@ import { CONTENT_RESOURCE }  from '../config';
 import { DESELECT_CONTENT, FETCH_CONTENT, NEW_CONTENT, UPDATE_SELECTED_CONTENT } from './types';
 import { START_LOADING, STOP_LOADING } from './types';
 
-export const fetchContent = (id) => async (dispatch) => {
-  dispatch({ type: START_LOADING });
+export const fetchContent = id => async dispatch => {
+  try {
+    dispatch({ type: START_LOADING });
 
-  const response = await read(id, CONTENT_RESOURCE);
+    const response = await read(id, CONTENT_RESOURCE);
 
-  dispatch({
-    type: FETCH_CONTENT,
-    payload: response
-  });
+    dispatch({
+      type: FETCH_CONTENT,
+      payload: response
+    });
 
-  dispatch({ type: STOP_LOADING });
+    dispatch({ type: STOP_LOADING });
+  } catch (error) {
+    return error;
+  }
 };
 
 export const newContent = () => (dispatch, getState) => {
@@ -25,16 +29,16 @@ export const newContent = () => (dispatch, getState) => {
   });
 };
 
-export const deselectContent = () => (dispatch) => {
+export const deselectContent = () => dispatch => {
   dispatch({
     type: DESELECT_CONTENT,
     payload: { }
   });
 };
 
-export const updateSelectedContent = ( prop ) => (dispatch) => {
+export const updateSelectedContent = property => dispatch => {
   dispatch({
     type: UPDATE_SELECTED_CONTENT,
-    payload: prop
+    payload: property
   });
 }

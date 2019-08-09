@@ -6,20 +6,6 @@ import { createAsset, updateAsset, updateSelectedAsset } from './'
 import { DESELECT_UPLOAD_FILE, GET_PRESIGNED_URL, SELECT_UPLOAD_FILE, SET_UPLOAD_PROGRESS, START_UPLOAD, STOP_UPLOAD, UPLOAD_FILE } from './types';
 import { ASSET_RESOURCE, ASSET_REPO_BUCKET } from '../config';
 
-export const startUpload = () => (dispatch, getState) => {
-  dispatch({ type: START_UPLOAD });
-  dispatch(getPresignedUrl(getState().upload.fileObj));
-};
-
-export const stopUpload = () => async (dispatch, getState) => {
-  dispatch({ type: STOP_UPLOAD });
-
-  const asset = getState().selectedAsset;
-  asset.id ? await dispatch(updateAsset(asset)) : await dispatch(createAsset(asset));
-
-  dispatch(deselectUploadFile());
-};
-
 export const selectUploadFile = fileObj => dispatch => {
   dispatch({
     type: SELECT_UPLOAD_FILE,
@@ -31,6 +17,11 @@ export const deselectUploadFile = () => {
   return {
     type: DESELECT_UPLOAD_FILE
   };
+};
+
+export const startUpload = () => (dispatch, getState) => {
+  dispatch({ type: START_UPLOAD });
+  dispatch(getPresignedUrl(getState().upload.fileObj));
 };
 
 export const getPresignedUrl = fileObj => async dispatch => {
@@ -96,3 +87,16 @@ export const updateAssetUpload = (fileObj, url) => dispatch => {
 
   dispatch(stopUpload());
 }
+
+export const stopUpload = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: STOP_UPLOAD });
+
+    const asset = getState().selectedAsset;
+    asset.id ? await dispatch(updateAsset(asset)) : await dispatch(createAsset(asset));
+
+    dispatch(deselectUploadFile());
+  } catch (error) {
+    return error;
+  }
+};
