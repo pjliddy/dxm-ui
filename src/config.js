@@ -34,3 +34,11 @@ export const INITIAL_SELECTED_CONTENT_STATE = {
   dateCreated: '',
   dateModified: ''
 };
+
+export const INITIAL_UPLOAD_STATE = {
+  fileObj: { },
+  fileUrl: '',
+  isUploading: false,
+  uploadedBytes: 0,
+  uploadUrl: ''
+};
