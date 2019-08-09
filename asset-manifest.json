@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/dxm-ui/static/js/main.dde252ad.chunk.js",
-    "main.js.map": "/dxm-ui/static/js/main.dde252ad.chunk.js.map",
+    "main.js": "/dxm-ui/static/js/main.c141b364.chunk.js",
+    "main.js.map": "/dxm-ui/static/js/main.c141b364.chunk.js.map",
     "runtime~main.js": "/dxm-ui/static/js/runtime~main.4306d79f.js",
     "runtime~main.js.map": "/dxm-ui/static/js/runtime~main.4306d79f.js.map",
-    "static/js/2.3c720b40.chunk.js": "/dxm-ui/static/js/2.3c720b40.chunk.js",
-    "static/js/2.3c720b40.chunk.js.map": "/dxm-ui/static/js/2.3c720b40.chunk.js.map",
+    "static/js/2.65bb259b.chunk.js": "/dxm-ui/static/js/2.65bb259b.chunk.js",
+    "static/js/2.65bb259b.chunk.js.map": "/dxm-ui/static/js/2.65bb259b.chunk.js.map",
     "index.html": "/dxm-ui/index.html",
-    "precache-manifest.62e7580b14f14fbae1e7a45e9ac46017.js": "/dxm-ui/precache-manifest.62e7580b14f14fbae1e7a45e9ac46017.js",
+    "precache-manifest.344b19762ccd7e6152917124e1935917.js": "/dxm-ui/precache-manifest.344b19762ccd7e6152917124e1935917.js",
     "service-worker.js": "/dxm-ui/service-worker.js"
   }
 }
