@@ -1,6 +1,8 @@
 // metadata action types
 export const START_LOADING = 'START_LOADING';
 export const STOP_LOADING = 'STOP_LOADING';
+export const START_REDIRECT = 'START_REDIRECT';
+export const STOP_REDIRECT = 'STOP_REDIRECT';
 
 // asset action types
 export const CREATE_ASSET = 'CREATE_ASSET';
@@ -30,6 +32,7 @@ export const UPDATE_SELECTED_CONTENT = 'UPDATE_SELECTED_CONTENT';
 export const DESELECT_UPLOAD_FILE = 'DESELECT_UPLOAD_FILE';
 export const GET_PRESIGNED_URL = 'GET_PRESIGNED_URL';
 export const SELECT_UPLOAD_FILE = 'SELECT_UPLOAD_FILE';
+export const SET_UPLOAD_PROGRESS = 'SET_UPLOAD_PROGRESS';
 export const START_UPLOAD = 'START_UPLOAD';
 export const STOP_UPLOAD = 'STOP_UPLOAD';
 export const UPLOAD_FILE = 'UPLOAD_FILE';

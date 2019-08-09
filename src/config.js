@@ -12,7 +12,8 @@ export const SENDING_DATA_MESSAGE = 'Sending Data...';
 
 // Initial Reducer States
 export const INITIAL_METADATA_STATE = {
-  isLoading: false
+  isLoading: false,
+  redirect: false
 };
 export const INITIAL_ASSETS_STATE = [];
 export const INITIAL_CONTENTS_STATE = [];
@@ -39,6 +40,6 @@ export const INITIAL_UPLOAD_STATE = {
   fileObj: { },
   fileUrl: '',
   isUploading: false,
-  uploadedBytes: 0,
+  progress: 0,
   uploadUrl: ''
 };

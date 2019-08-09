@@ -1,6 +1,6 @@
 import { API_BASE_URL }  from '../../config';
 
-// convert to class?
+// convert to axios since it's used for progress on uploads
 
 // POST includes params for getSignedUrl for S3 authentication
 export const create = (body, resource, params) => {

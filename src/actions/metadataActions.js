@@ -1,4 +1,4 @@
-import { START_LOADING, STOP_LOADING } from './types';
+import { START_LOADING, STOP_LOADING, START_REDIRECT, STOP_REDIRECT } from './types';
 
 export const startLoading = () => {
   return {
@@ -9,5 +9,17 @@ export const startLoading = () => {
 export const stopLoading = () => {
   return {
     type: STOP_LOADING
+  };
+};
+
+export const startRedirect = () => {
+  return {
+    type: START_REDIRECT
+  };
+};
+
+export const stopRedirect = () => {
+  return {
+    type: STOP_REDIRECT
   };
 };
