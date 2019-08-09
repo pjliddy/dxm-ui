@@ -1,14 +1,14 @@
-import { INITIAL_ASSET_STATE } from '../config';
+import { INITIAL_SELECTED_ASSET_STATE } from '../config';
 import { DESELECT_ASSET, FETCH_ASSET, NEW_ASSET, UPDATE_SELECTED_ASSET } from '../actions/types';
 
-export default (state = INITIAL_ASSET_STATE, action) => {
+export default (state = INITIAL_SELECTED_ASSET_STATE, action) => {
   switch (action.type) {
     case FETCH_ASSET:
       return action.payload;
     case NEW_ASSET:
         return action.payload;
     case DESELECT_ASSET:
-      return INITIAL_ASSET_STATE;
+      return INITIAL_SELECTED_ASSET_STATE;
     case UPDATE_SELECTED_ASSET:
       return { ...state, [action.payload.name]: action.payload.value }
     default:

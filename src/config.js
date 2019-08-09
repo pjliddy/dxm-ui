@@ -6,13 +6,17 @@ export const CONTENT_LAKE_URL = 'https://dxm-content-lake.s3.amazonaws.com';
 export const CONTENT_RESOURCE = 'nodes';
 export const SITE_REPO_URL = 'https://dxm-site-repo.s3.amazonaws.com';
 
+// Messages
+export const RECEIVING_DATA_MESSAGE = 'Receiving Data...';
+export const SENDING_DATA_MESSAGE = 'Sending Data...';
+
 // Initial Reducer States
 export const INITIAL_METADATA_STATE = {
   isLoading: false
 };
 export const INITIAL_ASSETS_STATE = [];
 export const INITIAL_CONTENTS_STATE = [];
-export const INITIAL_ASSET_STATE = {
+export const INITIAL_SELECTED_ASSET_STATE = {
   id: '',
   dataType: 'asset',
   title: '',
@@ -21,7 +25,7 @@ export const INITIAL_ASSET_STATE = {
   dateCreated: '',
   dateModified: ''
 };
-export const INTIAL_CONTENT_STATE = {
+export const INITIAL_SELECTED_CONTENT_STATE = {
   id: '',
   dataType: 'content',
   title: '',

@@ -5,7 +5,9 @@ import { fetchAsset, updateAsset, deselectAsset, updateSelectedAsset } from '../
 
 import { getPresignedUrl, uploadAsset /*, updateAssetFile */ } from '../api/S3';
 import AssetForm from '../forms/AssetForm';
-import IsLoading from '../IsLoading';
+import LoadingIndicator from '../LoadingIndicator';
+
+import { SENDING_DATA_MESSAGE } from '../../config';
 
 class AssetEdit extends React.Component {
   state = {
@@ -71,7 +73,8 @@ class AssetEdit extends React.Component {
                    onFormUpdate={this.props.updateSelectedAsset}
                    onFormSubmit={this.onFormSubmit}
                    onFormCancel={this.onFormCancel}/>
-         <IsLoading isLoading={this.props.isLoading} />
+        <LoadingIndicator isLoading={this.props.isLoading}
+                          message={SENDING_DATA_MESSAGE}/>
       </div>
     );
   }

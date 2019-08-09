@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { newContent, createContent, deselectContent, updateSelectedContent } from '../../actions';
 
 import ContentForm from '../forms/ContentForm';
-import IsLoading from '../IsLoading';
+import LoadingIndicator from '../LoadingIndicator';
+
+import { SENDING_DATA_MESSAGE } from '../../config';
 
 class ContentCreate extends React.Component {
   state = {
@@ -46,7 +48,8 @@ class ContentCreate extends React.Component {
                      onFormUpdate={this.props.updateSelectedContent}
                      onFormSubmit={this.createContent}
                      onFormCancel={this.onFormCancel}/>
-         <IsLoading isLoading={this.props.isLoading} />
+        <LoadingIndicator isLoading={this.props.isLoading}
+                   message={SENDING_DATA_MESSAGE}/>
        </div>
     );
   }

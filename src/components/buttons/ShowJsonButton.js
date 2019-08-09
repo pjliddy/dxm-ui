@@ -2,7 +2,9 @@ import React from 'react';
 import Button from './Button';
 import { CONTENT_LAKE_URL }  from '../../config';
 
-const ShowJsonButton = ({ node, type, hidden, children }) => {
+const ShowJsonButton = props => {
+  const { node, type, hidden } = props;
+  
   const onShowJsonButton = (node) => {
     window.open(`${CONTENT_LAKE_URL}/${node.dataType}/${node.id}.json`);
   };
@@ -15,7 +17,7 @@ const ShowJsonButton = ({ node, type, hidden, children }) => {
     <Button buttonType={type}
             iconType="code"
             tooltipText="Show JSON"
-            tooltipPosition="top center"
+            tooltipPosition="top right"
             onClick={() => onShowJsonButton(node)}>
       Show JSON
     </Button>

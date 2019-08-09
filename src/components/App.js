@@ -12,8 +12,6 @@ import AssetEdit from './views/AssetEdit';
 const App = () => {
   const containerStyle = { margin: '10px 0 20px' };
 
-  // contents/:id/edit
-
   return (
     <div className="ui container" style={containerStyle}>
       <HashRouter basename='/'>

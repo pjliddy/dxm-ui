@@ -1,56 +1,49 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Button = ({
-  buttonType = 'secondary',  // primary | secondary | icon
-  children,
-  iconType,
-  linkTo,
-  onClick,
-  tooltipPosition,
-  tooltipText,
-}) => {
+const Button = props => {
+  const {
+    buttonType = 'secondary',  // primary | secondary | icon
+    children,
+    iconType,
+    linkTo,
+    onClick,
+    tooltipPosition,
+    tooltipText,
+  } = props;
 
   let buttonStyle = '';
 
   switch (buttonType) {
     case 'primary':
-      buttonStyle = 'ui primary button';
+      buttonStyle = 'primary';
       break;
     case 'secondary':
     default:
-      buttonStyle = 'ui secondary basic button';
+      buttonStyle = 'secondary basic';
       break;
     case 'icon':
-      buttonStyle = 'ui basic button'
+      buttonStyle = 'basic'
       break;
   }
-
-  let icon = '';
-
-  if (iconType) {
-    const iconClass = `${iconType} icon`;
-    icon = <i className={iconClass}></i>;
-  }
-
   if (linkTo) {
     return(
-      <Link className={buttonStyle}
+      <Link className={`ui ${buttonStyle} button`}
             data-tooltip={tooltipText}
             data-position={tooltipPosition}
             to={linkTo}>
-        {iconType && icon}
+        {iconType && <i className={`${iconType} icon`}></i>}
         {buttonType !== 'icon' ? children : ''}
       </Link>
     )
   }
 
   return (
-    <button className={buttonStyle}
+    <button className={`ui ${buttonStyle} button`}
             data-tooltip={tooltipText}
             data-position={tooltipPosition}
             onClick={onClick}>
-      {iconType && icon}
+      {iconType && <i className={`${iconType} icon`}></i>}
       {buttonType !== 'icon' ? children : ''}
     </button>
   )

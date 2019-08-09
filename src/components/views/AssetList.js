@@ -5,7 +5,9 @@ import { fetchAssets, deleteAsset } from '../../actions';
 
 import Button from '../buttons/Button';
 import ShowJsonButton from '../buttons/ShowJsonButton';
-import IsLoading from '../IsLoading';
+import LoadingIndicator from '../LoadingIndicator';
+
+import { ASSET_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../config';
 
 class AssetList extends React.Component {
   componentDidMount() {
@@ -14,7 +16,7 @@ class AssetList extends React.Component {
 
   renderList() {
     return this.props.assets.map(asset => {
-      const linkPath = `/assets/${asset.id}/edit`;
+      const linkPath = `/${ASSET_RESOURCE}/${asset.id}/edit`;
 
       return (
         <div className="item"
@@ -69,7 +71,8 @@ class AssetList extends React.Component {
           {this.renderList()}
         </div>
 
-        <IsLoading isLoading={this.props.isLoading} />
+        <LoadingIndicator isLoading={this.props.isLoading}
+                          message={RECEIVING_DATA_MESSAGE}/>
       </div>
     )
   }

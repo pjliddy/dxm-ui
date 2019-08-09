@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { fetchContent, updateContent, deselectContent, updateSelectedContent } from '../../actions';
 
 import ContentForm from '../forms/ContentForm';
-import IsLoading from '../IsLoading';
+import LoadingIndicator from '../LoadingIndicator';
+
+import { SENDING_DATA_MESSAGE } from '../../config';
 
 // research containers for wrapping forms, etc.
 
@@ -44,7 +46,8 @@ class ContentEdit extends React.Component {
                      onFormUpdate={this.props.updateSelectedContent}
                      onFormSubmit={this.updateContent}
                      onFormCancel={this.onFormCancel}/>
-         <IsLoading isLoading={this.props.isLoading} />
+        <LoadingIndicator isLoading={this.props.isLoading}
+                          message={SENDING_DATA_MESSAGE}/>
       </div>
     );
   }

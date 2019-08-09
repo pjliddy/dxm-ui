@@ -6,7 +6,11 @@ import { fetchContents, deleteContent } from '../../actions';
 import Button from '../buttons/Button';
 import ShowJsonButton from '../buttons/ShowJsonButton';
 import BrowserPreviewButton from '../buttons/BrowserPreviewButton';
-import IsLoading from '../IsLoading';
+import LoadingIndicator from '../LoadingIndicator';
+
+// need to update API to use 'contents'
+// import { CONTENT_RESOURCE } from '../../config';
+import { RECEIVING_DATA_MESSAGE } from '../../config';
 
 class ContentList extends React.Component {
   componentDidMount() {
@@ -85,7 +89,8 @@ class ContentList extends React.Component {
           </tbody>
         </table>
 
-        <IsLoading isLoading={this.props.isLoading} />
+        <LoadingIndicator isLoading={this.props.isLoading}
+                          message={RECEIVING_DATA_MESSAGE}/>
       </div>
     );
   }
