@@ -2,7 +2,7 @@ import React from 'react';
 
 const Field = props => {
   const handleChange = (event) => {
-    props.onChange(event);
+    if (!props.readOnly) props.onChange(event);
   };
 
   const renderInput = () => {
