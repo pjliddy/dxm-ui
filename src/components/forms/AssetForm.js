@@ -86,7 +86,7 @@ const AssetForm = props => {
                 tooltipPosition="top center"
                 onClick={onFormCancel}>Cancel</Button>
         <ShowJsonButton node={asset}
-                  hidden={isNew}></ShowJsonButton>
+                        hidden={isNew}></ShowJsonButton>
         <Button buttonType="primary"
                 iconType="save"
                 tooltipText="Save Asset"

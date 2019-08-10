@@ -6,7 +6,7 @@ import Button from '../buttons/Button';
 import LoadingIndicator from '../LoadingIndicator';
 import ShowJsonButton from '../buttons/ShowJsonButton';
 
-import { RECEIVING_DATA_MESSAGE } from '../../config';
+import { CONTENT_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../config';
 
 const ContentList = props => {
   return (
@@ -56,7 +56,7 @@ const renderPageHeader = () => {
 
 const renderList = props => {
   return props.contents.map(content => {
-    const linkPath = `/contents/${content.id}/edit`;
+    const linkPath = `/${CONTENT_RESOURCE}/${content.id}/edit`;
 
     return(
       <tr key={content.id}>
