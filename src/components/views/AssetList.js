@@ -7,7 +7,7 @@ import LoadingIndicator from '../LoadingIndicator';
 
 import { ASSET_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../config';
 
-const AssetListView = (props) => {
+const AssetListView = props => {
   return (
     <div>
       <div className="ui two column grid">

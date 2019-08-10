@@ -1,6 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { fetchContent, updateContent, deselectContent, updateSelectedContent, startRedirect } from '../actions';
+import {
+  fetchContent,
+  updateContent,
+  deselectContent,
+  updateSelectedContent,
+  startRedirect
+} from '../actions';
 
 import ContentEditView from '../components/views/ContentEdit';
 
@@ -22,7 +28,7 @@ class ContentEdit extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     content: state.selectedContent,
     isLoading: state.metadata.isLoading,
@@ -30,6 +36,12 @@ const mapStateToProps = (state) => {
   };
 }
 
-const mapDispatchToProps = { fetchContent, updateContent, deselectContent, updateSelectedContent, startRedirect };
+const mapDispatchToProps = {
+  fetchContent,
+  updateContent,
+  deselectContent,
+  updateSelectedContent,
+  startRedirect 
+};
 
 export default connect(mapStateToProps, mapDispatchToProps) (ContentEdit);

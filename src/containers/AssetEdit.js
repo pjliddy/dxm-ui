@@ -21,6 +21,7 @@ class AssetEdit extends React.Component {
 
   render() {
     return <AssetEditView asset={this.props.asset}
+                          upload={this.props.upload}
                           isLoading={this.props.isLoading}
                           startUpload={this.props.startUpload}
                           updateSelectedAsset={this.props.updateSelectedAsset}
@@ -28,9 +29,10 @@ class AssetEdit extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     asset: state.selectedAsset,
+    upload: state.upload,
     isLoading: state.metadata.isLoading,
     redirect: state.metadata.redirect
   };

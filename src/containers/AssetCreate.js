@@ -1,6 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { newAsset, createAsset, deselectAsset, updateSelectedAsset, startRedirect, startUpload } from '../actions';
+import {
+  newAsset,
+  createAsset,
+  deselectAsset,
+  updateSelectedAsset,
+  startRedirect,
+  startUpload
+} from '../actions';
 
 import AssetCreateView from '../components/views/AssetCreate';
 
@@ -15,6 +22,7 @@ class AssetCreate extends React.Component {
 
   render() {
     return <AssetCreateView asset={this.props.asset}
+                            upload={this.props.upload}
                             isLoading={this.props.isLoading}
                             startUpload={this.props.startUpload}
                             updateSelectedAsset={this.props.updateSelectedAsset}
@@ -22,14 +30,22 @@ class AssetCreate extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     asset: state.selectedAsset,
+    upload: state.upload,
     isLoading: state.metadata.isLoading,
     redirect: state.metadata.redirect
   };
 }
 
-const mapDispatchToProps = { newAsset, createAsset, deselectAsset, updateSelectedAsset, startRedirect, startUpload };
+const mapDispatchToProps = {
+  newAsset,
+  createAsset,
+  deselectAsset,
+  updateSelectedAsset,
+  startRedirect,
+  startUpload
+};
 
 export default connect(mapStateToProps, mapDispatchToProps) (AssetCreate);

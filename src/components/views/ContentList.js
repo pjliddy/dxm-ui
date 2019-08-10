@@ -8,7 +8,7 @@ import LoadingIndicator from '../LoadingIndicator';
 
 import { RECEIVING_DATA_MESSAGE } from '../../config';
 
-const ContentListView = (props) => {
+const ContentListView = props => {
   return (
     <div>
       <div className="ui two column grid">

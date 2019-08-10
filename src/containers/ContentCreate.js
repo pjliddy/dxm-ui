@@ -1,6 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { newContent, createContent, deselectContent, updateSelectedContent, startRedirect } from '../actions';
+import {
+  newContent,
+  createContent,
+  deselectContent,
+  updateSelectedContent,
+  startRedirect
+} from '../actions';
 
 import ContentCreateView from '../components/views/ContentCreate';
 
@@ -22,7 +28,7 @@ class ContentCreate extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     content: state.selectedContent,
     isLoading: state.metadata.isLoading,
@@ -30,6 +36,12 @@ const mapStateToProps = (state) => {
   };
 }
 
-const mapDispatchToProps = { newContent, createContent, deselectContent, updateSelectedContent, startRedirect };
+const mapDispatchToProps = {
+  newContent,
+  createContent,
+  deselectContent,
+  updateSelectedContent,
+  startRedirect
+ };
 
 export default connect(mapStateToProps, mapDispatchToProps) (ContentCreate);

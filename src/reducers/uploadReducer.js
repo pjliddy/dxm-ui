@@ -1,14 +1,6 @@
 import { INITIAL_UPLOAD_STATE } from '../config';
 import { DESELECT_UPLOAD_FILE, GET_PRESIGNED_URL, SELECT_UPLOAD_FILE, SET_UPLOAD_PROGRESS, START_UPLOAD, STOP_UPLOAD, UPLOAD_FILE } from '../actions/types';
 
-// INITIAL_UPLOAD_STATE = {
-//   fileObj: { },
-//   fileUrl: '',
-//   isUploading: false,
-//   uploadedBytes: 0,
-//   uploadUrl: ''
-// };
-
 export default (state = INITIAL_UPLOAD_STATE, action) => {
   switch (action.type) {
     case SELECT_UPLOAD_FILE:

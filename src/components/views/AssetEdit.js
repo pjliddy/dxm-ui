@@ -12,6 +12,7 @@ const AssetEditView = props => {
       <Redirector path="/assets" />
       <h1>Edit Asset</h1>
       <AssetForm asset={props.asset}
+                 upload={props.upload}
                  onFormUpdate={props.updateSelectedAsset}
                  onFormSubmit={props.startUpload}
                  onFormCancel={props.startRedirect}/>

@@ -12,6 +12,7 @@ const AssetCreateView = props => {
       <Redirector path="/assets" />
       <h1>New Asset</h1>
       <AssetForm asset={props.asset}
+                 upload={props.upload}
                  isNew={true}
                  onFormUpdate={props.updateSelectedAsset}
                  onFormSubmit={props.startUpload}

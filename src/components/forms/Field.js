@@ -1,74 +1,72 @@
 import React from 'react';
 
-class Field extends React.Component {
-  handleChange = (event) => {
-    this.props.onChange(event);
-  }
+const Field = props => {
+  const handleChange = (event) => {
+    props.onChange(event);
+  };
 
-  renderInput = () => {
-    switch(this.props.type) {
+  const renderInput = () => {
+    switch(props.type) {
       case 'text':
       default:
-        return this.renderTextInput();
+        return renderTextInput();
       case 'select':
-        return this.renderSelect();
+        return renderSelect();
       case 'textarea':
-        return this.renderTextArea();
+        return renderTextArea();
     }
-  }
+  };
 
-  renderTextInput = () => {
-    const fieldClasses = `${this.props.required ? 'required ' : ''}${this.props.disabled ? 'disabled ' : ''}field`;
+  const renderTextInput = () => {
+    const fieldClasses = `${props.required ? 'required ' : ''}${props.disabled ? 'disabled ' : ''}field`;
 
     return(
       <div className={fieldClasses}>
-        <label htmlFor={this.props.name}>{this.props.label}</label>
-        <input name={this.props.name}
-               type={this.props.type}
-               placeholder={this.props.placeholder}
-               value={this.props.value}
-               onChange={this.handleChange} />
+        <label htmlFor={props.name}>{props.label}</label>
+        <input name={props.name}
+               type={props.type}
+               placeholder={props.placeholder}
+               value={props.value}
+               onChange={handleChange} />
       </div>
     );
-  }
+  };
 
-  renderSelect = () => {
-    const fieldClasses = `${this.props.required ? 'required ' : ''}${this.props.disabled ? 'disabled ' : ''}field`;
+  const renderSelect = () => {
+    const fieldClasses = `${props.required ? 'required ' : ''}${props.disabled ? 'disabled ' : ''}field`;
 
     return(
       <div className={fieldClasses}>
-      <label htmlFor={this.props.name}>{this.props.label}</label>
-        <select name={this.props.name}
-                placeholder={this.props.placeholder}
-                value={this.props.value}
-                onChange={this.handleChange}>
-          {this.props.children}
+      <label htmlFor={props.name}>{props.label}</label>
+        <select name={props.name}
+                placeholder={props.placeholder}
+                value={props.value}
+                onChange={handleChange}>
+          {props.children}
         </select>
       </div>
     );
-  }
+  };
 
-  renderTextArea = () => {
-    const fieldClasses = `${this.props.required ? 'required ' : ''}${this.props.disabled ? 'disabled ' : ''}field`;
+  const renderTextArea = () => {
+    const fieldClasses = `${props.required ? 'required ' : ''}${props.disabled ? 'disabled ' : ''}field`;
 
     return(
       <div className={fieldClasses}>
-        <label htmlFor={this.props.name}>{this.props.label}</label>
-        <textarea name={this.props.name}
-                  placeholder={this.props.placeholder}
-                  value={this.props.value}
-                  onChange={this.handleChange}></textarea>
+        <label htmlFor={props.name}>{props.label}</label>
+        <textarea name={props.name}
+                  placeholder={props.placeholder}
+                  value={props.value}
+                  onChange={handleChange}></textarea>
       </div>
     );
+  };
+
+  if (props.hidden) {
+    return null;
   }
 
-  render() {
-    if (this.props.hidden) {
-      return null;
-    }
-
-    return this.renderInput();
-  }
+  return renderInput();
 }
 
 export default Field;

@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { fetchContents, deleteContent } from '../actions';
+import {
+  fetchContents,
+  deleteContent
+} from '../actions';
 
 import ContentListView from '../components/views/ContentList';
 
@@ -16,13 +19,16 @@ class ContentList extends React.Component {
   }
 }
 
-export function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
     contents: state.contents,
     isLoading: state.metadata.isLoading
   };
 }
 
-const mapDispatchToProps = { fetchContents, deleteContent };
+const mapDispatchToProps = {
+  fetchContents,
+  deleteContent
+ };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentList)
