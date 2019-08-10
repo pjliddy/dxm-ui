@@ -21,7 +21,7 @@ export const INITIAL_METADATA_STATE = {
 
 export const INITIAL_SELECTED_ASSET_STATE = {
   id: '',
-  dataType: 'asset',
+  resourceType: 'assets',
   title: '',
   url: '',
   file: { },
@@ -31,7 +31,7 @@ export const INITIAL_SELECTED_ASSET_STATE = {
 
 export const INITIAL_SELECTED_CONTENT_STATE = {
   id: '',
-  dataType: 'content',
+  resourceType: 'contents',
   title: '',
   subTitle: '',
   copyText: '',

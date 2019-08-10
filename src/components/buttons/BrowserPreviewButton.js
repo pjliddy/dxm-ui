@@ -6,7 +6,7 @@ const BrowserPreviewButton = props => {
   const {node, type, hidden} = props;
 
   const onPreview = node => {
-    window.open(`${SITE_REPO_URL}/${node.dataType}/${node.id}.html`);
+    window.open(`${SITE_REPO_URL}/${node.resourceType}/${node.id}.html`);
   }
 
   if (hidden) return null;

@@ -11,7 +11,7 @@ export const fetchAssets = () => async dispatch => {
 
     dispatch({
       type: FETCH_ASSETS,
-      payload: response.filter(node => node.dataType === 'asset')
+      payload: response.filter(node => node.resourceType === ASSET_RESOURCE)
     });
 
     dispatch({ type: STOP_LOADING });

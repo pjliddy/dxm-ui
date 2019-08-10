@@ -6,7 +6,7 @@ const ShowJsonButton = props => {
   const { node, type, hidden } = props;
   
   const onShowJsonButton = (node) => {
-    window.open(`${CONTENT_LAKE_URL}/${node.dataType}/${node.id}.json`);
+    window.open(`${CONTENT_LAKE_URL}/${node.resourceType}/${node.id}.json`);
   };
 
   if (hidden) {

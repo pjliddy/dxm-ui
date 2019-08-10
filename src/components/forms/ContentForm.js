@@ -36,16 +36,13 @@ const ContentForm = props => {
              disabled={true}
              readOnly={true}></Field>
 
-      <Field type="select"
-             name="dataType"
-             label="Data Type"
-             placeholder="data type"
-             value={content.dataType}
-             onChange={handleChange}>
-        <option value="">Select Data Type...</option>
-        <option value="content">Content</option>
-      </Field>
-
+      <Field type="text"
+             name="resourceType"
+             label="Resource Type"
+             placeholder="resource type"
+             value={content.resourceType}
+             disabled={true}
+             readOnly={true}></Field>
 
       <Field type="text"
              name="title"

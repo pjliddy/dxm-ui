@@ -36,15 +36,13 @@ const AssetForm = props => {
              disabled={true}
              readOnly={true}></Field>
 
-      <Field type="select"
-             name="dataType"
-             label="Data Type"
-             placeholder="data type"
-             value={asset.dataType}
-             onChange={handleChange}>
-        <option value="">Select Data Type...</option>
-        <option value="asset">Asset</option>
-      </Field>
+      <Field type="text"
+             name="resourceType"
+             label="Resource Type"
+             placeholder="resource type"
+             value={asset.resourceType}
+             disabled={true}
+             readOnly={true}></Field>
 
       <Field type="text"
              name="title"

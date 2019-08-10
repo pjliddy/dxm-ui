@@ -11,7 +11,7 @@ export const fetchContents = () => async dispatch => {
 
     dispatch({
       type: FETCH_CONTENTS,
-      payload: response.filter(content => content.dataType === 'content')
+      payload: response.filter(content => content.resourceType === CONTENT_RESOURCE)
     });
 
     dispatch({ type: STOP_LOADING });

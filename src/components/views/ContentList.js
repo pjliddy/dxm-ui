@@ -66,7 +66,7 @@ const renderList = props => {
           </Link>
         </td>
         <td>
-          {content.dataType}
+          {content.resourceType}
         </td>
         <td className="collapsing">
           {content.id}
