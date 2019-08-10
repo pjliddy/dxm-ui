@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import {
-  selectUploadFile,
-  deselectUploadFile
+  deselectUploadFile,
+  selectUploadFile
 } from '../actions';
 
 import FilePickerView from '../components/forms/FilePicker';
@@ -14,12 +14,12 @@ class FilePicker extends React.Component {
 
   render() {
     return <FilePickerView asset={this.props.asset}
-                           preview={this.props.preview}
-                           value={this.props.value}
-                           required={this.props.required}
-                           progress={this.props.progress}
                            isUploading={this.props.isUploading}
-                           onChange={this.props.selectUploadFile} />;
+                           onChange={this.props.selectUploadFile}
+                           preview={this.props.preview}
+                           progress={this.props.progress}
+                           required={this.props.required}
+                           value={this.props.value} />;
   }
 }
 
@@ -31,8 +31,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  selectUploadFile,
-  deselectUploadFile
+  deselectUploadFile,
+  selectUploadFile
  };
 
 export default connect(mapStateToProps, mapDispatchToProps) (FilePicker);

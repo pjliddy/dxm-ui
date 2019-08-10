@@ -2,38 +2,45 @@ import React, { memo } from 'react'
 import { Link } from 'react-router-dom';
 
 import Button from '../buttons/Button';
-import ShowJsonButton from '../buttons/ShowJsonButton';
 import LoadingIndicator from '../LoadingIndicator';
+import ShowJsonButton from '../buttons/ShowJsonButton';
 
 import { ASSET_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../config';
 
-const AssetListView = props => {
+const AssetList = props => {
   return (
     <div>
-      <div className="ui two column grid">
-        <div className="row">
-          <div className="left floated column">
-          <h1>Asset List</h1>
-          </div>
-          <div className="right floated right aligned column">
-            <Button linkTo="/assets/new"
-                    buttonType="primary"
-                    iconType="plus">
-              New Asset
-            </Button>
-          </div>
-        </div>
-      </div>
-
+      {renderPageHeader()}
       <div className="ui divided relaxed list">
         {renderList(props)}
       </div>
 
       <LoadingIndicator isLoading={props.isLoading}
-                        message={RECEIVING_DATA_MESSAGE}/>
+                        message={RECEIVING_DATA_MESSAGE} />
     </div>
   )
 };
+
+const renderPageHeader = () => {
+  return (
+    <div className="ui two column grid">
+      <div className="row">
+        <div className="left floated column">
+        <h1>Asset List</h1>
+        </div>
+        <div className="right floated right aligned column">
+          <Button linkTo="/assets/new"
+                  buttonType="primary"
+                  iconType="plus"
+                  tooltipText="New Asset"
+                  tooltipPosition="left center">
+            New Asset
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const renderList = props => {
   return props.assets.map(asset => {
@@ -59,9 +66,9 @@ const renderList = props => {
           <ShowJsonButton node={asset} type="icon"/>
           <Button buttonType="icon"
                   iconType="trash alternate outline"
-                  tooltipText="Delete Asset"
+                  onClick={() => props.deleteAsset(asset.id)}
                   tooltipPosition="top center"
-                  onClick={() => props.deleteAsset(asset.id)}>
+                  tooltipText="Delete Asset">
             Delete Asset
           </Button>
         </div>
@@ -69,4 +76,4 @@ const renderList = props => {
     );
   });
 }
-export default memo(AssetListView);
+export default memo(AssetList);

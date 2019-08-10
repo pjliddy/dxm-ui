@@ -22,9 +22,9 @@ class ContentEdit extends React.Component {
   render() {
     return <ContentEditView content={this.props.content}
                             isLoading={this.props.isLoading}
+                            startRedirect={this.props.startRedirect}
                             updateContent={this.props.updateContent}
-                            updateSelectedContent={this.props.updateSelectedContent}
-                            startRedirect={this.props.startRedirect} />;
+                            updateSelectedContent={this.props.updateSelectedContent} />;
   }
 }
 
@@ -41,7 +41,7 @@ const mapDispatchToProps = {
   updateContent,
   deselectContent,
   updateSelectedContent,
-  startRedirect 
+  startRedirect
 };
 
 export default connect(mapStateToProps, mapDispatchToProps) (ContentEdit);

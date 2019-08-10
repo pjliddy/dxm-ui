@@ -13,11 +13,11 @@ const ContentCreate = props => {
       <h1>New Content</h1>
       <ContentForm content={props.content}
                    isNew={true}
-                   onFormUpdate={props.updateSelectedContent}
+                   onFormCancel={props.startRedirect}
                    onFormSubmit={props.createContent}
-                   onFormCancel={props.startRedirect}/>
+                   onFormUpdate={props.updateSelectedContent} />
       <LoadingIndicator isLoading={props.isLoading}
-                        message={SENDING_DATA_MESSAGE}/>
+                        message={SENDING_DATA_MESSAGE} />
      </div>
   );
 }

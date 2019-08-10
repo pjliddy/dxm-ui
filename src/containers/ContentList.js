@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import {
-  fetchContents,
-  deleteContent
+  deleteContent,
+  fetchContents
 } from '../actions';
 
 import ContentListView from '../components/views/ContentList';
@@ -14,8 +14,8 @@ class ContentList extends React.Component {
 
   render() {
     return <ContentListView contents={this.props.contents}
-                            isLoading={this.props.isLoading}
-                            deleteContent={this.props.deleteContent} />;
+                            deleteContent={this.props.deleteContent}
+                            isLoading={this.props.isLoading} />;
   }
 }
 
@@ -27,8 +27,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  fetchContents,
-  deleteContent
+  deleteContent,
+  fetchContents
  };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentList)

@@ -11,17 +11,17 @@ const ContentForm = props => {
   const onFormCancel = (event) => {
     event.preventDefault();
     props.onFormCancel();
-  }
+  };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
     props.onFormSubmit();
-  }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     props.onFormUpdate({ name, value });
-  }
+  };
 
   return(
     <div className="ui form">

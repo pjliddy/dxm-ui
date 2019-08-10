@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import {
-  newContent,
   createContent,
   deselectContent,
-  updateSelectedContent,
-  startRedirect
+  newContent,
+  startRedirect,
+  updateSelectedContent
 } from '../actions';
 
 import ContentCreateView from '../components/views/ContentCreate';
@@ -21,10 +21,10 @@ class ContentCreate extends React.Component {
 
   render() {
     return <ContentCreateView content={this.props.content}
-                              isLoading={this.props.isLoading}
                               createContent={this.props.createContent}
-                              updateSelectedContent={this.props.updateSelectedContent}
-                              startRedirect={this.props.startRedirect} />;
+                              isLoading={this.props.isLoading}
+                              startRedirect={this.props.startRedirect}
+                              updateSelectedContent={this.props.updateSelectedContent} />;
   }
 }
 
@@ -37,11 +37,11 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  newContent,
   createContent,
   deselectContent,
-  updateSelectedContent,
-  startRedirect
+  newContent,
+  startRedirect,
+  updateSelectedContent
  };
 
 export default connect(mapStateToProps, mapDispatchToProps) (ContentCreate);

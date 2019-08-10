@@ -9,9 +9,7 @@ const BrowserPreviewButton = props => {
     window.open(`${SITE_REPO_URL}/${node.dataType}/${node.id}.html`);
   }
 
-  if (hidden) {
-    return null;
-  }
+  if (hidden) return null;
 
   return (
     <Button buttonType={type}

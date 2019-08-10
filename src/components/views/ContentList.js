@@ -1,33 +1,17 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom';
 
-import Button from '../buttons/Button';
-import ShowJsonButton from '../buttons/ShowJsonButton';
 import BrowserPreviewButton from '../buttons/BrowserPreviewButton';
+import Button from '../buttons/Button';
 import LoadingIndicator from '../LoadingIndicator';
+import ShowJsonButton from '../buttons/ShowJsonButton';
 
 import { RECEIVING_DATA_MESSAGE } from '../../config';
 
-const ContentListView = props => {
+const ContentList = props => {
   return (
     <div>
-      <div className="ui two column grid">
-        <div className="row">
-          <div className="left floated column">
-            <h1>Content List</h1>
-          </div>
-          <div className="right floated right aligned column">
-            <Button linkTo="/contents/new"
-                    buttonType="primary"
-                    iconType="plus"
-                    tooltipText="New Content"
-                    tooltipPosition="top center">
-              New Content
-            </Button>
-          </div>
-        </div>
-      </div>
-
+      {renderPageHeader()}
       <table className="ui celled striped compact table">
         <thead>
           <tr>
@@ -44,10 +28,31 @@ const ContentListView = props => {
       </table>
 
       <LoadingIndicator isLoading={props.isLoading}
-                        message={RECEIVING_DATA_MESSAGE}/>
+                        message={RECEIVING_DATA_MESSAGE} />
     </div>
   );
 };
+
+const renderPageHeader = () => {
+  return(
+    <div className="ui two column grid">
+      <div className="row">
+        <div className="left floated column">
+          <h1>Content List</h1>
+        </div>
+        <div className="right floated right aligned column">
+          <Button linkTo="/contents/new"
+                  buttonType="primary"
+                  iconType="plus"
+                  tooltipText="New Content"
+                  tooltipPosition="left center">
+            New Content
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const renderList = props => {
   return props.contents.map(content => {
@@ -86,4 +91,4 @@ const renderList = props => {
   });
 };
 
-export default memo(ContentListView);
+export default memo(ContentList);

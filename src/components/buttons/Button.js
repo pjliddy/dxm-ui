@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Button = props => {
   const {
-    buttonType = 'secondary',  // primary | secondary | icon
+    buttonType,
     children,
     iconType,
     linkTo,

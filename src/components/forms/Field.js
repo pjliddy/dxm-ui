@@ -62,9 +62,7 @@ const Field = props => {
     );
   };
 
-  if (props.hidden) {
-    return null;
-  }
+  if (props.hidden) return null;
 
   return renderInput();
 }

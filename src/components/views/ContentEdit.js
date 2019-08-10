@@ -6,19 +6,19 @@ import Redirector from '../Redirector';
 
 import { SENDING_DATA_MESSAGE } from '../../config';
 
-const ContentEditView = props => {
+const ContentEdit = props => {
   return (
     <div>
       <Redirector path="/" />
       <h1>Edit Content</h1>
       <ContentForm content={props.content}
-                   onFormUpdate={props.updateSelectedContent}
+                   onFormCancel={props.startRedirect}
                    onFormSubmit={props.updateContent}
-                   onFormCancel={props.startRedirect}/>
+                   onFormUpdate={props.updateSelectedContent} />
       <LoadingIndicator isLoading={props.isLoading}
-                        message={SENDING_DATA_MESSAGE}/>
+                        message={SENDING_DATA_MESSAGE} />
     </div>
   );
 };
 
-export default memo(ContentEditView);
+export default memo(ContentEdit);

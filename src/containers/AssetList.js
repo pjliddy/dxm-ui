@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import {
+  deleteAsset,
   fetchAssets,
-  deleteAsset
 } from '../actions';
 
 import AssetListView from '../components/views/AssetList';
@@ -14,8 +14,8 @@ class AssetList extends React.Component {
 
   render() {
     return <AssetListView assets={this.props.assets}
-                          isLoading={this.props.isLoading}
-                          deleteAsset={this.props.deleteAsset} />;
+                          deleteAsset={this.props.deleteAsset}
+                          isLoading={this.props.isLoading} />;
   }
 }
 
@@ -27,8 +27,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  fetchAssets,
-  deleteAsset
+  deleteAsset,
+  fetchAssets
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssetList)
