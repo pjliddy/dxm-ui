@@ -57,7 +57,8 @@ const renderList = props => {
             {asset.title}
           </Link>
           <div className="description">
-            <p><strong>Date Modified: </strong>{asset.dateModified}<br />
+            <p><strong>ID: </strong>{asset.id}<br />
+            <strong>Date Modified: </strong>{asset.dateModified}<br />
             <strong>File Size: </strong>{(asset.file.size / 1024).toFixed(0)} kB<br />
             <strong>File Type: </strong>{asset.file.type}</p>
           </div>
