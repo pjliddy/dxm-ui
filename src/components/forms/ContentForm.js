@@ -51,10 +51,10 @@ const ContentForm = props => {
              onChange={handleChange}></Field>
 
       <Field type="text"
-             name="subTitle"
+             name="subtitle"
              label="Subtitle"
              placeholder="subtitle"
-             value={content.subTitle}
+             value={content.subtitle}
              required={true}
              onChange={handleChange}></Field>
 

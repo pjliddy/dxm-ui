@@ -31,7 +31,7 @@ export const INITIAL_SELECTED_CONTENT_STATE = {
   id: '',
   resourceType: CONTENT_RESOURCE,
   title: '',
-  subTitle: '',
+  subtitle: '',
   copyText: '',
   dateCreated: '',
   dateModified: ''
