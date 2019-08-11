@@ -1,4 +1,4 @@
-import { read } from '../components/api/Api';
+import * as api from '../components/api/Api';
 import { CONTENT_RESOURCE }  from '../config';
 import { DESELECT_CONTENT, FETCH_CONTENT, NEW_CONTENT, UPDATE_SELECTED_CONTENT } from './types';
 import { START_LOADING, STOP_LOADING } from './types';
@@ -7,7 +7,7 @@ export const fetchContent = id => async dispatch => {
   try {
     dispatch({ type: START_LOADING });
 
-    const response = await read(id, CONTENT_RESOURCE);
+    const response = await api.read(id, CONTENT_RESOURCE);
 
     dispatch({
       type: FETCH_CONTENT,
@@ -16,24 +16,23 @@ export const fetchContent = id => async dispatch => {
 
     dispatch({ type: STOP_LOADING });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };
 
 export const newContent = () => (dispatch, getState) => {
-  const content = getState().selectedContent;
+  // const content = getState().selectedContent;
 
   dispatch({
     type: NEW_CONTENT,
-    payload: content
+    payload: getState().selectedContent
   });
 };
 
 export const deselectContent = () => dispatch => {
-  dispatch({
-    type: DESELECT_CONTENT,
-    payload: { }
-  });
+  dispatch({ type: DESELECT_CONTENT });
 };
 
 export const updateSelectedContent = property => dispatch => {

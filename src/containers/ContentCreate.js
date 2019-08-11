@@ -4,6 +4,8 @@ import {
   createContent,
   deselectContent,
   newContent,
+  previewHtml,
+  previewJson,
   startRedirect,
   updateSelectedContent
 } from '../actions';
@@ -23,6 +25,8 @@ class ContentCreate extends React.Component {
     return <ContentCreateView content={this.props.content}
                               createContent={this.props.createContent}
                               isLoading={this.props.isLoading}
+                              previewHtml={this.props.previewHtml}
+                              previewJson={this.props.previewJson}
                               startRedirect={this.props.startRedirect}
                               updateSelectedContent={this.props.updateSelectedContent} />;
   }
@@ -40,6 +44,8 @@ const mapDispatchToProps = {
   createContent,
   deselectContent,
   newContent,
+  previewHtml,
+  previewJson,
   startRedirect,
   updateSelectedContent
  };

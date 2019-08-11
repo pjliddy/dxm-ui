@@ -3,7 +3,6 @@ import React from 'react';
 import Button from '../buttons/Button';
 import Field from './Field';
 import FilePicker from '../../containers/FilePicker';
-import ShowJsonButton from '../buttons/ShowJsonButton';
 
 const AssetForm = props => {
   const { asset, upload, isNew } = props;
@@ -83,8 +82,12 @@ const AssetForm = props => {
                 tooltipText="Cancel"
                 tooltipPosition="top center"
                 onClick={onFormCancel}>Cancel</Button>
-        <ShowJsonButton node={asset}
-                        hidden={isNew}></ShowJsonButton>
+        <Button buttonType="secondary"
+                hidden={isNew}
+                iconType="code"
+                tooltipText="Show JSON"
+                tooltipPosition="top center"
+                onClick={() => props.previewJson(asset)}>Show JSON</Button>
         <Button buttonType="primary"
                 iconType="save"
                 tooltipText="Save Asset"

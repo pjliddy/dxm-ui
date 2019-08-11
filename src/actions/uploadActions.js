@@ -3,9 +3,17 @@ import axios from 'axios';
 import uuid from 'uuid/v4';
 
 import { createAsset, updateAsset, updateSelectedAsset } from './'
-
-import { DESELECT_UPLOAD_FILE, GET_PRESIGNED_URL, SELECT_UPLOAD_FILE, SET_UPLOAD_PROGRESS, START_UPLOAD, STOP_UPLOAD, UPLOAD_FILE, UPLOAD_IS_NEW } from './types';
 import { ASSET_RESOURCE, ASSET_REPO_BUCKET } from '../config';
+import {
+  DESELECT_UPLOAD_FILE,
+  GET_PRESIGNED_URL,
+  SELECT_UPLOAD_FILE,
+  SET_UPLOAD_PROGRESS,
+  START_UPLOAD,
+  STOP_UPLOAD,
+  UPLOAD_FILE,
+  UPLOAD_IS_NEW
+} from './types';
 
 export const selectUploadFile = fileObj => dispatch => {
   dispatch({
@@ -15,9 +23,7 @@ export const selectUploadFile = fileObj => dispatch => {
 };
 
 export const deselectUploadFile = () => {
-  return {
-    type: DESELECT_UPLOAD_FILE
-  };
+  return { type: DESELECT_UPLOAD_FILE };
 };
 
 export const startUpload = () => (dispatch, getState) => {
@@ -27,7 +33,6 @@ export const startUpload = () => (dispatch, getState) => {
 
 export const getPresignedUrl = fileObj => async (dispatch, getState) => {
   try {
-
     // if state.selectedAsset has id, use it or else generate one
     const id = (getState().selectedAsset.id) ? getState().selectedAsset.id : uuid();
 
@@ -50,6 +55,8 @@ export const getPresignedUrl = fileObj => async (dispatch, getState) => {
     dispatch(uploadFile(fileObj, uploadURL));
 
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };
@@ -79,6 +86,8 @@ export const uploadFile = (fileObj, uploadUrl) => async dispatch => {
 
     dispatch(updateAssetUpload(fileObj, fileUrl));
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };

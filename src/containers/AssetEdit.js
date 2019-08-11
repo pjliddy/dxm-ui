@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   deselectAsset,
   fetchAsset,
+  previewJson,
   startRedirect,
   startUpload,
   updateSelectedAsset
@@ -22,6 +23,7 @@ class AssetEdit extends React.Component {
   render() {
     return <AssetEditView asset={this.props.asset}
                           isLoading={this.props.isLoading}
+                          previewJson={this.props.previewJson}
                           startRedirect={this.props.startRedirect}
                           startUpload={this.props.startUpload}
                           updateSelectedAsset={this.props.updateSelectedAsset}
@@ -41,6 +43,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   deselectAsset,
   fetchAsset,
+  previewJson,
   startRedirect,
   startUpload,
   updateSelectedAsset

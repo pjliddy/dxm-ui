@@ -14,7 +14,9 @@ const ContentEdit = props => {
       <ContentForm content={props.content}
                    onFormCancel={props.startRedirect}
                    onFormSubmit={props.updateContent}
-                   onFormUpdate={props.updateSelectedContent} />
+                   onFormUpdate={props.updateSelectedContent}
+                   previewHtml={props.previewHtml}
+                   previewJson={props.previewJson}/>
       <LoadingIndicator isLoading={props.isLoading}
                         message={SENDING_DATA_MESSAGE} />
     </div>

@@ -1,13 +1,21 @@
-import { read } from '../components/api/Api';
+import * as api from '../components/api/Api';
+
 import { ASSET_RESOURCE }  from '../config';
-import { DESELECT_ASSET, FETCH_ASSET, NEW_ASSET, UPDATE_SELECTED_ASSET, UPLOAD_IS_NEW } from './types';
-import { START_LOADING, STOP_LOADING } from './types';
+import {
+  DESELECT_ASSET,
+  FETCH_ASSET,
+  NEW_ASSET,
+  START_LOADING,
+  STOP_LOADING,
+  UPDATE_SELECTED_ASSET,
+  UPLOAD_IS_NEW
+} from './types';
 
 export const fetchAsset = id => async dispatch => {
   try {
     dispatch({ type: START_LOADING });
 
-    const response = await read(id, ASSET_RESOURCE);
+    const response = await api.read(id, ASSET_RESOURCE);
 
     dispatch({
       type: FETCH_ASSET,
@@ -16,32 +24,28 @@ export const fetchAsset = id => async dispatch => {
 
     dispatch({ type: STOP_LOADING });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };
 
 export const newAsset = () => async (dispatch, getState) => {
   try {
-    const asset = getState().selectedAsset;
-
-    dispatch({
-      type: UPLOAD_IS_NEW
-    })
-
+    dispatch({ type: UPLOAD_IS_NEW });
     dispatch({
       type: NEW_ASSET,
-      payload: asset
+      payload: getState().selectedAsset
     });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };
 
 export const deselectAsset = () => dispatch => {
-  dispatch({
-    type: DESELECT_ASSET,
-    payload: { }
-  });
+  dispatch({ type: DESELECT_ASSET });
 };
 
 export const updateSelectedAsset = property => dispatch => {

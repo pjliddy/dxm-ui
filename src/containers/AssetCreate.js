@@ -4,6 +4,7 @@ import {
   createAsset,
   deselectAsset,
   newAsset,
+  previewJson,
   startRedirect,
   startUpload,
   updateSelectedAsset
@@ -23,6 +24,7 @@ class AssetCreate extends React.Component {
   render() {
     return <AssetCreateView asset={this.props.asset}
                             isLoading={this.props.isLoading}
+                            previewJson={this.props.previewJson}
                             startRedirect={this.props.startRedirect}
                             startUpload={this.props.startUpload}
                             updateSelectedAsset={this.props.updateSelectedAsset}
@@ -43,6 +45,7 @@ const mapDispatchToProps = {
   createAsset,
   deselectAsset,
   newAsset,
+  previewJson,
   startRedirect,
   startUpload,
   updateSelectedAsset

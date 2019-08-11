@@ -15,6 +15,7 @@ const AssetEdit = props => {
                  onFormCancel={props.startRedirect}
                  onFormSubmit={props.startUpload}
                  onFormUpdate={props.updateSelectedAsset}
+                 previewJson={props.previewJson}
                  upload={props.upload} />
       <LoadingIndicator isLoading={props.isLoading}
                         message={SENDING_DATA_MESSAGE} />

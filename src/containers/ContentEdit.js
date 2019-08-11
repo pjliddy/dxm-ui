@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import {
-  fetchContent,
-  updateContent,
   deselectContent,
-  updateSelectedContent,
-  startRedirect
+  fetchContent,
+  previewHtml,
+  previewJson,
+  startRedirect,
+  updateContent,
+  updateSelectedContent
 } from '../actions';
 
 import ContentEditView from '../components/views/ContentEdit';
@@ -22,6 +24,8 @@ class ContentEdit extends React.Component {
   render() {
     return <ContentEditView content={this.props.content}
                             isLoading={this.props.isLoading}
+                            previewHtml={this.props.previewHtml}
+                            previewJson={this.props.previewJson}
                             startRedirect={this.props.startRedirect}
                             updateContent={this.props.updateContent}
                             updateSelectedContent={this.props.updateSelectedContent} />;
@@ -37,11 +41,13 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  fetchContent,
-  updateContent,
   deselectContent,
-  updateSelectedContent,
-  startRedirect
+  fetchContent,
+  previewHtml,
+  previewJson,
+  startRedirect,
+  updateContent,
+  updateSelectedContent
 };
 
 export default connect(mapStateToProps, mapDispatchToProps) (ContentEdit);

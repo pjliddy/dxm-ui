@@ -2,9 +2,9 @@ import { API_BASE_URL }  from '../../config';
 
 // convert to axios since it's used for progress on uploads
 
-// POST includes params for getSignedUrl for S3 authentication
 export const create = (body, resource, params) => {
   const url = new URL(`${API_BASE_URL}/${resource}`);
+  // POST includes params for getSignedUrl for S3 authentication
   url.search = new URLSearchParams(params);
 
   return fetch(url, {

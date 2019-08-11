@@ -16,6 +16,10 @@ export const DELETE_CONTENT = 'DELETE_CONTENT';
 export const FETCH_CONTENTS = 'FETCH_CONTENTS';
 export const UPDATE_CONTENT = 'UPDATE_CONTENT';
 
+// preview action types
+export const PREVIEW_HTML = 'PREVIEW_HTML';
+export const PREVIEW_JSON = 'PREVIEW_JSON';
+
 // selected asset actions
 export const DESELECT_ASSET = 'DESELECT_ASSET';
 export const FETCH_ASSET = 'FETCH_ASSET';

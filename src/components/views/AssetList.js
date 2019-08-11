@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import Button from '../buttons/Button';
 import LoadingIndicator from '../LoadingIndicator';
-import ShowJsonButton from '../buttons/ShowJsonButton';
 
 import { ASSET_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../config';
 
@@ -64,7 +63,13 @@ const renderList = props => {
           </div>
         </div>
         <div className="ui icon buttons right floated content">
-          <ShowJsonButton node={asset} type="icon"/>
+          <Button buttonType="icon"
+                  iconType="code"
+                  tooltipText="Show JSON"
+                  tooltipPosition="top center"
+                  onClick={() => props.previewJson(asset)}>
+            Show JSON
+          </Button>
           <Button buttonType="icon"
                   iconType="trash alternate outline"
                   onClick={() => props.deleteAsset(asset.id)}

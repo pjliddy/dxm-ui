@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {
   deleteContent,
-  fetchContents
+  fetchContents,
+  previewHtml,
+  previewJson
 } from '../actions';
 
 import ContentListView from '../components/views/ContentList';
@@ -15,7 +17,9 @@ class ContentList extends React.Component {
   render() {
     return <ContentListView contents={this.props.contents}
                             deleteContent={this.props.deleteContent}
-                            isLoading={this.props.isLoading} />;
+                            isLoading={this.props.isLoading}
+                            previewHtml={this.props.previewHtml}
+                            previewJson={this.props.previewJson} />;
   }
 }
 
@@ -28,7 +32,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   deleteContent,
-  fetchContents
+  fetchContents,
+  previewHtml,
+  previewJson
  };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentList)

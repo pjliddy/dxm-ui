@@ -1,4 +1,9 @@
-import { START_LOADING, STOP_LOADING, START_REDIRECT, STOP_REDIRECT } from './types';
+import {
+  START_LOADING,
+  START_REDIRECT,
+  STOP_LOADING,
+  STOP_REDIRECT 
+} from './types';
 
 export const startLoading = () => {
   return { type: START_LOADING };

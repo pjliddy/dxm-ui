@@ -5,12 +5,15 @@ const Button = props => {
   const {
     buttonType,
     children,
+    hidden,
     iconType,
     linkTo,
     onClick,
     tooltipPosition,
     tooltipText,
   } = props;
+
+  if (hidden) return null;
 
   let buttonStyle = '';
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {
   deleteAsset,
   fetchAssets,
+  previewJson
 } from '../actions';
 
 import AssetListView from '../components/views/AssetList';
@@ -15,7 +16,8 @@ class AssetList extends React.Component {
   render() {
     return <AssetListView assets={this.props.assets}
                           deleteAsset={this.props.deleteAsset}
-                          isLoading={this.props.isLoading} />;
+                          isLoading={this.props.isLoading}
+                          previewJson={this.props.previewJson} />;
   }
 }
 
@@ -28,7 +30,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   deleteAsset,
-  fetchAssets
+  fetchAssets,
+  previewJson
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssetList)

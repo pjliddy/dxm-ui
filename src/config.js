@@ -13,33 +13,29 @@ export const SENDING_DATA_MESSAGE = 'Sending Data...';
 // Initial Reducer States
 export const INITIAL_ASSETS_STATE = [];
 export const INITIAL_CONTENTS_STATE = [];
-
 export const INITIAL_METADATA_STATE = {
   isLoading: false,
   redirect: false
-  // keep track of isNew here?
 };
-
+export const INITIAL_PREVIEW_STATE = { };
 export const INITIAL_SELECTED_ASSET_STATE = {
   id: '',
-  resourceType: 'assets',
+  resourceType: ASSET_RESOURCE,
   title: '',
   url: '',
   file: { },
   dateCreated: '',
   dateModified: ''
 };
-
 export const INITIAL_SELECTED_CONTENT_STATE = {
   id: '',
-  resourceType: 'contents',
+  resourceType: CONTENT_RESOURCE,
   title: '',
   subTitle: '',
   copyText: '',
   dateCreated: '',
   dateModified: ''
 };
-
 export const INITIAL_UPLOAD_STATE = {
   fileObj: { },
   fileUrl: '',

@@ -1,7 +1,15 @@
 import * as api from '../components/api/Api';
+
 import { ASSET_RESOURCE }  from '../config';
-import { CREATE_ASSET, DELETE_ASSET, FETCH_ASSETS, UPDATE_ASSET } from './types';
-import { START_LOADING, STOP_LOADING, START_REDIRECT } from './types';
+import {
+  CREATE_ASSET,
+  DELETE_ASSET,
+  FETCH_ASSETS,
+  START_LOADING,
+  START_REDIRECT,
+  STOP_LOADING,
+  UPDATE_ASSET
+} from './types';
 
 export const fetchAssets = () => async dispatch => {
   try {
@@ -16,6 +24,8 @@ export const fetchAssets = () => async dispatch => {
 
     dispatch({ type: STOP_LOADING });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };
@@ -35,6 +45,8 @@ export const createAsset = () => async (dispatch, getState) => {
     dispatch({ type: STOP_LOADING });
     dispatch({ type: START_REDIRECT });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };
@@ -54,6 +66,8 @@ export const updateAsset = () => async (dispatch, getState) => {
     dispatch({ type: STOP_LOADING });
     dispatch({ type: START_REDIRECT });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };
@@ -66,11 +80,13 @@ export const deleteAsset = id => async dispatch => {
 
     dispatch({
       type: DELETE_ASSET,
-      payload: { id: id }
+      payload: { id }
     });
 
     dispatch({ type: STOP_LOADING });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 

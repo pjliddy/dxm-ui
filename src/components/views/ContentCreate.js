@@ -15,7 +15,9 @@ const ContentCreate = props => {
                    isNew={true}
                    onFormCancel={props.startRedirect}
                    onFormSubmit={props.createContent}
-                   onFormUpdate={props.updateSelectedContent} />
+                   onFormUpdate={props.updateSelectedContent}
+                   previewHtml={props.previewHtml}
+                   previewJson={props.previewJson}/>
       <LoadingIndicator isLoading={props.isLoading}
                         message={SENDING_DATA_MESSAGE} />
      </div>

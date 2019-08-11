@@ -1,5 +1,10 @@
 import { INITIAL_CONTENTS_STATE } from '../config';
-import { CREATE_CONTENT, DELETE_CONTENT, FETCH_CONTENTS, UPDATE_CONTENT } from '../actions/types';
+import {
+  CREATE_CONTENT,
+  DELETE_CONTENT,
+  FETCH_CONTENTS,
+  UPDATE_CONTENT
+} from '../actions/types';
 
 export default (state = INITIAL_CONTENTS_STATE, action) => {
   switch (action.type) {

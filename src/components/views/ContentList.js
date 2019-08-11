@@ -1,10 +1,8 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom';
 
-import BrowserPreviewButton from '../buttons/BrowserPreviewButton';
 import Button from '../buttons/Button';
 import LoadingIndicator from '../LoadingIndicator';
-import ShowJsonButton from '../buttons/ShowJsonButton';
 
 import { CONTENT_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../config';
 
@@ -76,8 +74,20 @@ const renderList = props => {
         </td>
         <td className="collapsing">
           <div className="ui icon buttons">
-            <ShowJsonButton node={content} type="icon"/>
-            <BrowserPreviewButton node={content} type="icon"/>
+            <Button buttonType="icon"
+                    iconType="code"
+                    tooltipText="Show JSON"
+                    tooltipPosition="top center"
+                    onClick={() => props.previewJson(content)}>
+              Show JSON
+            </Button>
+            <Button buttonType="icon"
+                    iconType="desktop"
+                    tooltipText="Preview in Browser"
+                    tooltipPosition="top center"
+                    onClick={() => props.previewHtml(content)}>
+              Preview in Browser
+            </Button>
             <Button buttonType="icon"
                     iconType="trash alternate outline"
                     tooltipText="Delete Content"

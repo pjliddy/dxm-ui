@@ -1,5 +1,14 @@
 import { INITIAL_UPLOAD_STATE } from '../config';
-import { DESELECT_UPLOAD_FILE, GET_PRESIGNED_URL, SELECT_UPLOAD_FILE, SET_UPLOAD_PROGRESS, START_UPLOAD, STOP_UPLOAD, UPLOAD_FILE,UPLOAD_IS_NEW } from '../actions/types';
+import {
+  DESELECT_UPLOAD_FILE,
+  GET_PRESIGNED_URL,
+  SELECT_UPLOAD_FILE,
+  SET_UPLOAD_PROGRESS,
+  START_UPLOAD,
+  STOP_UPLOAD,
+  UPLOAD_FILE,
+  UPLOAD_IS_NEW 
+} from '../actions/types';
 
 export default (state = INITIAL_UPLOAD_STATE, action) => {
   switch (action.type) {

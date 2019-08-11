@@ -1,7 +1,15 @@
 import * as api from '../components/api/Api';
+
 import { CONTENT_RESOURCE }  from '../config';
-import { CREATE_CONTENT, DELETE_CONTENT, FETCH_CONTENTS, UPDATE_CONTENT } from './types';
-import { START_LOADING, STOP_LOADING, START_REDIRECT } from './types';
+import {
+  CREATE_CONTENT,
+  DELETE_CONTENT,
+  FETCH_CONTENTS,
+  START_LOADING,
+  START_REDIRECT,
+  STOP_LOADING,
+  UPDATE_CONTENT
+} from './types';
 
 export const fetchContents = () => async dispatch => {
   try {
@@ -16,6 +24,8 @@ export const fetchContents = () => async dispatch => {
 
     dispatch({ type: STOP_LOADING });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };
@@ -35,6 +45,8 @@ export const createContent = () => async (dispatch, getState) => {
     dispatch({ type: STOP_LOADING });
     dispatch({ type: START_REDIRECT });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };
@@ -54,13 +66,13 @@ export const updateContent = () => async (dispatch, getState) => {
     dispatch({ type: STOP_LOADING });
     dispatch({ type: START_REDIRECT });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };
 
-// have API delete return id as confirmation?
-
-export const deleteContent = (id) => async dispatch => {
+export const deleteContent = id => async dispatch => {
   try {
     dispatch({ type: START_LOADING });
 
@@ -73,6 +85,8 @@ export const deleteContent = (id) => async dispatch => {
 
     dispatch({ type: STOP_LOADING });
   } catch (error) {
+    // handle errors
+    console.log(error);
     return error;
   }
 };

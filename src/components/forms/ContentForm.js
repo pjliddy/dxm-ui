@@ -2,8 +2,6 @@ import React from 'react';
 
 import Button from '../buttons/Button';
 import Field from './Field';
-import ShowJsonButton from '../buttons/ShowJsonButton';
-import BrowserPreviewButton from '../buttons/BrowserPreviewButton';
 
 const ContentForm = props => {
   const { content, isNew } = props;
@@ -92,10 +90,18 @@ const ContentForm = props => {
                 tooltipText="Cancel"
                 tooltipPosition="top center"
                 onClick={onFormCancel}>Cancel</Button>
-        <ShowJsonButton node={content}
-                        hidden={isNew}></ShowJsonButton>
-        <BrowserPreviewButton node={content}
-                              hidden={isNew}></BrowserPreviewButton>
+        <Button buttonType="secondary"
+                hidden={isNew}
+                iconType="code"
+                tooltipText="Show JSON"
+                tooltipPosition="top center"
+                onClick={() => props.previewJson(content)}>Show JSON</Button>
+        <Button buttonType="secondary"
+                hidden={isNew}
+                iconType="desktop"
+                tooltipText="Preview in Browser"
+                tooltipPosition="top center"
+                onClick={() => props.previewHtml(content)}>Preview in Browser</Button>
         <Button buttonType="primary"
                 iconType="save"
                 tooltipText="Save Content"
