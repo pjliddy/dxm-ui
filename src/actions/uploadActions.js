@@ -1,9 +1,10 @@
 import * as api from '../components/api/Api';
 import axios from 'axios';
+import uuid from 'uuid/v4';
 
 import { createAsset, updateAsset, updateSelectedAsset } from './'
 
-import { DESELECT_UPLOAD_FILE, GET_PRESIGNED_URL, SELECT_UPLOAD_FILE, SET_UPLOAD_PROGRESS, START_UPLOAD, STOP_UPLOAD, UPLOAD_FILE } from './types';
+import { DESELECT_UPLOAD_FILE, GET_PRESIGNED_URL, SELECT_UPLOAD_FILE, SET_UPLOAD_PROGRESS, START_UPLOAD, STOP_UPLOAD, UPLOAD_FILE, UPLOAD_IS_NEW } from './types';
 import { ASSET_RESOURCE, ASSET_REPO_BUCKET } from '../config';
 
 export const selectUploadFile = fileObj => dispatch => {
@@ -24,20 +25,26 @@ export const startUpload = () => (dispatch, getState) => {
   dispatch(getPresignedUrl(getState().upload.fileObj));
 };
 
-export const getPresignedUrl = fileObj => async dispatch => {
+export const getPresignedUrl = fileObj => async (dispatch, getState) => {
   try {
+
+    // if state.selectedAsset has id, use it or else generate one
+    const id = (getState().selectedAsset.id) ? getState().selectedAsset.id : uuid();
+
+    dispatch(updateSelectedAsset({ 'name': 'id', 'value': id }));
+
     const s3Params = {
       'Bucket': ASSET_REPO_BUCKET,
-      'Key':  `${ASSET_RESOURCE}/${fileObj.name}`,
+      'Key':  `${ASSET_RESOURCE}/${id}/${fileObj.name}`,
       'ACL': 'public-read',
       'ContentType': fileObj.type
     };
     const urlParams = { getSignedUrl: true };
-    const { uploadURL } = await api.create(s3Params, ASSET_RESOURCE, urlParams);
+    const { uploadURL }= await api.create(s3Params, ASSET_RESOURCE, urlParams);
 
     dispatch({
       type: GET_PRESIGNED_URL,
-      payload: uploadURL
+      payload: { uploadURL, id }
     });
 
     dispatch(uploadFile(fileObj, uploadURL));
@@ -93,10 +100,17 @@ export const stopUpload = () => async (dispatch, getState) => {
     dispatch({ type: STOP_UPLOAD });
 
     const asset = getState().selectedAsset;
-    asset.id ? await dispatch(updateAsset(asset)) : await dispatch(createAsset(asset));
+
+    getState().upload.isNew
+      ? await dispatch(createAsset(asset))
+      : await dispatch(updateAsset(asset));
 
     dispatch(deselectUploadFile());
   } catch (error) {
     return error;
   }
+};
+
+export const uploadIsNew = () => {
+  return { type: UPLOAD_IS_NEW };
 };

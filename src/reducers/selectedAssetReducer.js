@@ -10,7 +10,10 @@ export default (state = INITIAL_SELECTED_ASSET_STATE, action) => {
     case DESELECT_ASSET:
       return INITIAL_SELECTED_ASSET_STATE;
     case UPDATE_SELECTED_ASSET:
-      return { ...state, [action.payload.name]: action.payload.value }
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value
+      }
     default:
       return state;
   }

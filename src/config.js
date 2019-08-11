@@ -17,6 +17,7 @@ export const INITIAL_CONTENTS_STATE = [];
 export const INITIAL_METADATA_STATE = {
   isLoading: false,
   redirect: false
+  // keep track of isNew here?
 };
 
 export const INITIAL_SELECTED_ASSET_STATE = {
@@ -42,6 +43,8 @@ export const INITIAL_SELECTED_CONTENT_STATE = {
 export const INITIAL_UPLOAD_STATE = {
   fileObj: { },
   fileUrl: '',
+  id: '',
+  isNew: false,
   isUploading: false,
   progress: 0,
   uploadUrl: ''

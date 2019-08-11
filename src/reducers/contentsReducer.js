@@ -5,8 +5,10 @@ export default (state = INITIAL_CONTENTS_STATE, action) => {
   switch (action.type) {
     case FETCH_CONTENTS:
       // sort by name for now
-      const sortFunction = (a, b) => (a.title.toLowerCase() > b.title.toLowerCase())
-        ? 1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0);
+      const sortFunction = (a, b) => {
+        return (a.title.toLowerCase() > b.title.toLowerCase())
+          ? 1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0)
+      };
 
       return action.payload.sort((a,b) => sortFunction(a,b));
     case CREATE_CONTENT:

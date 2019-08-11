@@ -36,3 +36,4 @@ export const SET_UPLOAD_PROGRESS = 'SET_UPLOAD_PROGRESS';
 export const START_UPLOAD = 'START_UPLOAD';
 export const STOP_UPLOAD = 'STOP_UPLOAD';
 export const UPLOAD_FILE = 'UPLOAD_FILE';
+export const UPLOAD_IS_NEW = 'UPLOAD_IS_NEW';

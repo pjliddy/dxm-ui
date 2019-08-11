@@ -14,7 +14,7 @@ const FilePicker = props => {
 
       {props.isUploading && <p>Uploading: {props.progress}%</p>}
 
-      {props.preview ? (
+      {!props.isUploading && props.preview ? (
         <div>
           <div className="ui hidden divider"></div>
           <img className="ui big image"
