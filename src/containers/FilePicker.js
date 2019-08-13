@@ -25,8 +25,7 @@ class FilePicker extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    asset: state.selectedAsset,
-    upload: state.upload,
+    asset: state.selectedAsset
   };
 }
 
