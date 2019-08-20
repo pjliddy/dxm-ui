@@ -1,6 +1,8 @@
 import React from 'react';
 
 const Field = props => {
+  if (props.hidden) return null;
+
   const handleChange = (event) => {
     if (!props.readOnly) props.onChange(event);
   };
@@ -61,8 +63,6 @@ const Field = props => {
       </div>
     );
   };
-
-  if (props.hidden) return null;
 
   return renderInput();
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Button from '../buttons/Button';
 import Field from './Field';
-import FilePicker from '../../containers/FilePicker';
+import FilePicker from './FilePicker/FilePicker';
 
 const AssetForm = props => {
   const { asset, upload, isNew } = props;

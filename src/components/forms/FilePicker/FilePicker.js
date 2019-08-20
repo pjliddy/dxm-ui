@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import {
   deselectUploadFile,
   selectUploadFile
-} from '../actions';
+} from '../../../actions';
 
-import FilePickerView from '../components/forms/FilePicker';
+import FilePickerView from './FilePickerView';
 
 class FilePicker extends React.Component {
   componentWillUnmount() {

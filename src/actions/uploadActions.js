@@ -28,13 +28,17 @@ export const deselectUploadFile = () => {
 
 export const startUpload = () => (dispatch, getState) => {
   dispatch({ type: START_UPLOAD });
-  dispatch(getPresignedUrl(getState().upload.fileObj));
+  dispatch(getPresignedUrl());
 };
 
-export const getPresignedUrl = fileObj => async (dispatch, getState) => {
+export const getPresignedUrl = () => async (dispatch, getState) => {
   try {
+    const fileObj = getState().upload.fileObj;
+
     // if state.selectedAsset has id, use it or else generate one
-    const id = (getState().selectedAsset.id) ? getState().selectedAsset.id : uuid();
+    const id = getState().selectedAsset.id
+      ? getState().selectedAsset.id
+      : uuid();
 
     dispatch(updateSelectedAsset({ 'name': 'id', 'value': id }));
 
@@ -45,14 +49,14 @@ export const getPresignedUrl = fileObj => async (dispatch, getState) => {
       'ContentType': fileObj.type
     };
     const urlParams = { getSignedUrl: true };
-    const { uploadURL }= await api.create(s3Params, ASSET_RESOURCE, urlParams);
+    const { uploadURL } = await api.create(s3Params, ASSET_RESOURCE, urlParams);
 
     dispatch({
       type: GET_PRESIGNED_URL,
-      payload: { uploadURL, id }
+      payload: { uploadUrl: uploadURL, id }
     });
 
-    dispatch(uploadFile(fileObj, uploadURL));
+    dispatch(uploadFile());
 
   } catch (error) {
     // handle errors
@@ -61,8 +65,11 @@ export const getPresignedUrl = fileObj => async (dispatch, getState) => {
   }
 };
 
-export const uploadFile = (fileObj, uploadUrl) => async dispatch => {
+export const uploadFile = () => async (dispatch, getState) => {
   try {
+    const fileObj = getState().upload.fileObj;
+    const uploadUrl = getState().upload.uploadUrl;
+
     const config = {
       headers: {
         'ACL': 'public-read',
@@ -84,7 +91,7 @@ export const uploadFile = (fileObj, uploadUrl) => async dispatch => {
       payload: fileUrl
     });
 
-    dispatch(updateAssetUpload(fileObj, fileUrl));
+    dispatch(updateAssetUpload(fileUrl));
   } catch (error) {
     // handle errors
     console.log(error);
@@ -92,7 +99,9 @@ export const uploadFile = (fileObj, uploadUrl) => async dispatch => {
   }
 };
 
-export const updateAssetUpload = (fileObj, url) => dispatch => {
+export const updateAssetUpload = url => (dispatch, getState) => {
+  const fileObj = getState().upload.fileObj;
+
   const fileData = {
     name: fileObj.name,
     size: fileObj.size,
