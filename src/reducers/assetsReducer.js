@@ -4,7 +4,7 @@ import {
   DELETE_ASSET,
   FETCH_ASSETS,
   UPDATE_ASSET
-} from '../actions/types';
+} from '../config';
 
 export default (state = INITIAL_ASSETS_STATE, action) => {
   switch (action.type) {

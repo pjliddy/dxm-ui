@@ -9,7 +9,7 @@ import {
   START_REDIRECT,
   STOP_LOADING,
   UPDATE_CONTENT
-} from './types';
+} from '../config';
 
 export const fetchContents = () => async dispatch => {
   try {

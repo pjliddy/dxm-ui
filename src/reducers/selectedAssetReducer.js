@@ -4,14 +4,15 @@ import {
   FETCH_ASSET,
   NEW_ASSET,
   UPDATE_SELECTED_ASSET
-} from '../actions/types';
+} from '../config';
 
 export default (state = INITIAL_SELECTED_ASSET_STATE, action) => {
   switch (action.type) {
     case FETCH_ASSET:
       return action.payload;
     case NEW_ASSET:
-        return action.payload;
+      // use INITIAL_SELECTED_ASSET_STATE & no payload?
+      return action.payload;
     case DESELECT_ASSET:
       return INITIAL_SELECTED_ASSET_STATE;
     case UPDATE_SELECTED_ASSET:

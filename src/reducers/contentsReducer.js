@@ -4,7 +4,7 @@ import {
   DELETE_CONTENT,
   FETCH_CONTENTS,
   UPDATE_CONTENT
-} from '../actions/types';
+} from '../config';
 
 export default (state = INITIAL_CONTENTS_STATE, action) => {
   switch (action.type) {

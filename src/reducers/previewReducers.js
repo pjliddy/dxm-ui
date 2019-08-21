@@ -1,5 +1,5 @@
 import { INITIAL_PREVIEW_STATE } from '../config';
-import { PREVIEW_HTML, PREVIEW_JSON } from '../actions/types';
+import { PREVIEW_HTML, PREVIEW_JSON } from '../config';
 
 export default (state = INITIAL_PREVIEW_STATE, action) => {
   switch (action.type) {

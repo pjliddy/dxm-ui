@@ -7,8 +7,8 @@ import {
   START_UPLOAD,
   STOP_UPLOAD,
   UPLOAD_FILE,
-  UPLOAD_IS_NEW 
-} from '../actions/types';
+  UPLOAD_IS_NEW
+} from '../config';
 
 export default (state = INITIAL_UPLOAD_STATE, action) => {
   switch (action.type) {

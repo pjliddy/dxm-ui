@@ -13,7 +13,7 @@ import {
   STOP_UPLOAD,
   UPLOAD_FILE,
   UPLOAD_IS_NEW
-} from './types';
+} from '../config';
 
 export const selectUploadFile = fileObj => dispatch => {
   dispatch({

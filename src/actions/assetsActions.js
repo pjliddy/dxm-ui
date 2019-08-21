@@ -9,7 +9,7 @@ import {
   START_REDIRECT,
   STOP_LOADING,
   UPDATE_ASSET
-} from './types';
+} from '../config';
 
 export const fetchAssets = () => async dispatch => {
   try {

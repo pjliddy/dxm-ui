@@ -4,7 +4,7 @@ import {
   FETCH_CONTENT,
   NEW_CONTENT,
   UPDATE_SELECTED_CONTENT
-} from '../actions/types';
+} from '../config';
 
 export default (state = INITIAL_SELECTED_CONTENT_STATE, action) => {
   switch (action.type) {

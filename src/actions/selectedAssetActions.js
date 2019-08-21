@@ -1,6 +1,6 @@
 import * as api from '../components/api/Api';
 
-import { ASSET_RESOURCE }  from '../config';
+import { ASSET_RESOURCE } from '../config';
 import {
   DESELECT_ASSET,
   FETCH_ASSET,
@@ -9,7 +9,7 @@ import {
   STOP_LOADING,
   UPDATE_SELECTED_ASSET,
   UPLOAD_IS_NEW
-} from './types';
+} from '../config';
 
 export const fetchAsset = id => async dispatch => {
   try {

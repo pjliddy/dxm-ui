@@ -4,7 +4,7 @@ import {
   STOP_LOADING,
   START_REDIRECT,
   STOP_REDIRECT
-} from '../actions/types';
+} from '../config';
 
 export default (state = INITIAL_METADATA_STATE, action) => {
   switch (action.type) {

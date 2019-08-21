@@ -8,8 +8,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './components/App';
 import reducers from './reducers';
 
-// const store = createStore(reducers, applyMiddleware(thunk));
-
 const store = createStore(reducers, composeWithDevTools(
   applyMiddleware(thunk)
 ));
