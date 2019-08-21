@@ -1,12 +1,12 @@
 import React, { memo } from 'react'
 
-import ContentForm from '../forms/ContentForm';
-import LoadingIndicator from '../LoadingIndicator';
-import Redirector from '../Redirector';
+import ContentForm from '../../forms/ContentForm';
+import LoadingIndicator from '../../LoadingIndicator';
+import Redirector from '../../Redirector';
 
-import { SENDING_DATA_MESSAGE } from '../../config';
+import { SENDING_DATA_MESSAGE } from '../../../config';
 
-const ContentCreate = props => {
+const ContentCreateView = props => {
   return (
     <div>
       <Redirector path="/" />
@@ -23,4 +23,4 @@ const ContentCreate = props => {
      </div>
   );
 }
-export default memo(ContentCreate);
+export default memo(ContentCreateView);

@@ -8,9 +8,9 @@ import {
   startRedirect,
   startUpload,
   updateSelectedAsset
-} from '../actions';
+} from '../../../actions';
 
-import AssetCreateView from '../components/views/AssetCreate';
+import AssetCreateView from './AssetCreateView';
 
 class AssetCreate extends React.Component {
   componentDidMount() {

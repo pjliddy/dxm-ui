@@ -8,9 +8,9 @@ import {
   startRedirect,
   updateContent,
   updateSelectedContent
-} from '../actions';
+} from '../../../actions';
 
-import ContentEditView from '../components/views/ContentEdit';
+import ContentEditView from './ContentEditView';
 
 class ContentEdit extends React.Component {
   componentDidMount() {

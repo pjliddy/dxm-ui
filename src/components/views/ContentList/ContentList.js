@@ -5,9 +5,9 @@ import {
   fetchContents,
   previewHtml,
   previewJson
-} from '../actions';
+} from '../../../actions';
 
-import ContentListView from '../components/views/ContentList';
+import ContentListView from './ContentListView';
 
 class ContentList extends React.Component {
   componentDidMount() {

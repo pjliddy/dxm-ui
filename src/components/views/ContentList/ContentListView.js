@@ -1,12 +1,12 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom';
 
-import Button from '../buttons/Button';
-import LoadingIndicator from '../LoadingIndicator';
+import Button from '../../buttons/Button';
+import LoadingIndicator from '../../LoadingIndicator';
 
-import { CONTENT_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../config';
+import { CONTENT_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../../config';
 
-const ContentList = props => {
+const ContentListView = props => {
   return (
     <div>
       {renderPageHeader()}
@@ -101,4 +101,4 @@ const renderList = props => {
   });
 };
 
-export default memo(ContentList);
+export default memo(ContentListView);

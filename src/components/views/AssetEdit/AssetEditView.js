@@ -1,12 +1,12 @@
 import React, { memo } from 'react'
 
-import AssetForm from '../forms/AssetForm';
-import LoadingIndicator from '../LoadingIndicator';
-import Redirector from '../Redirector';
+import AssetForm from '../../forms/AssetForm';
+import LoadingIndicator from '../../LoadingIndicator';
+import Redirector from '../../Redirector';
 
-import { SENDING_DATA_MESSAGE } from '../../config';
+import { SENDING_DATA_MESSAGE } from '../../../config';
 
-const AssetEdit = props => {
+const AssetEditView = props => {
   return (
     <div>
       <Redirector path="/assets" />
@@ -23,4 +23,4 @@ const AssetEdit = props => {
   );
 }
 
-export default memo(AssetEdit);
+export default memo(AssetEditView);

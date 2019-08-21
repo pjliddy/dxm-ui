@@ -4,9 +4,9 @@ import {
   deleteAsset,
   fetchAssets,
   previewJson
-} from '../actions';
+} from '../../../actions';
 
-import AssetListView from '../components/views/AssetList';
+import AssetListView from './AssetListView';
 
 class AssetList extends React.Component {
   componentDidMount() {

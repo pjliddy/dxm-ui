@@ -2,12 +2,12 @@ import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 
 import Header from './Header';
-import ContentList from '../containers/ContentList';
-import ContentCreate from '../containers/ContentCreate';
-import ContentEdit from '../containers/ContentEdit';
-import AssetList from '../containers/AssetList';
-import AssetCreate from '../containers/AssetCreate';
-import AssetEdit from '../containers/AssetEdit';
+import ContentList from './views/ContentList/ContentList';
+import ContentCreate from './views/ContentCreate/ContentCreate';
+import ContentEdit from './views/ContentEdit/ContentEdit';
+import AssetList from './views/AssetList/AssetList';
+import AssetCreate from './views/AssetCreate/AssetCreate';
+import AssetEdit from './views/AssetEdit/AssetEdit';
 
 const App = () => {
   const containerStyle = { margin: '10px 0 20px' };

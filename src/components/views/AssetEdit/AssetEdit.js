@@ -7,9 +7,9 @@ import {
   startRedirect,
   startUpload,
   updateSelectedAsset
- } from '../actions';
+} from '../../../actions';
 
-import AssetEditView from '../components/views/AssetEdit';
+import AssetEditView from './AssetEditView';
 
 class AssetEdit extends React.Component {
   componentDidMount() {

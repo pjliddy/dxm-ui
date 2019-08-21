@@ -8,9 +8,9 @@ import {
   previewJson,
   startRedirect,
   updateSelectedContent
-} from '../actions';
+} from '../../../actions';
 
-import ContentCreateView from '../components/views/ContentCreate';
+import ContentCreateView from './ContentCreateView';
 
 class ContentCreate extends React.Component {
   componentDidMount() {
