@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom';
 
-import Button from '../../buttons/Button';
+import Button from '../../forms/Button';
 import LoadingIndicator from '../../LoadingIndicator';
 
 import { ASSET_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../../config';

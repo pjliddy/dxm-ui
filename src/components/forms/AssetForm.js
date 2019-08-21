@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from '../buttons/Button';
+import Button from './Button';
 import Field from './Field';
 import FilePicker from './FilePicker/FilePicker';
 

@@ -2,6 +2,8 @@ import { API_BASE_URL }  from '../../config';
 
 // convert to axios since it's used for progress on uploads
 
+// reverse param order since all have resource but additional payload is optional
+
 export const create = (body, resource, params) => {
   const url = new URL(`${API_BASE_URL}/${resource}`);
   // POST includes params for getSignedUrl for S3 authentication
@@ -22,7 +24,7 @@ export const create = (body, resource, params) => {
     );
 };
 
-export const index = (resource) => {
+export const index = resource => {
   return fetch(`${API_BASE_URL}/${resource}`)
     .then(response => response.json())
     .then(
@@ -34,6 +36,8 @@ export const index = (resource) => {
       }
     );
 };
+
+// reverse param order since all have resource but additional payload is optional
 
 export const read = (id, resource) => {
   return fetch(`${API_BASE_URL}/${resource}/${id}`)
@@ -47,6 +51,8 @@ export const read = (id, resource) => {
       }
     );
 };
+
+// reverse param order since all have resource but additional payload is optional
 
 export const update = (body, resource) => {
   return fetch(`${API_BASE_URL}/${resource}/${body.id}`, {
@@ -63,6 +69,8 @@ export const update = (body, resource) => {
       }
     );
 };
+
+// reverse param order since all have resource but additional payload is optional
 
 export const destroy = (id, resource) => {
   return fetch(`${API_BASE_URL}/${resource}/${id}`, {
