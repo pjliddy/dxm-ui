@@ -34,8 +34,7 @@ export const newAsset = () => async (dispatch, getState) => {
   try {
     dispatch({ type: UPLOAD_IS_NEW });
     dispatch({
-      type: NEW_ASSET,
-      payload: getState().selectedAsset
+      type: NEW_ASSET
     });
   } catch (error) {
     // handle errors

@@ -15,6 +15,10 @@ import {
   UPLOAD_IS_NEW
 } from '../config';
 
+export const uploadIsNew = () => {
+  return { type: UPLOAD_IS_NEW };
+};
+
 export const selectUploadFile = fileObj => dispatch => {
   dispatch({
     type: SELECT_UPLOAD_FILE,
@@ -26,19 +30,22 @@ export const deselectUploadFile = () => {
   return { type: DESELECT_UPLOAD_FILE };
 };
 
-export const startUpload = () => (dispatch, getState) => {
+export const startUpload = () => async (dispatch, getState) => {
   dispatch({ type: START_UPLOAD });
-  dispatch(getPresignedUrl());
+  await dispatch(getPresignedUrl());
+  await dispatch(uploadFile());
+  dispatch(updateAssetUpload());
+  await dispatch(stopUpload());
+  dispatch(deselectUploadFile());
 };
 
 export const getPresignedUrl = () => async (dispatch, getState) => {
   try {
-    const fileObj = getState().upload.fileObj;
+    const { fileObj } = getState().upload;
+    const assetId = getState().selectedAsset.id;
 
     // if state.selectedAsset has id, use it or else generate one
-    const id = getState().selectedAsset.id
-      ? getState().selectedAsset.id
-      : uuid();
+    const id = assetId ? assetId : uuid();
 
     dispatch(updateSelectedAsset({ 'name': 'id', 'value': id }));
 
@@ -55,11 +62,7 @@ export const getPresignedUrl = () => async (dispatch, getState) => {
       type: GET_PRESIGNED_URL,
       payload: { uploadUrl: uploadURL, id }
     });
-
-    dispatch(uploadFile());
-
   } catch (error) {
-    // handle errors
     console.log(error);
     return error;
   }
@@ -90,17 +93,14 @@ export const uploadFile = () => async (dispatch, getState) => {
       type: UPLOAD_FILE,
       payload: fileUrl
     });
-
-    dispatch(updateAssetUpload(fileUrl));
   } catch (error) {
-    // handle errors
     console.log(error);
     return error;
   }
 };
 
 export const updateAssetUpload = url => (dispatch, getState) => {
-  const fileObj = getState().upload.fileObj;
+  const { fileUrl, fileObj } = getState().upload;
 
   const fileData = {
     name: fileObj.name,
@@ -108,9 +108,7 @@ export const updateAssetUpload = url => (dispatch, getState) => {
     type: fileObj.type
   };
   dispatch(updateSelectedAsset({ 'name': 'file', 'value': fileData }));
-  dispatch(updateSelectedAsset({ 'name': 'url', 'value': url }));
-
-  dispatch(stopUpload());
+  dispatch(updateSelectedAsset({ 'name': 'url', 'value': fileUrl }));
 }
 
 export const stopUpload = () => async (dispatch, getState) => {
@@ -122,13 +120,7 @@ export const stopUpload = () => async (dispatch, getState) => {
     getState().upload.isNew
       ? await dispatch(createAsset(asset))
       : await dispatch(updateAsset(asset));
-
-    dispatch(deselectUploadFile());
   } catch (error) {
     return error;
   }
-};
-
-export const uploadIsNew = () => {
-  return { type: UPLOAD_IS_NEW };
 };

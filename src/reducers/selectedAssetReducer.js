@@ -11,8 +11,7 @@ export default (state = INITIAL_SELECTED_ASSET_STATE, action) => {
     case FETCH_ASSET:
       return action.payload;
     case NEW_ASSET:
-      // use INITIAL_SELECTED_ASSET_STATE & no payload?
-      return action.payload;
+      return INITIAL_SELECTED_ASSET_STATE;
     case DESELECT_ASSET:
       return INITIAL_SELECTED_ASSET_STATE;
     case UPDATE_SELECTED_ASSET:

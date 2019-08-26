@@ -29,7 +29,9 @@ const Button = props => {
       buttonStyle = 'basic'
       break;
   }
+
   if (linkTo) {
+    // don't duplicate icon & type, convert to portable
     return(
       <Link className={`ui ${buttonStyle} button`}
             data-tooltip={tooltipText}

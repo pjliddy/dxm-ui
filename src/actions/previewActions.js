@@ -1,6 +1,8 @@
 import { CONTENT_LAKE_URL, SITE_REPO_URL } from '../config';
 import { PREVIEW_HTML, PREVIEW_JSON } from '../config';
 
+// move to utils file instead of actions 
+
 export const previewHtml = node => {
    window.open(`${SITE_REPO_URL}/${node.resourceType}/${node.id}.html`);
 

@@ -11,8 +11,7 @@ export default (state = INITIAL_SELECTED_CONTENT_STATE, action) => {
     case FETCH_CONTENT:
       return action.payload;
     case NEW_CONTENT:
-      // use INITIAL_SELECTED_CONTENT_STATE & no payload?
-      return action.payload;
+      return INITIAL_SELECTED_CONTENT_STATE;
     case DESELECT_CONTENT:
       return INITIAL_SELECTED_CONTENT_STATE;
     case UPDATE_SELECTED_CONTENT:

@@ -1,4 +1,4 @@
-import { API_BASE_URL }  from '../../config';
+import { API_BASE_URL }  from '../../config/constants';
 
 // convert to axios since it's used for progress on uploads
 

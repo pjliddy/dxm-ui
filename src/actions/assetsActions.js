@@ -13,6 +13,7 @@ import {
 
 export const fetchAssets = () => async dispatch => {
   try {
+    // add to API wrapper?
     dispatch({ type: START_LOADING });
 
     const response = await api.index(ASSET_RESOURCE);
@@ -21,10 +22,11 @@ export const fetchAssets = () => async dispatch => {
       type: FETCH_ASSETS,
       payload: response.filter(node => node.resourceType === ASSET_RESOURCE)
     });
-
+    
     dispatch({ type: STOP_LOADING });
+
   } catch (error) {
-    // handle errors
+    // handle errors; dipatch to state?
     console.log(error);
     return error;
   }

@@ -6,6 +6,8 @@ import LoadingIndicator from '../../LoadingIndicator';
 
 import { CONTENT_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../../config';
 
+// use propTypes?
+
 const ContentListView = props => {
   return (
     <div>
