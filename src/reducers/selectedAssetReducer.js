@@ -1,10 +1,10 @@
-import { INITIAL_SELECTED_ASSET_STATE } from '../config';
+import { INITIAL_SELECTED_ASSET_STATE } from '../config/initialStates';
 import {
   DESELECT_ASSET,
   FETCH_ASSET,
   NEW_ASSET,
   UPDATE_SELECTED_ASSET
-} from '../config';
+} from '../config/actionTypes';
 
 export default (state = INITIAL_SELECTED_ASSET_STATE, action) => {
   switch (action.type) {

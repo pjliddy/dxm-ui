@@ -1,10 +1,10 @@
-import { INITIAL_METADATA_STATE } from '../config';
+import { INITIAL_METADATA_STATE } from '../config/initialStates';
 import {
   START_LOADING,
   STOP_LOADING,
   START_REDIRECT,
   STOP_REDIRECT
-} from '../config';
+} from '../config/actionTypes';
 
 export default (state = INITIAL_METADATA_STATE, action) => {
   switch (action.type) {

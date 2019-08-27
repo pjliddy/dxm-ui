@@ -7,11 +7,11 @@ class Redirector extends React.Component {
   componentWillUnmount(){
     this.props.stopRedirect();
   }
-  
+
   render() {
-    return this.props.redirect
-      ? <Redirect to={this.props.path} />
-      : null;
+    if (!this.props.redirect) return null;
+
+    return <Redirect to={this.props.path} />;
   }
 }
 

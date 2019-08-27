@@ -3,7 +3,7 @@ import axios from 'axios';
 import uuid from 'uuid/v4';
 
 import { createAsset, updateAsset, updateSelectedAsset } from './'
-import { ASSET_RESOURCE, ASSET_REPO_BUCKET } from '../config';
+import { ASSET_RESOURCE, ASSET_REPO_BUCKET } from '../config/constants';
 import {
   DESELECT_UPLOAD_FILE,
   GET_PRESIGNED_URL,
@@ -13,7 +13,7 @@ import {
   STOP_UPLOAD,
   UPLOAD_FILE,
   UPLOAD_IS_NEW
-} from '../config';
+} from '../config/actionTypes';
 
 export const uploadIsNew = () => {
   return { type: UPLOAD_IS_NEW };

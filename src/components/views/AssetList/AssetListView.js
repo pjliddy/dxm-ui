@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../forms/Button';
 import LoadingIndicator from '../../LoadingIndicator';
 
-import { ASSET_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../../config';
+import { ASSET_RESOURCE, RECEIVING_DATA_MESSAGE } from '../../../config/constants';
 
 const AssetListView = props => {
   return (

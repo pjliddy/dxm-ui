@@ -3,7 +3,7 @@ import {
   START_REDIRECT,
   STOP_LOADING,
   STOP_REDIRECT
-} from '../config';
+} from '../config/actionTypes';
 
 export const startLoading = () => {
   return { type: START_LOADING };

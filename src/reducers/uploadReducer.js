@@ -1,4 +1,4 @@
-import { INITIAL_UPLOAD_STATE } from '../config';
+import { INITIAL_UPLOAD_STATE } from '../config/initialStates';
 import {
   DESELECT_UPLOAD_FILE,
   GET_PRESIGNED_URL,
@@ -8,7 +8,7 @@ import {
   STOP_UPLOAD,
   UPLOAD_FILE,
   UPLOAD_IS_NEW
-} from '../config';
+} from '../config/actionTypes';
 
 export default (state = INITIAL_UPLOAD_STATE, action) => {
   switch (action.type) {

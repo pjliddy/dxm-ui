@@ -1,7 +1,13 @@
 import * as api from '../components/api/Api';
-import { CONTENT_RESOURCE }  from '../config';
-import { DESELECT_CONTENT, FETCH_CONTENT, NEW_CONTENT, UPDATE_SELECTED_CONTENT } from '../config';
-import { START_LOADING, STOP_LOADING } from '../config';
+import { CONTENT_RESOURCE }  from '../config/constants';
+import {
+  DESELECT_CONTENT,
+  FETCH_CONTENT,
+  NEW_CONTENT,
+  START_LOADING,
+  STOP_LOADING,
+  UPDATE_SELECTED_CONTENT
+} from '../config/actionTypes';
 
 export const fetchContent = id => async dispatch => {
   try {

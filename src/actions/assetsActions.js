@@ -1,6 +1,6 @@
 import * as api from '../components/api/Api';
 
-import { ASSET_RESOURCE }  from '../config';
+import { ASSET_RESOURCE }  from '../config/constants';
 import {
   CREATE_ASSET,
   DELETE_ASSET,
@@ -9,7 +9,7 @@ import {
   START_REDIRECT,
   STOP_LOADING,
   UPDATE_ASSET
-} from '../config';
+} from '../config/actionTypes';
 
 export const fetchAssets = () => async dispatch => {
   try {
@@ -22,7 +22,7 @@ export const fetchAssets = () => async dispatch => {
       type: FETCH_ASSETS,
       payload: response.filter(node => node.resourceType === ASSET_RESOURCE)
     });
-    
+
     dispatch({ type: STOP_LOADING });
 
   } catch (error) {

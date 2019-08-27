@@ -1,6 +1,6 @@
 import * as api from '../components/api/Api';
 
-import { CONTENT_RESOURCE }  from '../config';
+import { CONTENT_RESOURCE }  from '../config/constants';
 import {
   CREATE_CONTENT,
   DELETE_CONTENT,
@@ -9,7 +9,7 @@ import {
   START_REDIRECT,
   STOP_LOADING,
   UPDATE_CONTENT
-} from '../config';
+} from '../config/actionTypes';
 
 export const fetchContents = () => async dispatch => {
   try {

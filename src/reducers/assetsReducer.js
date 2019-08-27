@@ -1,10 +1,10 @@
-import { INITIAL_ASSETS_STATE } from '../config';
+import { INITIAL_ASSETS_STATE } from '../config/initialStates';
 import {
   CREATE_ASSET,
   DELETE_ASSET,
   FETCH_ASSETS,
   UPDATE_ASSET
-} from '../config';
+} from '../config/actionTypes';
 
 export default (state = INITIAL_ASSETS_STATE, action) => {
   switch (action.type) {

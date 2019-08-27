@@ -4,7 +4,7 @@ import AssetForm from '../../forms/AssetForm';
 import LoadingIndicator from '../../LoadingIndicator';
 import Redirector from '../../Redirector';
 
-import { SENDING_DATA_MESSAGE } from '../../../config';
+import { SENDING_DATA_MESSAGE } from '../../../config/constants';
 
 const AssetEditView = props => {
   return (

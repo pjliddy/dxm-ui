@@ -1,10 +1,10 @@
-import { INITIAL_SELECTED_CONTENT_STATE } from '../config';
+import { INITIAL_SELECTED_CONTENT_STATE } from '../config/initialStates';
 import {
   DESELECT_CONTENT,
   FETCH_CONTENT,
   NEW_CONTENT,
   UPDATE_SELECTED_CONTENT
-} from '../config';
+} from '../config/actionTypes';
 
 export default (state = INITIAL_SELECTED_CONTENT_STATE, action) => {
   switch (action.type) {
