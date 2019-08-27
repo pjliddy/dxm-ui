@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {
   deleteContent,
-  fetchContents,
+  listContents,
   previewHtml,
   previewJson
 } from '../../../actions';
@@ -11,7 +11,7 @@ import ContentListView from './ContentListView';
 
 class ContentList extends React.Component {
   componentDidMount() {
-    this.props.fetchContents();
+    this.props.listContents();
   }
 
   render() {
@@ -34,7 +34,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   deleteContent,
-  fetchContents,
+  listContents,
   previewHtml,
   previewJson
  };

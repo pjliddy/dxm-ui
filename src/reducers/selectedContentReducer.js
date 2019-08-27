@@ -1,14 +1,14 @@
 import { INITIAL_SELECTED_CONTENT_STATE } from '../config/initialStates';
 import {
   DESELECT_CONTENT,
-  FETCH_CONTENT,
+  GET_CONTENT,
   NEW_CONTENT,
   UPDATE_SELECTED_CONTENT
 } from '../config/actionTypes';
 
 export default (state = INITIAL_SELECTED_CONTENT_STATE, action) => {
   switch (action.type) {
-    case FETCH_CONTENT:
+    case GET_CONTENT:
       return action.payload;
     case NEW_CONTENT:
       return INITIAL_SELECTED_CONTENT_STATE;

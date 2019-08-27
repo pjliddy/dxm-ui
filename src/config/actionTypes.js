@@ -7,13 +7,13 @@ export const STOP_REDIRECT = 'STOP_REDIRECT';
 // asset action types
 export const CREATE_ASSET = 'CREATE_ASSET';
 export const DELETE_ASSET = 'DELETE_ASSET';
-export const FETCH_ASSETS = 'FETCH_ASSETS';
+export const LIST_ASSETS = 'LIST_ASSETS';
 export const UPDATE_ASSET = 'UPDATE_ASSET';
 
 // content action types
 export const CREATE_CONTENT = 'CREATE_CONTENT';
 export const DELETE_CONTENT = 'DELETE_CONTENT';
-export const FETCH_CONTENTS = 'FETCH_CONTENTS';
+export const LIST_CONTENTS = 'LIST_CONTENTS';
 export const UPDATE_CONTENT = 'UPDATE_CONTENT';
 
 // preview action types
@@ -22,13 +22,13 @@ export const PREVIEW_JSON = 'PREVIEW_JSON';
 
 // selected asset actions
 export const DESELECT_ASSET = 'DESELECT_ASSET';
-export const FETCH_ASSET = 'FETCH_ASSET';
+export const GET_ASSET = 'GET_ASSET';
 export const NEW_ASSET = 'NEW_ASSET';
 export const UPDATE_SELECTED_ASSET = 'UPDATE_SELECTED_ASSET';
 
 // selected content actions
 export const DESELECT_CONTENT = 'DESELECT_CONTENT';
-export const FETCH_CONTENT = 'FETCH_CONTENT';
+export const GET_CONTENT = 'GET_CONTENT';
 export const NEW_CONTENT = 'NEW_CONTENT';
 export const UPDATE_SELECTED_CONTENT = 'UPDATE_SELECTED_CONTENT';
 

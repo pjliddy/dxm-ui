@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {
   deleteAsset,
-  fetchAssets,
+  listAssets,
   previewJson
 } from '../../../actions';
 
@@ -10,7 +10,7 @@ import AssetListView from './AssetListView';
 
 class AssetList extends React.Component {
   componentDidMount() {
-    this.props.fetchAssets();
+    this.props.listAssets();
   }
 
   render() {
@@ -30,7 +30,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   deleteAsset,
-  fetchAssets,
+  listAssets,
   previewJson
 };
 

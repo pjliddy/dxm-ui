@@ -2,13 +2,13 @@ import { INITIAL_ASSETS_STATE } from '../config/initialStates';
 import {
   CREATE_ASSET,
   DELETE_ASSET,
-  FETCH_ASSETS,
+  LIST_ASSETS,
   UPDATE_ASSET
 } from '../config/actionTypes';
 
 export default (state = INITIAL_ASSETS_STATE, action) => {
   switch (action.type) {
-    case FETCH_ASSETS:
+    case LIST_ASSETS:
       // sort by name for now
       const sortFunction = (a, b) => {
         return (a.title.toLowerCase() > b.title.toLowerCase())

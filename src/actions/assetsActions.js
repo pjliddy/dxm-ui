@@ -4,14 +4,14 @@ import { ASSET_RESOURCE }  from '../config/constants';
 import {
   CREATE_ASSET,
   DELETE_ASSET,
-  FETCH_ASSETS,
+  LIST_ASSETS,
   START_LOADING,
   START_REDIRECT,
   STOP_LOADING,
   UPDATE_ASSET
 } from '../config/actionTypes';
 
-export const fetchAssets = () => async dispatch => {
+export const listAssets = () => async dispatch => {
   try {
     // add to API wrapper?
     dispatch({ type: START_LOADING });
@@ -19,7 +19,7 @@ export const fetchAssets = () => async dispatch => {
     const response = await api.index(ASSET_RESOURCE);
 
     dispatch({
-      type: FETCH_ASSETS,
+      type: LIST_ASSETS,
       payload: response.filter(node => node.resourceType === ASSET_RESOURCE)
     });
 
@@ -37,7 +37,7 @@ export const createAsset = () => async (dispatch, getState) => {
     dispatch({ type: START_LOADING });
 
     const asset = getState().selectedAsset;
-    const response = await api.create(asset, ASSET_RESOURCE);
+    const response = await api.create(ASSET_RESOURCE, asset);
 
     dispatch({
       type: CREATE_ASSET,
@@ -58,7 +58,7 @@ export const updateAsset = () => async (dispatch, getState) => {
     dispatch({ type: START_LOADING });
 
     const asset = getState().selectedAsset;
-    const response = await api.update(asset, ASSET_RESOURCE);
+    const response = await api.update(ASSET_RESOURCE, asset);
 
     dispatch({
       type: UPDATE_ASSET,
@@ -78,7 +78,7 @@ export const deleteAsset = id => async dispatch => {
   try {
     dispatch({ type: START_LOADING });
 
-    await api.destroy(id, ASSET_RESOURCE);
+    await api.destroy(ASSET_RESOURCE, id);
 
     dispatch({
       type: DELETE_ASSET,

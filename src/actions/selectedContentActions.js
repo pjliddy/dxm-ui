@@ -2,21 +2,21 @@ import * as api from '../components/api/Api';
 import { CONTENT_RESOURCE }  from '../config/constants';
 import {
   DESELECT_CONTENT,
-  FETCH_CONTENT,
+  GET_CONTENT,
   NEW_CONTENT,
   START_LOADING,
   STOP_LOADING,
   UPDATE_SELECTED_CONTENT
 } from '../config/actionTypes';
 
-export const fetchContent = id => async dispatch => {
+export const getContent = id => async dispatch => {
   try {
     dispatch({ type: START_LOADING });
 
-    const response = await api.read(id, CONTENT_RESOURCE);
+    const response = await api.read(CONTENT_RESOURCE, id);
 
     dispatch({
-      type: FETCH_CONTENT,
+      type: GET_CONTENT,
       payload: response
     });
 

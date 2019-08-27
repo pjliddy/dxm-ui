@@ -56,7 +56,7 @@ export const getPresignedUrl = () => async (dispatch, getState) => {
       'ContentType': fileObj.type
     };
     const urlParams = { getSignedUrl: true };
-    const { uploadURL } = await api.create(s3Params, ASSET_RESOURCE, urlParams);
+    const { uploadURL } = await api.create(ASSET_RESOURCE, s3Params, urlParams);
 
     dispatch({
       type: GET_PRESIGNED_URL,

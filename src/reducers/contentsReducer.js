@@ -2,13 +2,13 @@ import { INITIAL_CONTENTS_STATE } from '../config/initialStates';
 import {
   CREATE_CONTENT,
   DELETE_CONTENT,
-  FETCH_CONTENTS,
+  LIST_CONTENTS,
   UPDATE_CONTENT
 } from '../config/actionTypes';
 
 export default (state = INITIAL_CONTENTS_STATE, action) => {
   switch (action.type) {
-    case FETCH_CONTENTS:
+    case LIST_CONTENTS:
       // sort by name for now
       const sortFunction = (a, b) => {
         return (a.title.toLowerCase() > b.title.toLowerCase())

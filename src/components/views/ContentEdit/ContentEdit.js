@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {
   deselectContent,
-  fetchContent,
+  getContent,
   previewHtml,
   previewJson,
   startRedirect,
@@ -14,7 +14,7 @@ import ContentEditView from './ContentEditView';
 
 class ContentEdit extends React.Component {
   componentDidMount() {
-    this.props.fetchContent(this.props.match.params.id);
+    this.props.getContent(this.props.match.params.id);
   }
 
   componentWillUnmount() {
@@ -42,7 +42,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   deselectContent,
-  fetchContent,
+  getContent,
   previewHtml,
   previewJson,
   startRedirect,

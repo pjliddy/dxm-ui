@@ -2,7 +2,7 @@ import * as api from '../components/api/Api';
 import { ASSET_RESOURCE } from '../config/constants';
 import {
   DESELECT_ASSET,
-  FETCH_ASSET,
+  GET_ASSET,
   NEW_ASSET,
   START_LOADING,
   STOP_LOADING,
@@ -10,14 +10,14 @@ import {
   UPLOAD_IS_NEW
 } from '../config/actionTypes';
 
-export const fetchAsset = id => async dispatch => {
+export const getAsset = id => async dispatch => {
   try {
     dispatch({ type: START_LOADING });
 
-    const response = await api.read(id, ASSET_RESOURCE);
+    const response = await api.read(ASSET_RESOURCE, id);
 
     dispatch({
-      type: FETCH_ASSET,
+      type: GET_ASSET,
       payload: response
     });
 

@@ -4,21 +4,21 @@ import { CONTENT_RESOURCE }  from '../config/constants';
 import {
   CREATE_CONTENT,
   DELETE_CONTENT,
-  FETCH_CONTENTS,
+  LIST_CONTENTS,
   START_LOADING,
   START_REDIRECT,
   STOP_LOADING,
   UPDATE_CONTENT
 } from '../config/actionTypes';
 
-export const fetchContents = () => async dispatch => {
+export const listContents = () => async dispatch => {
   try {
     dispatch({ type: START_LOADING });
 
     const response = await api.index(CONTENT_RESOURCE);
 
     dispatch({
-      type: FETCH_CONTENTS,
+      type: LIST_CONTENTS,
       payload: response.filter(content => content.resourceType === CONTENT_RESOURCE)
     });
 
@@ -35,7 +35,7 @@ export const createContent = () => async (dispatch, getState) => {
     dispatch({ type: START_LOADING });
 
     const content = getState().selectedContent;
-    const response = await api.create(content, CONTENT_RESOURCE);
+    const response = await api.create(CONTENT_RESOURCE, content);
 
     dispatch({
       type: CREATE_CONTENT,
@@ -56,7 +56,7 @@ export const updateContent = () => async (dispatch, getState) => {
     dispatch({ type: START_LOADING });
 
     const content = getState().selectedContent;
-    const response = await api.update(content, CONTENT_RESOURCE);
+    const response = await api.update(CONTENT_RESOURCE, content);
 
     dispatch({
       type: UPDATE_CONTENT,
@@ -76,7 +76,7 @@ export const deleteContent = id => async dispatch => {
   try {
     dispatch({ type: START_LOADING });
 
-    await api.destroy(id, CONTENT_RESOURCE);
+    await api.destroy(CONTENT_RESOURCE, id);
 
     dispatch({
       type: DELETE_CONTENT,
