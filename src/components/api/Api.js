@@ -1,8 +1,8 @@
 import { API_BASE_URL }  from '../../config/constants';
-import {
-  startLoading,
-  stopLoading,
-} from '../../actions';
+// import {
+//   startLoading,
+//   stopLoading,
+// } from '../../actions';
 
 // convert to axios since it's used for progress on uploads
 

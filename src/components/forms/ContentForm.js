@@ -25,7 +25,7 @@ const ContentForm = props => {
     <div className="ui form">
       <p>All fields must have values. Validation to be added.</p>
 
-      <Field type="text"
+      <Field inputType="text"
              name="id"
              label="ID"
              placeholder="id"
@@ -34,7 +34,7 @@ const ContentForm = props => {
              disabled={true}
              readOnly={true}></Field>
 
-      <Field type="text"
+      <Field inputType="text"
              name="resourceType"
              label="Resource Type"
              placeholder="resource type"
@@ -42,7 +42,7 @@ const ContentForm = props => {
              disabled={true}
              readOnly={true}></Field>
 
-      <Field type="text"
+      <Field inputType="text"
              name="title"
              label="Title"
              placeholder="title"
@@ -50,7 +50,7 @@ const ContentForm = props => {
              required={true}
              onChange={handleChange}></Field>
 
-      <Field type="text"
+      <Field inputType="text"
              name="subtitle"
              label="Subtitle"
              placeholder="subtitle"
@@ -58,7 +58,7 @@ const ContentForm = props => {
              required={true}
              onChange={handleChange}></Field>
 
-      <Field type="textarea"
+      <Field inputType="textarea"
              name="copyText"
              label="Copy Text"
              placeholder="copy text"
@@ -66,7 +66,7 @@ const ContentForm = props => {
              required={true}
              onChange={handleChange}></Field>
 
-      <Field type="text"
+      <Field inputType="text"
              name="dateCreated"
              label="Date Created"
              placeholder="date created"
@@ -75,7 +75,7 @@ const ContentForm = props => {
              disabled={true}
              readOnly={true}></Field>
 
-      <Field type="text"
+      <Field inputType="text"
              name="dateModified"
              label="Date Modified"
              placeholder="date modified"

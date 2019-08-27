@@ -1,14 +1,27 @@
 import React from 'react';
 
 const Field = props => {
-  if (props.hidden) return null;
+  const {
+    disabled,
+    hidden,
+    inputType,
+    label,
+    name,
+    onChange,
+    placeholder,
+    readOnly,
+    required,
+    value
+  } = props;
+
+  if (hidden) return null;
 
   const handleChange = (event) => {
-    if (!props.readOnly) props.onChange(event);
+    if (!readOnly) onChange(event);
   };
 
   const renderInput = () => {
-    switch(props.type) {
+    switch(inputType) {
       case 'text':
       default:
         return renderTextInput();
@@ -19,30 +32,29 @@ const Field = props => {
     }
   };
 
+  const fieldClasses = `${required ? 'required ' : ''}${disabled ? 'disabled ' : ''}field`;
+
   const renderTextInput = () => {
-    const fieldClasses = `${props.required ? 'required ' : ''}${props.disabled ? 'disabled ' : ''}field`;
 
     return(
       <div className={fieldClasses}>
-        <label htmlFor={props.name}>{props.label}</label>
-        <input name={props.name}
-               type={props.type}
-               placeholder={props.placeholder}
-               value={props.value}
+        <label htmlFor={name}>{label}</label>
+        <input name={name}
+               type={props.inputType}
+               placeholder={placeholder}
+               value={value}
                onChange={handleChange} />
       </div>
     );
   };
 
   const renderSelect = () => {
-    const fieldClasses = `${props.required ? 'required ' : ''}${props.disabled ? 'disabled ' : ''}field`;
-
     return(
       <div className={fieldClasses}>
-      <label htmlFor={props.name}>{props.label}</label>
-        <select name={props.name}
-                placeholder={props.placeholder}
-                value={props.value}
+      <label htmlFor={name}>{label}</label>
+        <select name={name}
+                placeholder={placeholder}
+                value={value}
                 onChange={handleChange}>
           {props.children}
         </select>
@@ -51,14 +63,12 @@ const Field = props => {
   };
 
   const renderTextArea = () => {
-    const fieldClasses = `${props.required ? 'required ' : ''}${props.disabled ? 'disabled ' : ''}field`;
-
     return(
       <div className={fieldClasses}>
-        <label htmlFor={props.name}>{props.label}</label>
-        <textarea name={props.name}
-                  placeholder={props.placeholder}
-                  value={props.value}
+        <label htmlFor={name}>{label}</label>
+        <textarea name={name}
+                  placeholder={placeholder}
+                  value={value}
                   onChange={handleChange}></textarea>
       </div>
     );

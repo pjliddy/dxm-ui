@@ -7,18 +7,28 @@ import Redirector from '../../Redirector';
 import { SENDING_DATA_MESSAGE } from '../../../config/constants';
 
 const AssetCreateView = props => {
+  const {
+    asset,
+    isLoading,
+    onFormCancel,
+    onFormSubmit,
+    onFormUpdate,
+    previewJson,
+    upload
+  } = props;
+
   return (
     <div>
       <Redirector path="/assets" />
       <h1>New Asset</h1>
-      <AssetForm asset={props.asset}
+      <AssetForm asset={asset}
                  isNew={true}
-                 onFormCancel={props.startRedirect}
-                 onFormSubmit={props.startUpload}
-                 onFormUpdate={props.updateSelectedAsset}
-                 previewJson={props.previewJson}
-                 upload={props.upload} />
-       <LoadingIndicator isLoading={props.isLoading}
+                 onFormCancel={onFormCancel}
+                 onFormSubmit={onFormSubmit}
+                 onFormUpdate={onFormUpdate}
+                 previewJson={previewJson}
+                 upload={upload} />
+       <LoadingIndicator isLoading={isLoading}
                          message={SENDING_DATA_MESSAGE} />
      </div>
   );

@@ -23,8 +23,6 @@ class ContentList extends React.Component {
   }
 }
 
-// use reselect for memoization
-
 const mapStateToProps = state => {
   return {
     contents: state.contents,

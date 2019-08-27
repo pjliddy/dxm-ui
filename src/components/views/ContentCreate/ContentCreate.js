@@ -23,20 +23,19 @@ class ContentCreate extends React.Component {
 
   render() {
     return <ContentCreateView content={this.props.content}
-                              createContent={this.props.createContent}
+                              onFormSubmit={this.props.createContent}
                               isLoading={this.props.isLoading}
                               previewHtml={this.props.previewHtml}
                               previewJson={this.props.previewJson}
-                              startRedirect={this.props.startRedirect}
-                              updateSelectedContent={this.props.updateSelectedContent} />;
+                              onFormCancel={this.props.startRedirect}
+                              onFormUpdate={this.props.updateSelectedContent} />;
   }
 }
 
 const mapStateToProps = state => {
   return {
     content: state.selectedContent,
-    isLoading: state.metadata.isLoading,
-    redirect: state.metadata.redirect
+    isLoading: state.metadata.isLoading
   };
 }
 

@@ -5,7 +5,12 @@ import Field from './Field';
 import FilePicker from './FilePicker/FilePicker';
 
 const AssetForm = props => {
-  const { asset, upload, isNew } = props;
+  const {
+    asset,
+    isNew,
+    previewJson,
+    upload,
+  } = props;
 
   const onFormCancel = (event) => {
     event.preventDefault();
@@ -26,7 +31,7 @@ const AssetForm = props => {
     <div className="ui form">
       <p>All fields must have values. Validation to be added.</p>
 
-      <Field type="text"
+      <Field inputType="text"
              name="id"
              label="ID"
              placeholder="id"
@@ -35,7 +40,7 @@ const AssetForm = props => {
              disabled={true}
              readOnly={true}></Field>
 
-      <Field type="text"
+      <Field inputType="text"
              name="resourceType"
              label="Resource Type"
              placeholder="resource type"
@@ -43,7 +48,7 @@ const AssetForm = props => {
              disabled={true}
              readOnly={true}></Field>
 
-      <Field type="text"
+      <Field inputType="text"
              name="title"
              label="Title"
              placeholder="title"
@@ -58,7 +63,7 @@ const AssetForm = props => {
                   progress={upload.progress}
                   isUploading={upload.isUploading} />
 
-      <Field type="text"
+      <Field inputType="text"
              name="dateCreated"
              label="Date Created"
              placeholder="date created"
@@ -67,7 +72,7 @@ const AssetForm = props => {
              disabled={true}
              readOnly={true}></Field>
 
-      <Field type="text"
+      <Field inputType="text"
              name="dateModified"
              label="Date Modified"
              placeholder="date modified"
@@ -87,7 +92,7 @@ const AssetForm = props => {
                 iconType="code"
                 tooltipText="Show JSON"
                 tooltipPosition="top center"
-                onClick={() => props.previewJson(asset)}>Show JSON</Button>
+                onClick={() => previewJson(asset)}>Show JSON</Button>
         <Button buttonType="primary"
                 iconType="save"
                 tooltipText="Save Asset"

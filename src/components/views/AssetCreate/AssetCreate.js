@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import {
-  createAsset,
   deselectAsset,
   newAsset,
   previewJson,
@@ -25,9 +24,9 @@ class AssetCreate extends React.Component {
     return <AssetCreateView asset={this.props.asset}
                             isLoading={this.props.isLoading}
                             previewJson={this.props.previewJson}
-                            startRedirect={this.props.startRedirect}
-                            startUpload={this.props.startUpload}
-                            updateSelectedAsset={this.props.updateSelectedAsset}
+                            onFormCancel={this.props.startRedirect}
+                            onFormSubmit={this.props.startUpload}
+                            onFormUpdate={this.props.updateSelectedAsset}
                             upload={this.props.upload} />;
   }
 }
@@ -36,13 +35,11 @@ const mapStateToProps = state => {
   return {
     asset: state.selectedAsset,
     isLoading: state.metadata.isLoading,
-    redirect: state.metadata.redirect,
     upload: state.upload
   };
 }
 
 const mapDispatchToProps = {
-  createAsset,
   deselectAsset,
   newAsset,
   previewJson,

@@ -7,18 +7,28 @@ import Redirector from '../../Redirector';
 import { SENDING_DATA_MESSAGE } from '../../../config/constants';
 
 const ContentCreateView = props => {
+  const {
+    content,
+    isLoading,
+    onFormCancel,
+    onFormSubmit,
+    onFormUpdate,
+    previewHtml,
+    previewJson
+  } = props;
+
   return (
     <div>
       <Redirector path="/" />
       <h1>New Content</h1>
-      <ContentForm content={props.content}
+      <ContentForm content={content}
                    isNew={true}
-                   onFormCancel={props.startRedirect}
-                   onFormSubmit={props.createContent}
-                   onFormUpdate={props.updateSelectedContent}
-                   previewHtml={props.previewHtml}
-                   previewJson={props.previewJson}/>
-      <LoadingIndicator isLoading={props.isLoading}
+                   onFormCancel={onFormCancel}
+                   onFormSubmit={onFormSubmit}
+                   onFormUpdate={onFormUpdate}
+                   previewHtml={previewHtml}
+                   previewJson={previewJson}/>
+      <LoadingIndicator isLoading={isLoading}
                         message={SENDING_DATA_MESSAGE} />
      </div>
   );

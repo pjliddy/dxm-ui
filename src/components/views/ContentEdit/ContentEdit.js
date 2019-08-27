@@ -26,17 +26,16 @@ class ContentEdit extends React.Component {
                             isLoading={this.props.isLoading}
                             previewHtml={this.props.previewHtml}
                             previewJson={this.props.previewJson}
-                            startRedirect={this.props.startRedirect}
-                            updateContent={this.props.updateContent}
-                            updateSelectedContent={this.props.updateSelectedContent} />;
+                            onFormCancel={this.props.startRedirect}
+                            onFormSubmit={this.props.updateContent}
+                            onFormUpdate={this.props.updateSelectedContent} />;
   }
 }
 
 const mapStateToProps = state => {
   return {
     content: state.selectedContent,
-    isLoading: state.metadata.isLoading,
-    redirect: state.metadata.redirect
+    isLoading: state.metadata.isLoading
   };
 }
 

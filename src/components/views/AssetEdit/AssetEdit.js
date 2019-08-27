@@ -35,7 +35,6 @@ const mapStateToProps = state => {
   return {
     asset: state.selectedAsset,
     isLoading: state.metadata.isLoading,
-    redirect: state.metadata.redirect,
     upload: state.upload
   };
 }

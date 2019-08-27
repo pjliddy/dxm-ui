@@ -1,24 +1,35 @@
 import React from 'react';
 
 const FilePicker = props => {
-  if (props.hidden)  return null;
+  const {
+    asset,
+    disabled,
+    hidden,
+    isUploading,
+    onChange,
+    preview,
+    progress,
+    required
+   } = props;
 
-  const fieldClasses = `${props.required ? 'required ' : ''}${props.disabled ? 'disabled ' : ''}field`;
+  if (hidden) return null;
+
+  const fieldClasses = `${required ? 'required ' : ''}${disabled ? 'disabled ' : ''}field`;
 
   return (
     <div className={fieldClasses}>
       <label htmlFor="file">File</label>
       <input name="file"
              type="file"
-             onChange={(e) => props.onChange(e.target.files[0])} />
+             onChange={(e) => onChange(e.target.files[0])} />
 
-      {props.isUploading && <p>Uploading: {props.progress}%</p>}
+      {isUploading && <p>Uploading: {progress}%</p>}
 
-      {!props.isUploading && props.preview ? (
+      {!isUploading && preview ? (
         <div>
           <div className="ui hidden divider"></div>
           <img className="ui big image"
-               src={props.asset.url}
+               src={asset.url}
                alt="alt text placeholder">
            </img>
            <div className="ui divider"></div>
