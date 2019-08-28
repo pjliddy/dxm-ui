@@ -1,5 +1,4 @@
 import * as api from '../components/api/Api';
-import axios from 'axios';
 import uuid from 'uuid/v4';
 
 import { createAsset, updateAsset, updateSelectedAsset } from './'
@@ -8,7 +7,6 @@ import {
   DESELECT_UPLOAD_FILE,
   GET_PRESIGNED_URL,
   SELECT_UPLOAD_FILE,
-  SET_UPLOAD_PROGRESS,
   START_UPLOAD,
   STOP_UPLOAD,
   UPLOAD_FILE,
@@ -70,24 +68,8 @@ export const getPresignedUrl = () => async (dispatch, getState) => {
 
 export const uploadFile = () => async (dispatch, getState) => {
   try {
-    const fileObj = getState().upload.fileObj;
-    const uploadUrl = getState().upload.uploadUrl;
-
-    const config = {
-      headers: {
-        'ACL': 'public-read',
-        'Content-Type': fileObj.type
-      },
-      onUploadProgress: progressEvent => {
-        dispatch({
-          type: SET_UPLOAD_PROGRESS,
-          payload: Number.parseInt(progressEvent.loaded / fileObj.size * 100, 10)
-        });
-      }
-    };
-
-    const response = await axios.put(uploadUrl, fileObj, config);
-    const fileUrl = response.config.url.split('?')[0];
+    const { uploadUrl, fileObj } = getState().upload;
+    const fileUrl = api.upload(uploadUrl, fileObj, dispatch);
 
     dispatch({
       type: UPLOAD_FILE,
