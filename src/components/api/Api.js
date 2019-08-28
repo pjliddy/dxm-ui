@@ -1,87 +1,69 @@
 import { API_BASE_URL }  from '../../config/constants';
+import axios from 'axios';
+
 // import {
 //   startLoading,
 //   stopLoading,
 // } from '../../actions';
 
-// convert to axios since it's used for progress on uploads
+export const create = async (resource, body, params) => {
+  // POST can include params (getSignedUrl: true) for S3 authentication
+  try {
+    const url = new URL(`${API_BASE_URL}/${resource}`);
+    url.search = new URLSearchParams(params);
+    const { data } = await axios.post(url, JSON.stringify(body),params);
 
-export const create = (resource, body, params) => {
-  const url = new URL(`${API_BASE_URL}/${resource}`);
-  // POST includes params for getSignedUrl for S3 authentication
-  url.search = new URLSearchParams(params);
-
-  return fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(body)
-  })
-    .then(response => response.json())
-    .then(
-      (response) => {
-        return response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
-export const index = resource => {
-  // dispatch(startLoading());
+export const index = async (resource) => {
+  try {
+    const url = `${API_BASE_URL}/${resource}`;
+    const { data } = await axios.get(url);
 
-  return fetch(`${API_BASE_URL}/${resource}`)
-    .then(response => response.json())
-    // .then(dispatch(stopLoading()))
-    .then(
-      (response) => {
-        return response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
-export const read = (resource, id) => {
-  return fetch(`${API_BASE_URL}/${resource}/${id}`)
-    .then(response => response.json())
-    .then(
-      (response) => {
-        return response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+export const read = async (resource, id) => {
+  try {
+    const url = `${API_BASE_URL}/${resource}/${id}`;
+    const { data } = await axios.get(url);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
-export const update = (resource, body) => {
-  return fetch(`${API_BASE_URL}/${resource}/${body.id}`, {
-      method: 'PUT',
-      body: JSON.stringify(body)
-  })
-    .then(response => response.json())
-    .then(
-      (response) => {
-        return response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+export const update = async (resource, body, params) => {
+  try {
+    const url = new URL(`${API_BASE_URL}/${resource}/${body.id}`);
+    const { data } = await axios.put(url, JSON.stringify(body));
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
-export const destroy = (resource, id) => {
-  return fetch(`${API_BASE_URL}/${resource}/${id}`, {
-      method: 'DELETE'
-  })
-    .then(response => response.json())
-    .then(
-      (response) => {
-        return response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+export const destroy = async (resource, id) => {
+  try {
+    const url = `${API_BASE_URL}/${resource}/${id}`;
+    const { data } = await axios.delete(url);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
