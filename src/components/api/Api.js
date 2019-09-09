@@ -1,13 +1,13 @@
-import { API_BASE_URL }  from '../../config/constants';
 import axios from 'axios';
+import { API_BASE_URL }  from '../../config/constants';
 import {
   SET_UPLOAD_PROGRESS
 } from '../../config/actionTypes';
 
-import {
-  startLoading,
-  stopLoading,
-} from '../../actions';
+// import {
+//   startLoading,
+//   stopLoading,
+// } from '../../actions';
 
 export const create = async (resource, body, params) => {
   // POST can include params (getSignedUrl: true) for S3 authentication
@@ -24,12 +24,8 @@ export const create = async (resource, body, params) => {
 
 export const index = async (resource) => {
   try {
-    startLoading();
-
     const url = `${API_BASE_URL}/${resource}`;
     const { data } = await axios.get(url);
-
-    stopLoading();
 
     return data;
   } catch (error) {

@@ -69,7 +69,7 @@ export const getPresignedUrl = () => async (dispatch, getState) => {
 export const uploadFile = () => async (dispatch, getState) => {
   try {
     const { uploadUrl, fileObj } = getState().upload;
-    const fileUrl = api.upload(uploadUrl, fileObj, dispatch);
+    const fileUrl = await api.upload(uploadUrl, fileObj, dispatch);
 
     dispatch({
       type: UPLOAD_FILE,
@@ -97,11 +97,11 @@ export const stopUpload = () => async (dispatch, getState) => {
   try {
     dispatch({ type: STOP_UPLOAD });
 
-    const asset = getState().selectedAsset;
+    const { selectedAsset } = getState();
 
     getState().upload.isNew
-      ? await dispatch(createAsset(asset))
-      : await dispatch(updateAsset(asset));
+      ? await dispatch(createAsset(selectedAsset))
+      : await dispatch(updateAsset(selectedAsset));
   } catch (error) {
     return error;
   }
