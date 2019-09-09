@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import Header from './Header';
 import ContentList from './views/ContentList/ContentList';
@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <div className="ui container" style={containerStyle}>
-      <HashRouter basename='/'>
+      <BrowserRouter basename='/'>
         <Header />
         <Route path="/" exact component={ContentList} />
         <Route path="/contents/:id/edit" exact component={ContentEdit} />
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/assets" exact component={AssetList} />
         <Route path="/assets/:id/edit" exact component={AssetEdit} />
         <Route path="/assets/new" exact component={AssetCreate} />
-      </HashRouter>
+      </BrowserRouter>
     </div>
   )
 }
