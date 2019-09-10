@@ -13,7 +13,8 @@ export const create = async (resource, body, params) => {
   // POST can include params (getSignedUrl: true) for S3 authentication
   try {
     const url = new URL(`${API_BASE_URL}/${resource}`);
-    const { data } = await axios.post(url, JSON.stringify(body), params);
+    url.search = new URLSearchParams(params);
+    const { data } = await axios.post(url, body);
 
     return data;
   } catch (error) {
